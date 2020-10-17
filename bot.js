@@ -39,10 +39,9 @@ client.on('message', async message => {
 
   var timestamp = moment().format('HH:mm:ss');
   var unix = moment().unix();
-  var table = `xp_${message.guild.id}`;
 
   // XP HANDLER
-
+  var table = `xp_${message.guild.id}`;
   database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
     // console.log(rows);
@@ -62,7 +61,7 @@ client.on('message', async message => {
       var level = rows[0].level;
       var f = 5*Math.pow(level, 2)+50*level+100;
 
-      if (progress >= f) {
+      if (progress >= f) {}
         level++;
         progress -= f;
         sql = `UPDATE ${table} SET xp = ${xp + genXp}, timeStamp = ${unix}, progress = ${progress + genXp}, WHERE id = '${message.author.id}'`;
