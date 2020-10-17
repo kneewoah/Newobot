@@ -47,19 +47,32 @@ client.on('message', async message => {
     if(err) throw err;
     // console.log(rows);
     let sql;
+    var genXp = generateXp();
 
     if(rows.length < 1) {
-      sql = `INSERT INTO ${table} (id, xp, timeStamp) VALUES ('${message.author.id}', ${generateXp()}, ${unix})`;
+      sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${genXp}, ${unix}, ${genXp}, 0)`;
+
     } else {
       var oldTime = rows[0].timeStamp;
       var diff = (unix - oldTime);
-
       if (diff < 60) return sql = "";
-      let xp = rows[0].xp;
 
-      sql = `UPDATE ${table} SET xp = ${xp + generateXp()}, timeStamp = ${unix} WHERE id = '${message.author.id}'`;
+      var xp = rows[0].xp;
+      var progress = rows[0].progress;
+      var level = rows[0].level;
+      var f = 5*Math.pow(level, 2)+50*level+100;
+
+      if (progress >= f) {
+        level++;
+        progress -= f;
+        sql = `UPDATE ${table} SET xp = ${xp + genXp}, timeStamp = ${unix}, progress = ${progress + genXp}, WHERE id = '${message.author.id}'`;
+        message.channel.send("Level up!"); // will make detailed later
+      } else {
+        sql = `UPDATE ${table} SET xp = ${xp + genXp}, timeStamp = ${unix}, progress = ${progress + genXp}, level = ${level} WHERE id = '${message.author.id}'`;
+      }
     }
     database.query(sql, console.log);
+
   });
 
   // COMMAND HANDLER
