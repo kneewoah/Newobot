@@ -61,6 +61,7 @@ client.on('message', async message => {
 
       sql = `UPDATE xp SET xp = ${xp + generateXp()}, timeStamp = ${unix} WHERE id = '${message.author.id}'`;
     }
+    message.channel.send(sql);
     database.query(sql, console.log);
   });
 
