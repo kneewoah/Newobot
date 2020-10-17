@@ -57,7 +57,7 @@ client.on('message', async message => {
       var oldTime = rows[0].timeStamp;
       var diff = (unix - oldTime);
 
-      if (diff < 60) return;
+      if (diff < 60) return sql = "";
       let xp = rows[0].xp;
 
       sql = `UPDATE xp SET xp = ${xp + generateXp()}, timeStamp = ${unix} WHERE id = '${message.author.id}'`;
