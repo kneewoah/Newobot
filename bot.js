@@ -64,7 +64,7 @@ client.on('message', async message => {
       if (progress >= f) {
         level++;
         progress -= f;
-        sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress}, WHERE id = '${message.author.id}'`;
+        sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress} WHERE id = '${message.author.id}'`;
         message.channel.send("Level up!"); // will make detailed later
       } else {
         sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
