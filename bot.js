@@ -39,7 +39,7 @@ client.on('message', async message => {
 
   var timestamp = moment().format('HH:mm:ss');
   var unix = moment().unix();
-  var table = "xp_" + message.guild.id;
+  var table =  `xp_${message.guild.id}`;
 
 
   // XP HANDLER
