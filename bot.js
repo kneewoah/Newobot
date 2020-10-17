@@ -56,18 +56,18 @@ client.on('message', async message => {
       var diff = (unix - oldTime);
       if (diff < 60) return sql = "";
 
-      var xp = rows[0].xp;
-      var progress = rows[0].progress;
+      var xp = rows[0].xp + genXp;
+      var progress = rows[0].progress + genXp;
       var level = rows[0].level;
       var f = 5*Math.pow(level, 2)+50*level+100;
 
       if (progress >= f) {
         level++;
         progress -= f;
-        sql = `UPDATE ${table} SET xp = ${xp + genXp}, timeStamp = ${unix}, progress = ${progress + genXp}, WHERE id = '${message.author.id}'`;
+        sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress}, WHERE id = '${message.author.id}'`;
         message.channel.send("Level up!"); // will make detailed later
       } else {
-        sql = `UPDATE ${table} SET xp = ${xp + genXp}, timeStamp = ${unix}, progress = ${progress + genXp}, level = ${level} WHERE id = '${message.author.id}'`;
+        sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
       }
     }
     database.query(sql, console.log);
