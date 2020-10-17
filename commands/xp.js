@@ -16,7 +16,7 @@ exports.run = (client, message, args, con) => {
 }
 
 function findLvl(xp) {
-  for (int i = 1; i < 200; i++) {
+  for (var i = 1; i < 200; i++) {
     if (xp < xpNeeded(i)) {
       return i-1;
 }
