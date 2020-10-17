@@ -6,11 +6,11 @@ exports.run = async (client, message, args, database) => {
   var query = args.join(' ');
   if (query == "") return message.channel.send("u gotta put in a query bro")
 
-  try {
-    database.query(query);
-  } catch (e) {
-    message.channel.send(e);
-  }
+  // try {
+  //   database.query(query);
+  // } catch (e) {
+  //   message.channel.send(e);
+  // }
 }
 
 exports.help = {
