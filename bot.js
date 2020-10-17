@@ -29,7 +29,6 @@ database.connect(err => {
 function generateXp() {
   var min = 15;
   var max = 25;
-
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -43,17 +42,14 @@ client.on('message', async message => {
 
 
   // XP HANDLER
-
   database.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
-    console.log(rows);
-
+    // console.log(rows);
     let sql;
 
     if(rows.length < 1) {
       sql = `INSERT INTO xp (id, xp, timeStamp) VALUES ('${message.author.id}', ${generateXp()}, ${unix})`;
     } else {
-
       var oldTime = rows[0].timeStamp;
       var diff = (unix - oldTime);
 
