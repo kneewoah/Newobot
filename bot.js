@@ -46,6 +46,7 @@ client.on('message', async message => {
 
   database.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
+    console.log(rows);
 
     let sql;
 
