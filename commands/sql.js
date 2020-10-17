@@ -9,6 +9,7 @@ exports.run = async (client, message, args, database) => {
   } catch (e) {
     message.channel.send(e);
   }
+}
 
 exports.help = {
   description: "access the SQL database (Newo Only)",
