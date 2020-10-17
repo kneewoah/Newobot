@@ -39,10 +39,9 @@ client.on('message', async message => {
 
   var timestamp = moment().format('HH:mm:ss');
   var unix = moment().unix();
-  var table = `xp_${message.guild.id}`;
 
   // XP HANDLER
-
+  var table = `xp_${message.guild.id}`;
   database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
     // console.log(rows);
@@ -56,8 +55,9 @@ client.on('message', async message => {
 
       if (diff < 60) return sql = "";
       let xp = rows[0].xp;
-
-      sql = `UPDATE ${table} SET xp = ${xp + generateXp()}, timeStamp = ${unix} WHERE id = '${message.author.id}'`;
+      
+      let genXp = generateXp();
+      sql = `UPDATE ${table} SET xp = ${xp + genXp}, timeStamp = ${unix} WHERE id = '${message.author.id}'`;
     }
     database.query(sql, console.log);
   });
