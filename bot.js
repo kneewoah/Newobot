@@ -77,7 +77,7 @@ client.on('message', async message => {
     cmdFile = require(`./commands/${command}.js`);
     exists = true;
   } catch (failure) {
-    // No error needed, command does not exist
+    console.log(failure);
   }
 
   if (exists) {
