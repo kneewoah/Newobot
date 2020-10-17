@@ -13,19 +13,20 @@ exports.run = (client, message, args, con) => {
     message.channel.send(`Your total XP is: ${xp}. Your level is: ${lvl}.`);
   });
 
-}
 
-function findLvl(xp) {
-  for (var i = 1; i < 200; i++) {
-    if (xp < xpNeeded(i)) {
-      return i-1;
-}
 
-function xpNeeded(level) {
-  if (level = 0) return 0;
-  xpNeeded = 0;
-  for (var i = 0; i < level; i++) {
-    xpNeeded += 5*Math.pow((level-1),2)+50*(level-1)+100;
+  function findLvl(xp) {
+    for (var i = 1; i < 200; i++) {
+      if (xp < xpNeeded(i)) {
+        return i-1;
+  }
+
+  function xpNeeded(level) {
+    if (level = 0) return 0;
+    xpNeeded = 0;
+    for (var i = 0; i < level; i++) {
+      xpNeeded += 5*Math.pow((level-1),2)+50*(level-1)+100;
+    }
   }
 }
 
