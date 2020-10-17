@@ -17,8 +17,8 @@ exports.run = (client, message, args, con) => {
 
   function findLvl(xp) {
     for (var i = 1; i < 200; i++) {
-      if (xp < xpNeeded(i)) {
-        return i-1;
+      if (xp < xpNeeded(i))return i-1;
+    }
   }
 
   function xpNeeded(level) {
@@ -28,7 +28,7 @@ exports.run = (client, message, args, con) => {
       xpNeeded += 5*Math.pow((level-1),2)+50*(level-1)+100;
     }
   }
-}
+});
 
 exports.help = {
   description: "WIP - XP tracker",
