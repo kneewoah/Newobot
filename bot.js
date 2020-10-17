@@ -61,7 +61,7 @@ client.on('message', async message => {
       var level = rows[0].level;
       var f = 5*Math.pow(level, 2)+50*level+100;
 
-      if (progress >= f) {}
+      if (progress >= f) {
         level++;
         progress -= f;
         sql = `UPDATE ${table} SET xp = ${xp + genXp}, timeStamp = ${unix}, progress = ${progress + genXp}, WHERE id = '${message.author.id}'`;
