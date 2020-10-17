@@ -28,7 +28,7 @@ exports.run = (client, message, args, con) => {
       xpNeeded += 5*Math.pow((level-1),2)+50*(level-1)+100;
     }
   }
-});
+};
 
 exports.help = {
   description: "WIP - XP tracker",
