@@ -5,7 +5,7 @@ exports.run = (client, message, args, con) => {
   function findLvl(xp) {
     var needed = 0;
     for (var i = 1; i < 200; i++) {
-      var needed += 5*Math.pow((i-1),2)+50*(i-1)+100;
+      needed += 5*Math.pow((i-1),2)+50*(i-1)+100;
       if (xp < needed) return i-1;
     }
   }
