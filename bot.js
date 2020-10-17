@@ -83,7 +83,7 @@ client.on('message', async message => {
   if (exists) {
     try {
       cmdFile.run(client, message, args, database);
-      console.log(`${timestamp}: Processed command \'${command}\' succesfully.`);
+      console.log(`${timestamp}: Ran command \'${command}\' succesfully.`);
       message.react('☁');
     } catch (error) {
       console.log(`${timestamp}: Could not process command \'${command}\'.`);
