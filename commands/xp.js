@@ -2,17 +2,11 @@ const config = require("../config.json");
 
 exports.run = (client, message, args, con) => {
 
-  function xpNd(level) {
-    if (level = 0) return 0;
-    xpNeeded = 0;
-    for (var i = 0; i < level; i++) {
-      xpNeeded += 5*Math.pow((level-1),2)+50*(level-1)+100;
-    }
-  }
-
   function findLvl(xp) {
+    var needed = 0;
     for (var i = 1; i < 200; i++) {
-      if (xp < xpNd(i))return i-1;
+      var needed += 5*Math.pow((i-1),2)+50*(i-1)+100;
+      if (xp < needed) return i-1;
     }
   }
 
