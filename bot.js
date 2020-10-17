@@ -40,18 +40,18 @@ client.on('message', async message => {
 
   var timestamp = moment().format('HH:mm:ss');
   var unix = moment().unix();
-
+  var table = `xp_${message.guild.id}`;
 
   // XP HANDLER
 
-  database.query(`SELECT * FROM xp WHERE id = '${message.author.id}'`, (err, rows) => {
+  database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
     console.log(rows);
 
     let sql;
 
     if(rows.length < 1) {
-      sql = `INSERT INTO xp (id, xp, timeStamp) VALUES ('${message.author.id}', ${generateXp()}, ${unix})`;
+      sql = `INSERT INTO ${table} (id, xp, timeStamp) VALUES ('${message.author.id}', ${generateXp()}, ${unix})`;
     } else {
 
       var oldTime = rows[0].timeStamp;
@@ -60,7 +60,7 @@ client.on('message', async message => {
       if (diff < 60) return;
       let xp = rows[0].xp;
 
-      sql = `UPDATE xp SET xp = ${xp + generateXp()}, timeStamp = ${unix} WHERE id = '${message.author.id}'`;
+      sql = `UPDATE ${table} SET xp = ${xp + generateXp()}, timeStamp = ${unix} WHERE id = '${message.author.id}'`;
     }
     database.query(sql, console.log);
   });
