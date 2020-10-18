@@ -3,7 +3,8 @@ const config = require("../config.json");
 exports.run = (client, message, args, con) => {
 
   var msg = "";
-  let races = Object.assign({}, config.races);
+  let races = JSON.parse(JSON.stringify(config.races));
+  console.log(races);
   let size = races.length;
   var remaining = 100;
 
