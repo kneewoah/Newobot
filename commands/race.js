@@ -7,7 +7,7 @@ exports.run = (client, message, args, con) => {
   let size = races.length;
   var remaining = 100;
 
-  for (var i = 0; i < size, i++) {
+  for (var i = 0; i < size; i++) {
     var index = Math.floor(Math.random()*races.length);
     var percent = Math.floor(Math.random()*remaining);
     if (percent < 1) percent = "<1";
