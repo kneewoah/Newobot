@@ -41,7 +41,9 @@ client.on('message', async message => {
   var unix = moment().unix();
 
   // XP HANDLER
-  var table = `xp_${message.guild.id}`;
+  function handleXP() {
+    if (message.guild.id != config.pillowsID) return;
+  var table = `xp_${config.pillowsID}`;
   database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
     // console.log(rows);
@@ -73,6 +75,9 @@ client.on('message', async message => {
     database.query(sql, console.log);
 
   });
+  }
+  
+  handleXP();
 
   // COMMAND HANDLER
   if(message.content.indexOf(config.prefix) !== 0) return;
