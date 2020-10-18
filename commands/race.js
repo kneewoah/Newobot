@@ -4,14 +4,13 @@ exports.run = (client, message, args, con) => {
 
   var msg = "";
   let races = JSON.parse(JSON.stringify(config.races));
-  console.log(races);
   let size = races.length;
   var remaining = 100;
 
   for (var i = 0; i < size; i++) {
     var index = Math.floor(Math.random()*races.length);
     var percent = Math.floor(Math.random()*remaining);
-    if (percent < 1) percent = "<1";
+    if (percent < 1 || percent == "NaN") percent = "<1";
     console.log(`Percent ${i+1}: ${percent}`);
     msg = msg + `${races[index]}: ${percent}%\n`;
     races.splice(index, 1);
