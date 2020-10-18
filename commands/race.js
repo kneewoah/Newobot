@@ -16,14 +16,12 @@ exports.run = (client, message, args, con) => {
     msg = msg + `${races[index]}: ${percent2}%\n`;
     races.splice(index, 1);
     remaining -= percent;
-
   }
 
   message.channel.send(`${message.author}, after conducting DNA analysis, I have concluded your race to be as follows:\n\n` + msg);
-
 };
 
 exports.help = {
-  description: "WIP - XP tracker",
-  usage: "!xp"
+  description: "DNA Analysis",
+  usage: "!race"
 };
