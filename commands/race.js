@@ -13,7 +13,7 @@ exports.run = (client, message, args, con) => {
     var percent2 = percent;
     if (percent < 1) percent2 = "<1";
     console.log(`Percent ${i+1}: ${percent}`);
-    msg = msg + `${races[index]}: ${percent2}%\n`;
+    msg = msg + `${races[index]}: \`${percent2}%\`\n`;
     races.splice(index, 1);
     remaining -= percent;
   }
