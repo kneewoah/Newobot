@@ -26,8 +26,6 @@ exports.run = (client, message, args, con) => {
 
   percents.sort(function(a, b){return a-b});
   console.log(percents);
-
-  var params = ;
   console.log(params);
   console.log(`https://quickchart.io/chart?c={type:'pie',data:{labels:${races},datasets:[{data:${percents}}]}}`);
 
