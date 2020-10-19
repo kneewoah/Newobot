@@ -76,7 +76,7 @@ client.on('message', async message => {
 
   });
   }
-  
+
   handleXP();
 
   // COMMAND HANDLER
@@ -99,7 +99,7 @@ client.on('message', async message => {
 
   if (exists) {
     try {
-      cmdFile.run(client, message, args, database);
+      cmdFile.run(client, message, args, database, client);
       console.log(`${timestamp}: Ran command \'${command}\' succesfully.`);
       message.react('☁');
     } catch (error) {

@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const config = require("../config.json");
 
-exports.run = (client, message, args, con) => {
+exports.run = (client, message, args, con, client) => {
 
   var msg = "";
   let races = JSON.parse(JSON.stringify(config.races));
@@ -12,7 +12,6 @@ exports.run = (client, message, args, con) => {
   for (var i = 0; i < size; i++) {
     var percent = Math.floor(Math.random()*remaining);
     var percent2 = percent;
-    if (percent < 1) percent2 = Math.random();
     percents.push(percent2);
     remaining -= percent;
   }
