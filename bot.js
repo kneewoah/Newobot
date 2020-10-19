@@ -99,7 +99,7 @@ client.on('message', async message => {
 
   if (exists) {
     try {
-      cmdFile.run(client, message, args, database, client);
+      cmdFile.run(client, message, args, database);
       console.log(`${timestamp}: Ran command \'${command}\' succesfully.`);
       message.react('☁');
     } catch (error) {

@@ -1,9 +1,8 @@
 const Discord = require('discord.js');
 const config = require("../config.json");
 
-exports.run = (client, message, args, con, client) => {
+exports.run = (client, message, args, con) => {
 
-  var msg = "";
   let races = JSON.parse(JSON.stringify(config.races));
   let size = races.length;
   var remaining = 100;
@@ -16,6 +15,7 @@ exports.run = (client, message, args, con, client) => {
     remaining -= percent;
   }
 
+  // sort
   for (i = races.length -1; i > 0; i--) {
     j = Math.floor(Math.random() * i)
     k = races[i]
