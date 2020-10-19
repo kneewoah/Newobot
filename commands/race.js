@@ -26,7 +26,6 @@ exports.run = (client, message, args, con) => {
 
   percents.sort(function(a, b){return a-b});
   console.log(percents);
-  console.log(params);
   console.log(`https://quickchart.io/chart?c={type:'pie',data:{labels:${races},datasets:[{data:${percents}}]}}`);
 
   message.channel.send(`${message.author}, after conducting DNA analysis, I have concluded your race to be as follows:`, {files: [`https://quickchart.io/chart?c={type:'pie',data:{labels:${races},datasets:[{data:${percents}}]}}`]});
