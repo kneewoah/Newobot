@@ -30,9 +30,9 @@ exports.run = (client, message, args, con) => {
   var params = {
     type:'pie',
     data: {
-      labels: races,
+      labels: `${races}`,
       datasets: [{
-        data: percents
+        data: `${races}`
       }]
     }
   }
