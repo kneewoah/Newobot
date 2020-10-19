@@ -10,7 +10,6 @@ exports.run = (client, message, args, con) => {
 
   for (var i = 0; i < size; i++) {
     var percent = Math.floor(Math.random()*remaining);
-    console.log(`Percent ${i+1}: ${percent}`);
     var percent2 = percent;
     if (percent < 1) percent2 = Math.random();
     percents.push(percent2);
@@ -23,8 +22,10 @@ exports.run = (client, message, args, con) => {
     races[i] = races[j]
     races[j] = k
   }
+  console.log(races)
 
   percents.sort(function(a, b){return a-b});
+  console.log(percents);
 
   var params = {
     type:'pie',
@@ -35,6 +36,7 @@ exports.run = (client, message, args, con) => {
       }]
     }
   }
+  console.log(params);
 
   message.channel.send(`${message.author}, after conducting DNA analysis, I have concluded your race to be as follows:`, {files: [`https://quickchart.io/chart?c=${params}`]});
 };
