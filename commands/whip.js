@@ -5,7 +5,7 @@ exports.run = (client, message, args) => {
 
   let extra;
   if ((Math.floor(Math.random()*10)) < 1) {
-    extra = ` so hard they bled out. RIP ${randomPerson.username}`;
+    extra = ` so hard they bled out. RIP ${randomPerson}`;
   } else {
     extra = ".";
   }
