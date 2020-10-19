@@ -22,7 +22,7 @@ exports.run = (client, message, args, con) => {
     races[i] = races[j]
     races[j] = k
   }
-  console.log(races)
+  console.log(JSON.stringify(races))
 
   percents.sort(function(a, b){return a-b});
   console.log(percents);
