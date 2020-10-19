@@ -27,7 +27,7 @@ exports.run = (client, message, args, con) => {
   percents.sort(function(a, b){return a-b});
   console.log(percents);
 
-  var params = {type:'pie',data:{labels:`${races}`,datasets:[{data:`${percents}`}]}};
+  var params = {type:'pie',data:{labels:[races],datasets:[{data:[percents]}]}};
   console.log(params);
   console.log(params.datasets);
 
