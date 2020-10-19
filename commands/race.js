@@ -29,8 +29,8 @@ exports.run = (client, message, args, con) => {
 
   var params = {type:'pie',data:{labels:[races],datasets:[{data:[percents]}]}};
   console.log(params);
-  console.log(params.datasets);
-
+  console.log(`https://quickchart.io/chart?c=${params}`);
+    
   message.channel.send(`${message.author}, after conducting DNA analysis, I have concluded your race to be as follows:`, {files: [`https://quickchart.io/chart?c=${params}`]});
 };
 
