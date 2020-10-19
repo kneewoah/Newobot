@@ -38,7 +38,7 @@ exports.run = (client, message, args, con) => {
   }
   console.log(params);
 
-  message.channel.send(`${message.author}, after conducting DNA analysis, I have concluded your race to be as follows:`);
+  message.channel.send(`${message.author}, after conducting DNA analysis, I have concluded your race to be as follows:`, {files: [`https://quickchart.io/chart?c=${params}`]});
 };
 
 exports.help = {
