@@ -32,7 +32,7 @@ exports.run = (client, message, args, con) => {
     data: {
       labels: `${races}`,
       datasets: [{
-        data: `${races}`
+        data: `${percents}`
       }]
     }
   }
