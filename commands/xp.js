@@ -10,7 +10,7 @@ exports.run = (client, message, args, con) => {
     }
   }
 
-  let target = message.author; //message.mentions.users.first() || message.guild.members.cache.cache.get(args[1]) ||
+  let target = message.author; //message.mentions.users.first() || message.guild.members.cache.get(args[1]) ||
 
   con.query(`SELECT * FROM xp_${message.guild.id} WHERE id = '${target.id}'`, (err, rows) => {
     if(err) throw err;

@@ -19,8 +19,8 @@ function changeColor(color, author) {
 };
 
 function deleteRole(roleName) {
-  if (message.guild.roles.cache.cache.find(role => role.name === roleName)) {
-    message.guild.roles.cache.cache.find(role => role.name === roleName).delete();
+  if (message.guild.roles.cache.find(role => role.name === roleName)) {
+    message.guild.roles.cache.find(role => role.name === roleName).delete();
   }
 };
 
