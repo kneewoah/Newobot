@@ -1,6 +1,6 @@
 // BEFORE LAUNCH
 const Discord = require('discord.js');
-const client = new Discord.Client({disableEveryone: true});
+const client = new Discord.Client({disableMentions: 'everyone'});
 const config = require('./config.json');
 const moment = require('moment');
 const fs = require('fs');
@@ -8,7 +8,7 @@ const mysql = require('mysql');
 
 // ON READY
 client.on('ready', () => {
-  const owner = client.users.find(user => user.id === config.ownerID)
+  const owner = client.users.cache.find(user => user.id === config.ownerID)
   console.log("Newo Bot is Online.");
 });
 
@@ -116,11 +116,11 @@ client.on('guildMemberAdd', member => {
   // COLOR GREETER
   let roleName = `${member.id}`;
 
-  if(member.guild.roles.find(role => role.name === roleName)) {
-    let roleID = member.guild.roles.find(role => role.name === roleName).id;
-    member.addRole(roleID);
+  if(member.guild.roles.cache.find(role => role.name === roleName)) {
+    let roleID = member.guild.roles.cache.find(role => role.name === roleName).id;
+    member.roles.add(roleID);
   } else {
-    let channel = member.guild.channels.find(ch => ch.id === config.pillowsGeneralID || ch.id === config.testingChannelID);
+    let channel = member.guild.channels.cache.find(ch => ch.id === config.pillowsGeneralID || ch.id === config.testingChannelID);
     if (!channel) return;
     channel.send(`Welcome ${member.displayName}! Type \`!color #HEXCODEHERE\` to chose your role color! You can choose a color here: <https://tr.im/hexwheel>.`);
   };

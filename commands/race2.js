@@ -29,7 +29,7 @@ exports.run = (client, message, args, con) => {
   console.log(`https://quickchart.io/chart?c={type:'pie',data:{labels:${JSON.stringify(races)},datasets:[{data:[${percents}]}]}}`);
 
   message.channel.send(`${message.author}, after conducting DNA analysis, I have concluded your race to be as follows:`, {files: []});
-  const exampleEmbed = new Discord.RichEmbed()
+  const exampleEmbed = new Discord.MessageEmbed()
 	.setImage(`https://quickchart.io/chart?c={type:'pie',data:{labels:${JSON.stringify(races)},datasets:[{data:[${percents}]}]}}`);
   message.channel.send(exampleEmbed);
 
