@@ -16,25 +16,29 @@ exports.run = async (client, message, args) => {
   }
 
 function changeColor(color, author) {
-  deleteRole(author.id);
-  setTimeout(function() {makeRole(color, author.id)}, 400);
+  deleteRole(author);
+  setTimeout(function() {makeRole(color, author)}, 400);
   setTimeout(function() {addRole(author)}, 1600);
 };
 
-function deleteRole(roleName) {
-  if (message.guild.roles.cache.find(role => role.name === roleName)) {
-    message.guild.roles.cache.find(role => role.name === roleName).delete();
+function deleteRole(author) {
+  if (message.guild.roles.cache.find(role => role.name === author.id)) {
+    message.guild.roles.cache.find(role => role.name === author.id).delete();
   }
-  console.log(roleName + " deleted");
+  console.log(author.id + " deleted");
 };
 
-function makeRole(color, id) {
+function makeRole(color, author) {
   message.guild.roles.create({
-    name: `${id}`,
-    color: `0x${color}`,
-    hoist: false,
-    mentionable: false,
+    data: {
+      name: `${author.id}`,
+      color: `0x${color}`,
+      hoist: false,
+      mentionable: false,
+    },
+    reason: `!color command for ${author.username}`
   });
+  
   console.log(id + " created");
 };
 
