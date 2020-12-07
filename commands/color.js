@@ -22,6 +22,7 @@ function deleteRole(roleName) {
   if (message.guild.roles.cache.find(role => role.name === roleName)) {
     message.guild.roles.cache.find(role => role.name === roleName).delete();
   }
+  console.log(roleName + " deleted");
 };
 
 function makeRole(color, id) {
@@ -31,11 +32,13 @@ function makeRole(color, id) {
     hoist: false,
     mentionable: false,
   });
+  console.log(id + " created");
 };
 
 function addRole(user) {
   let roleID = message.guild.roles.cache.find(role => role.name === user.id).id;
   message.member.roles.add(roleID);
+  console.log(roleID + " added");
 };
 
 };
