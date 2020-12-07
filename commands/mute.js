@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
   if(!message.member.hasPermission("MANAGE_MESSAGES" || "ADMINISTRATOR") || message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.");
 
   if(!message.guild.roles.cache.find(role => role.name === "Muted")) {
-    message.guild.createRole({
+    message.guild.roles.create({
       name: 'Muted',
       color: '0xb51515',
       hoist: false,

@@ -25,7 +25,7 @@ function deleteRole(roleName) {
 };
 
 function makeRole(color, id) {
-  message.guild.createRole({
+  message.guild.roles.create({
     name: `${id}`,
     color: `0x${color}`,
     hoist: false,
