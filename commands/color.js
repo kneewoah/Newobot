@@ -16,19 +16,24 @@ exports.run = async (client, message, args) => {
   }
 
 function changeColor(color, author) {
-  deleteRole(author);
-  setTimeout(function() {makeRole(color, author)}, 400);
+  let pos = deleteRole(author);
+  setTimeout(function() {makeRole(color, author, pos)}, 400);
   setTimeout(function() {addRole(author)}, 1600);
 };
 
 function deleteRole(author) {
   if (message.guild.roles.cache.find(role => role.name === author.id)) {
-    message.guild.roles.cache.find(role => role.name === author.id).delete();
+    let role = message.guild.roles.cache.find(role => role.name === author.id)
+    let pos = role.position;
+    role.delete();
+    return pos;
+  } else {
+    return 0;
   }
   console.log(author.id + " deleted");
 };
 
-function makeRole(color, author) {
+function makeRole(color, author, pos) {
   message.guild.roles.create({
     data: {
       name: `${author.id}`,
@@ -36,6 +41,7 @@ function makeRole(color, author) {
       hoist: false,
       mentionable: false,
     },
+    position: pos,
     reason: `!color command for ${author.username}`
   });
 
