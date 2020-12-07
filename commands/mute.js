@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
 
   if(!message.guild.roles.cache.find(role => role.name === "Muted")) {
     message.guild.roles.create({
-      dat: {
+      data: {
         name: 'Muted',
         color: '0xb51515',
         hoist: false,
