@@ -38,8 +38,8 @@ function makeRole(color, author) {
     },
     reason: `!color command for ${author.username}`
   });
-  
-  console.log(id + " created");
+
+  console.log(author.id + " created");
 };
 
 function addRole(user) {
