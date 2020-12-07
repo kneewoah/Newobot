@@ -6,11 +6,14 @@ exports.run = async (client, message, args) => {
 
   if(!message.guild.roles.cache.find(role => role.name === "Muted")) {
     message.guild.roles.create({
-      name: 'Muted',
-      color: '0xb51515',
-      hoist: false,
-      mentionable: false,
-      permissions: ["READ_MESSAGE_HISTORY", "SPEAK", "USE_VAD", "CHANGE_NICKNAME"]
+      dat: {
+        name: 'Muted',
+        color: '0xb51515',
+        hoist: false,
+        mentionable: false,
+        permissions: ["READ_MESSAGE_HISTORY", "SPEAK", "USE_VAD", "CHANGE_NICKNAME"]
+      },
+      reason: "New Muted Role"
     });
     message.channel.send("Because there was no `muted` role, I've gone ahead and created one for you.");
   }
