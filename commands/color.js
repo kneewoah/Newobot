@@ -27,7 +27,7 @@ function deleteRole(author) {
     let pos = role.position;
     role.delete();
     return pos;
-      console.log(author.id + " deleted");
+    console.log(author.id + " deleted");
   } else {
     return 0;
   }
@@ -40,8 +40,8 @@ function makeRole(color, author, pos) {
       color: `0x${color}`,
       hoist: false,
       mentionable: false,
+      position: pos,
     },
-    position: pos,
     reason: `!color command for ${author.username}`
   });
 
