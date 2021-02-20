@@ -56,7 +56,7 @@ client.on('message', async message => {
     } else {
       var oldTime = rows[0].timeStamp;
       var diff = (unix - oldTime);
-      if (diff < 60) return sql = "";
+      if (diff < 60) return;
 
       var xp = rows[0].xp + genXp;
       var progress = rows[0].progress + genXp;
@@ -100,7 +100,7 @@ client.on('message', async message => {
   if (exists) {
     try {
       cmdFile.run(client, message, args, database);
-      console.log(`${timestamp}: Loaded command \'${command}\' succesfully.`);
+      console.log(`${timestamp}: Ran command \'${command}\' succesfully.`);
       message.react('☁');
     } catch (error) {
       console.log(`${timestamp}: Could not process command \'${command}\'.`);
