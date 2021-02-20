@@ -11,7 +11,7 @@ exports.run = (client, message, args, con) => {
   }
 
   let target;
-  if (args[0) {
+  if (message.mentions.members.first()) {
     target = message.mentions.members.first();
   } else {
     target = message.author;
