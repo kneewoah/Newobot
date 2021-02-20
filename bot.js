@@ -67,7 +67,7 @@ client.on('message', async message => {
         var progress = rows[0].progress + genXp;
         var level = rows[0].level;
         var thresh = 5*Math.pow(level, 2)+50*level+100;
-        var sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress} WHERE id = ${message.author.id}`;
+        var sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress} WHERE id = '${message.author.id}'`;
         console.log("NEW QUERY: " + sql);
         database.query(sql, console.log);
 
@@ -76,7 +76,7 @@ client.on('message', async message => {
         if (progress >= thresh) {
           level++;
           progress -= thresh;
-          sql2 = `UPDATE ${table} progress = ${progress}, level = ${level} WHERE id = ${message.author.id}`;
+          sql2 = `UPDATE ${table} set progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
           console.log("NEW QUERY: " + sql2);
           database.query(sql2, console.log);
           message.channel.send("Level up!"); // will make detailed later
