@@ -56,6 +56,7 @@ client.on('message', async message => {
     } else {
       var oldTime = rows[0].timeStamp;
       var diff = (unix - oldTime);
+      console.log("Diff: " + diff);
 
       if (diff >= 60) {
         // update params
