@@ -76,7 +76,7 @@ client.on('message', async message => {
         if (progress >= thresh) {
           level++;
           progress -= thresh;
-          sql2 = `UPDATE ${table} progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
+          sql2 = `UPDATE ${table} set progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
           console.log("NEW QUERY: " + sql2);
           database.query(sql2, console.log);
           message.channel.send("Level up!"); // will make detailed later
@@ -86,7 +86,6 @@ client.on('message', async message => {
 
   });
   }
-
   handleXP();
 
   // COMMAND HANDLER
