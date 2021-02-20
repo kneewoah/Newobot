@@ -54,7 +54,7 @@ client.on('message', async message => {
       database.query(sql, console.log);
 
     } else {
-      var oldTime = rows[0].timeStamp;
+      var oldTime = rows[0].timestamp;
       var diff = (unix - oldTime);
       console.log("Diff: " + diff);
 
