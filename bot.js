@@ -43,36 +43,38 @@ client.on('message', async message => {
   // XP HANDLER
   function handleXP() {
     if (message.guild.id != config.pillowsID) return;
-  var table = `xp_${config.pillowsID}`;
-  database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
+    var table = `xp_${config.pillowsID}`;
+    database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
     if(err) throw err;
     // console.log(rows);
-    let sql;
-    var genXp = generateXp();
 
     if(rows.length < 1) {
-      sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${genXp}, ${unix}, ${genXp}, 0)`;
+      var sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${generateXp()}, ${unix}, ${genXp}, 0)`;
+      database.query(sql, console.log);
 
     } else {
       var oldTime = rows[0].timeStamp;
       var diff = (unix - oldTime);
-      if (diff < 60) return;
 
-      var xp = rows[0].xp + genXp;
-      var progress = rows[0].progress + genXp;
-      var level = rows[0].level;
-      var f = 5*Math.pow(level, 2)+50*level+100;
+      if (diff >= 60) {
+        // update params
+        var xp = rows[0].xp + genXp;
+        var progress = rows[0].progress + genXp;
+        var level = rows[0].level;
+        var thresh = 5*Math.pow(level, 2)+50*level+100;
+        var sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress} WHERE id = '${message.author.id}'`;
+        database.query(sql, console.log);
 
-      if (progress >= f) {
-        level++;
-        progress -= f;
-        sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
-        message.channel.send("Level up!"); // will make detailed later
-      } else {
-        sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress} WHERE id = '${message.author.id}'`;
+        // check if level update
+        if (progress >= thresh) {
+          level++;
+          progress -= thresh;
+          sql2 = `UPDATE ${table} progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
+          database.query(sql2, console.log);
+          message.channel.send("Level up!"); // will make detailed later
+        }
       }
     }
-    database.query(sql, console.log);
 
   });
   }
