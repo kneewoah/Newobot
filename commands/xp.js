@@ -23,7 +23,7 @@ exports.run = (client, message, args, con) => {
     if(!rows[0]) return message.channel.send("imagine having 0 xp lol");
     let xp = rows[0].xp;
     var lvl = findLvl(xp);
-    message.channel.send(`Your total XP is: ${xp}. Your level is: ${lvl}.`);
+    message.channel.send(`The total XP for ${target.username} is: ${xp}. Their level is: ${lvl}.`);
   });
 
 };
