@@ -12,7 +12,7 @@ exports.run = (client, message, args, con) => {
 
   let target;
   if (message.mentions.members.first()) {
-    target = message.mentions.members.first();
+    target = message.mentions.members.first().user;
   } else {
     target = message.author;
   }
