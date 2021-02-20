@@ -49,9 +49,15 @@ client.on('message', async message => {
     // console.log(rows);
 
     if(rows.length < 1) {
-      var sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${generateXp()}, ${unix}, ${genXp}, 0)`;
+      function generateXp() {
+        var min = 15;
+        var max = 25;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      var xp = generateXp();
+      var sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${xp}, ${unix}, ${xp}, 0)`;
       console.log("NEW QUERY: " + sql);
-      database.query(sql, console.log);
+      database.query(sql, console.log);console.log("NEW QUERY: " + sql);
 
     } else {
       var oldTime = rows[0].timestamp;
