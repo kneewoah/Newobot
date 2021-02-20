@@ -2,7 +2,7 @@ const config = require("../config.json");
 
 exports.run = async (client, message, args) => {
 
-  var members = await message.guild.members.cache;
+  var members = await message.guild.members.fetch.then(console.log).catch(console.error).cache;
   console.log(members);
 
   var random = members.random();
