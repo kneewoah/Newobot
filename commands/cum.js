@@ -2,7 +2,7 @@ const config = require("../config.json");
 
 exports.run = async (client, message, args) => {
 
-  var members = await message.guild.members.fetch();
+  var members = await message.guild.members;
   const users = members.users.map(u => u.toString());
   console.log(users);
 
