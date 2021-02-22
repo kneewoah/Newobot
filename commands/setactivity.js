@@ -12,7 +12,6 @@ exports.run = (client, message, args) => {
     } else {
       client.user.setPresence({status: style });
     }
-    client.user.setActivity(text, { type: style });
   } else {
     text = args.join(' ');
     client.user.setActivity(text);
