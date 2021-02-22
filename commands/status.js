@@ -3,7 +3,7 @@ const config = require("../config.json");
 exports.run = (client, message, args) => {
 
   if(message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.");
-  var query = args[0].toLowercase();
+  var query = args[0].toLowerCase();
   if (query != 'online' || query != 'dnd' || query != 'idle' || query != 'invisible') {
     return message.reply("Please enter a valid status: \`online | idle | dnd | invisible\`")
   } else {
