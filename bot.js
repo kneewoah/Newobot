@@ -54,7 +54,8 @@ client.on('message', async message => {
 
       var sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${genXp}, ${unix}, ${genXp}, 0)`;
       console.log("NEW QUERY: " + sql);
-      database.query(sql, console.log);console.log("NEW QUERY: " + sql);
+      database.query(sql, console.log);
+      console.log("NEW QUERY: " + sql);
 
     } else {
       var oldTime = rows[0].timestamp;
