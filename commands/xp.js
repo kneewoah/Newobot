@@ -54,7 +54,7 @@ exports.run = (client, message, args, con) => {
       ]
     }
 
-    var embed = new Discord.RichEmbed(data);
+    var embed = new Discord.MessageEmbed(data);
     message.channel.send(embed);
   });
 
