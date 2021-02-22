@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const client = new Discord.Client({disableMentions: 'everyone'});
 const config = require("../config.json");
 
 exports.run = (client, message, args, con) => {
@@ -51,8 +52,8 @@ exports.run = (client, message, args, con) => {
 client.on('messageReactionAdd', (reaction, user) => {
         let message = reaction.message, emoji = reaction.emoji;
 
-        if(message.author != client.user) return;
-        if(message.channel != config.pillowsGeneralID) return;
+        if(message.author != client.user) console.log("1") return;
+        if(message.channel != config.pillowsGeneralID) console.log("2") return;
 
         if(emoji.name == '✅') {
             var embed = message.embeds[0];
@@ -63,6 +64,7 @@ client.on('messageReactionAdd', (reaction, user) => {
 
             embed.addField({name: "Yes", value: yes.value + " " + user.toString(), inline: true})
             embed.addField(no);
+            reaction.remove(user);
         }
 
         else if(emoji.name == '❌') {
@@ -74,10 +76,10 @@ client.on('messageReactionAdd', (reaction, user) => {
 
           embed.addField(yes)
           embed.addField({name: "No", value: no.value + " " + user.toString(), inline: true});
+          reaction.remove(user);
         }
 
-        // Remove the user's reaction
-        reaction.remove(user);
+
 });
 
 exports.help = {
