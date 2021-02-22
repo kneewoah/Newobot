@@ -52,8 +52,8 @@ exports.run = (client, message, args, con) => {
 client.on('messageReactionAdd', (reaction, user) => {
         let message = reaction.message, emoji = reaction.emoji;
 
-        if(message.author != client.user) console.log("1") return;
-        if(message.channel != config.pillowsGeneralID) console.log("2") return;
+        if(message.author != client.user)  return console.log("1");
+        if(message.channel != config.pillowsGeneralID) return console.log("2");
 
         if(emoji.name == '✅') {
             var embed = message.embeds[0];
