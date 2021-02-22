@@ -54,8 +54,13 @@ exports.run = (client, message, args, con) => {
           value: `${progress} / ${xpToNxtLvl}`,
           inline: false
         }
-      ]
+      ],
+      footer: {
+        icon_url: client.user.avatarURL,
+        text: "© 2021 Newo"
     }
+    }
+    data.setThumbnail(target.avatarURL());
 
     var embed = new Discord.MessageEmbed(data);
     message.channel.send(embed);
