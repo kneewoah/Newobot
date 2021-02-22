@@ -6,7 +6,12 @@ exports.run = (client, message, args) => {
   let style = args[0].toLowerCase();
   let text;
   if (style === "watching" || query === "streaming" ||  query === "listening" || query === "playing") {
-    text = args.slice(1).join(' ');
+    if (args[1]) {
+      text = args.slice(1).join(' ');
+      client.user.setActivity(text, { type: style });
+    } else {
+      client.user.setPresence({status: style });
+    }
     client.user.setActivity(text, { type: style });
   } else {
     text = args.join(' ');
