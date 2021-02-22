@@ -5,7 +5,7 @@ exports.run = (client, message, args) => {
   if(message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.");
   let style = args[0].toLowerCase();
   let text;
-  if (style === "watching" || query === "streaming" ||  query === "listening" || query === "playing") {
+  if (style === "watching" || style === "streaming" || style === "listening" || style === "playing") {
     if (args[1]) {
       text = args.slice(1).join(' ');
       client.user.setActivity(text, { type: style });
