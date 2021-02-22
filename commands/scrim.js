@@ -10,6 +10,7 @@ exports.run = (client, message, args, con) => {
       time = 8;
     } else {
       time = args[0];
+    }
 
     let date;
     if (!args[1]) {
@@ -18,7 +19,8 @@ exports.run = (client, message, args, con) => {
       date = args.slice(1).join(' ');
     }
 
-    message.channels.cache.find(config.scrimChannel).send(`@everyone Scrim ${time}pm EST ${date}?`).react(✅);
+    message.channels.cache.find(config.scrimChannel)
+    .send(`@everyone Scrim ${time}pm EST ${date}?`).react(✅);
 
 };
 
