@@ -3,8 +3,8 @@ const config = require("../config.json");
 const fs = require("fs");
 
 exports.add = (client, message, user, reaction, emoji) => {
-  if(message.author != client.user)  return console.log("1");
-  if(message.channel != config.pillowsGeneralID) return console.log("2");
+  if(message.author !== client.user)  return console.log("1");
+  if(message.channel.id !== config.pillowsGeneralID) return console.log("2");
 
   if(emoji.name == '✅') {
       var embed = message.embeds[0];
