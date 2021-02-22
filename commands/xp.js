@@ -55,7 +55,7 @@ exports.run = (client, message, args, con) => {
         }
       ],
       footer: {
-        icon_url: client.user.avatarURL,
+        icon_url: client.user.avatarURL(),
         text: "© 2021 Newo"
       }
     }
