@@ -48,6 +48,38 @@ exports.run = (client, message, args, con) => {
 
 };
 
+client.on('messageReactionAdd', (reaction, user) => {
+        let message = reaction.message, emoji = reaction.emoji;
+
+        if(message.author != client.user) return;
+        if(message.channel != config.pillowsGeneralID) return;
+
+        if(emoji.name == '✅') {
+            var embed = message.embeds[0];
+            var yes = embed.fields[0];
+            var no = embed.fields[1];
+
+            embed.spliceFields(0);
+
+            embed.addField({name: "Yes", value: yes.value + " " + user.toString(), inline: true})
+            embed.addField(no);
+        }
+
+        else if(emoji.name == '❌') {
+          var embed = message.embeds[0];
+          var yes = embed.fields[0];
+          var no = embed.fields[1];
+
+          embed.spliceFields(0);
+
+          embed.addField(yes)
+          embed.addField({name: "No", value: no.value + " " + user.toString(), inline: true});
+        }
+
+        // Remove the user's reaction
+        reaction.remove(user);
+});
+
 exports.help = {
   description: "scrim announcement",
   usage: "!scrim <time> <date>"
