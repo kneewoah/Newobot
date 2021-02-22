@@ -5,8 +5,18 @@ exports.run = (client, message, args, con) => {
 
     if(message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.");
 
-    var time = args[0];
-    var date = args.slice(1).join(' ');
+    let time;
+    if (!args[0]) {
+      time = 8;
+    } else {
+      time = args[0];
+
+    let date;
+    if (!args[1]) {
+      date = "tonight";
+    } else {
+      date = args.slice(1).join(' ');
+    }
 
     client.guild.cache.find(config.pillowsID).channels.cache.find(config.scrimChannel).send(`@everyone Scrim ${time}pm EST ${date}?`).react(✅);
 
