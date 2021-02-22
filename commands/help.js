@@ -36,7 +36,13 @@ exports.run = (client, message, args) => {
           subArray.push(cmdFile.help.description, cmdFile.help.usage);
         });
 
+        var embed = new Discord.MessageEmbed({
+          title: `Newo Bot Commands`, color: `#FFFFFF`});
+
+        cmdArray.forEach(element => embed.addField(element[0], `Description: ${require(`./${element[0]}.js`).help.description}`, `Usage: ${require(`./${element[0]}.js`).help.usage}`))
+
         message.author.send(`\`Newo Bot Commands\` \n${cmdArray.map(subArray2 => `**${subArray2[0]}** \n__Description__: ${subArray2[1]} \n__Usage__: ${subArray2[2]}`).join('\n\n')}`);
+        message.author.send(embed);
       }
 
 
