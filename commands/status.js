@@ -7,7 +7,7 @@ exports.run = (client, message, args) => {
 
   message.reply(args[0]);
 
-  if (query === "dnd") {
+  if (query === "dnd" || query === "idle" ||  query === "online" || query === "invisible") {
     client.user.setStatus(query);
     message.channel.send("My status has been updated to " + query);
   } else {
