@@ -37,8 +37,8 @@ function generateXp() {
 
 // ON MESSAGE
 client.on('message', async message => {
-  if (message.author.id === "812476222269292555") message.reply("faggot");
-  
+  if (message.author.id === "198950035470155776") message.reply("STUPID FUCKING FAGGOT");
+
   if(message.author.bot) return;
 
   var timestamp = moment().format('HH:mm:ss');
