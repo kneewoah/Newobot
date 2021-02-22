@@ -128,8 +128,11 @@ client.on('guildMemberAdd', member => {
   // COLOR GREETER
   let roleName = `${member.id}`;
 
+  // Apply old color
   if(member.guild.roles.cache.find(role => role.name === roleName)) {
     member.roles.add(member.guild.roles.cache.find(role => role.name === roleName).id);
+
+
   } else {
     let channel = member.guild.channels.cache.find(ch => ch.id === config.pillowsGeneralID || ch.id === config.testingChannelID);
     if (!channel) return;
@@ -138,7 +141,7 @@ client.on('guildMemberAdd', member => {
     message.member.roles.add(
       message.guild.roles.create({
       data: {
-        name: `${author.id}`,
+        name: `${roleName}`,
         color: `0x${Math.floor(Math.random()*16777215).toString(16)}`,
         hoist: false,
         mentionable: false,
