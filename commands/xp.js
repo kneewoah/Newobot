@@ -7,7 +7,7 @@ exports.run = (client, message, args, con) => {
     recurseXp = xp;
     var i = 0;
     var leftover = 0;
-    while (recurseXp >= 0) {}
+    while (recurseXp >= 0) {
       recurseXp -= (5*Math.pow((i),2)+50*(i)+100);
       i++;
     }
