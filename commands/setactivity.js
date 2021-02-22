@@ -9,15 +9,16 @@ exports.run = (client, message, args) => {
     if (args[1]) {
       text = args.slice(1).join(' ');
       client.user.setActivity(text, { type: style });
+      message.channel.send("My activity has been updated to " + style + " " + text);
     } else {
       client.user.setPresence({status: style });
+      message.channel.send("My status has been updated to " + style);
     }
   } else {
     text = args.join(' ');
     client.user.setActivity(text);
+    message.channel.send("My activity has been updated to " + text);
   }
-
-  message.channel.send("My activity has been updated");
 
 }
 
