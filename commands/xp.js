@@ -1,13 +1,17 @@
 const config = require("../config.json");
 
 exports.run = (client, message, args, con) => {
+  var recurseXp;
 
-  var toNextLvl = 0;
   function findLvl(xp) {
-    for (var i = 1; i < 200; i++) {
-      toNextLvl += 5*Math.pow((i-1),2)+50*(i-1)+100;
-      if (xp < toNextLvl) return i-1;
+    recurseXp = xp;
+    var i = 0;
+    var leftover = 0;
+    while (recurseXp >= 0) {}
+      recurseXp -= (5*Math.pow((i),2)+50*(i)+100);
+      i++;
     }
+    return i-1;
   }
 
   let target;
@@ -21,8 +25,11 @@ exports.run = (client, message, args, con) => {
     if(err) throw err;
 
     if(!rows[0]) return message.channel.send("imagine having 0 xp lol");
-    let xp = rows[0].xp;
+
+    var xp = rows[0].xp;
     var lvl = findLvl(xp);
+    var xpToNxtLvl = 5*Math.pow((i),2)+50*(i)+100;
+    var progress = xpToNxtLvl + recurseXp;
 
     const data = {
       "title": `XP for ${target.username}`,
@@ -40,12 +47,12 @@ exports.run = (client, message, args, con) => {
         },
         {
           "name": "XP to Next Level",
-          "value": `${progress} / ${toNextLvl}`,
+          "value": `${progress} / ${xpToNxtLvl}`,
           "inline": false
         }
       ]
     }
-    
+
     var embed = new Discord.RichEmbed(data);
     message.channel.send(embed);
   });
