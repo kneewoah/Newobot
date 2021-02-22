@@ -11,6 +11,7 @@ client.on('ready', () => {
   const owner = client.users.cache.find(user => user.id === config.ownerID)
   console.log("Newo Bot is Online.");
   client.user.setActivity("Destiny 2", {url: "https://twitch.tv/newox", type: 'STREAMING'});
+  client.user.setStatus('dnd');
 });
 
 // CONNECT TO DATABASE
