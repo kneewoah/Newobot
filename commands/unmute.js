@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
     message.reply(rb + " isn't even muted you mormon.");
   } else {
 
-    message.reply(rb + " has been unmuted.");
+    message.reply(rb.toString() + " has been unmuted.");
 
     await rb.roles.remove(role.id)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't unmute because of : ${error}`));
