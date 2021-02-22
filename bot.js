@@ -10,6 +10,7 @@ const mysql = require('mysql');
 client.on('ready', () => {
   const owner = client.users.cache.find(user => user.id === config.ownerID)
   console.log("Newo Bot is Online.");
+  client.user.setActivity("Destiny 2", {url: "https://twitch.tv/newox", type: 'PLAYING'});
 });
 
 // CONNECT TO DATABASE
