@@ -42,5 +42,5 @@ exports.run = async (client, message, args) => {
 
 exports.help = {
   description: "Get a custom role color in discord",
-  usage: "!color #HEX43F"
+  usage: "!color #HEX43F or !color random"
 };
