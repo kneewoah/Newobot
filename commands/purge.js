@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
   return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
   }
 
-  const fetched = await message.channel.messages.fetchs({limit: deleteCount});
+  const fetched = await message.channel.messages.fetch({limit: deleteCount});
   message.channel.bulkDelete(fetched).catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
 };
 
