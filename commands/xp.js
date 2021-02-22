@@ -32,7 +32,7 @@ exports.run = (client, message, args, con) => {
     var xpToNxtLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
     var progress = xpToNxtLvl + recurseXp;
     var color = message.guild.roles.cache.find(role => role.name === target.id).color;
-    console.log(colorhex.toString(16));
+    console.log(color.toString(16));
 
   //   const data = {
   //     "title": `XP for ${target.username}`,
