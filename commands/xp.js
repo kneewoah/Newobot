@@ -57,7 +57,7 @@ exports.run = (client, message, args, con) => {
       ]
     }
 
-    console.log(target.avatarURL);
+    console.log(target.avatarURL());
 
     var embed = new Discord.MessageEmbed(data);
     message.channel.send(embed);
