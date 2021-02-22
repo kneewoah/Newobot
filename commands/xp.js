@@ -35,16 +35,18 @@ exports.run = (client, message, args, con) => {
 
     const data = {
       title: `XP for ${target.username}`,
-      color: `${color}`,
+      color: color,
+      thumbnail: target.avatarURL,
+      timestamp: Date.now(),
       fields: [
         {
           name: "XP",
-          value: `${xp}`,
+          value: xp,
           inline: false
         },
         {
           name: "Level",
-          value: `${lvl}`,
+          value: lvl,
           inline: false
         },
         {
