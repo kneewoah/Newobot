@@ -37,7 +37,7 @@ function generateXp() {
 
 // ON MESSAGE
 client.on('message', async message => {
-  
+
   // for trolling
   // if (message.author.id === "198950035470155776") message.reply("message here");
 
@@ -154,6 +154,20 @@ client.on('guildMemberAdd', member => {
     }))
     channel.send(`Welcome ${member.displayName}! Type \`!color #HEXCODEHERE\` to chose your role color! You can choose a color here: <https://tr.im/hexwheel>.`);
   };
+});
+
+client.on('messageReactionAdd', (reaction, user) => {
+  const reactions = require(`./modules/reactions.js`);
+  const message = reaction.message
+  const emoji = reaction.emoji;
+  reactions.reactionsAdd(reaction, user, message, emoji);
+});
+
+client.on('messageReactionRemove', (reaction, user) => {
+  const reactions = require(`./modules/reactions.js`);
+  const message = reaction.message
+  const emoji = reaction.emoji;
+  reactions.reactionsRemove(client, message, user, reaction, emoji);
 });
 
 // ERROR
