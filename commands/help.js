@@ -6,14 +6,6 @@ exports.run = (client, message, args) => {
   fs.readdir("./commands", (err, files) => {
       if(err) console.error(err);
 
-      let cmdArray = files.filter(f => f.split(".").pop() === "js").sort().map(function(cmd) {return cmd.slice(0, cmd.length - 3)}).map(x => [x]);
-
-      cmdArray.forEach(function(subArray) {
-        var name = subArray[0];
-        var cmdFile = require(`./${name}.js`);
-        subArray.push(cmdFile.help.description, cmdFile.help.usage);
-      });
-
       // with args (!help <cmd>)
       if(args[0]) {
 
@@ -36,7 +28,15 @@ exports.run = (client, message, args) => {
 
       // no args
       } else {
-          message.author.send(`\`Newo Bot Commands\` \n${cmdArray.map(subArray2 => `**${subArray2[0]}** \n__Description__: ${subArray2[1]} \n__Usage__: ${subArray2[2]}`).join('\n\n')}`);
+        let cmdArray = files.filter(f => f.split(".").pop() === "js").sort().map(function(cmd) {return cmd.slice(0, cmd.length - 3)}).map(x => [x]);
+
+        cmdArray.forEach(function(subArray) {
+          var name = subArray[0];
+          var cmdFile = require(`./${name}.js`);
+          subArray.push(cmdFile.help.description, cmdFile.help.usage);
+        });
+
+        message.author.send(`\`Newo Bot Commands\` \n${cmdArray.map(subArray2 => `**${subArray2[0]}** \n__Description__: ${subArray2[1]} \n__Usage__: ${subArray2[2]}`).join('\n\n')}`);
       }
 
 
