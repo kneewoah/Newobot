@@ -36,7 +36,7 @@ exports.run = (client, message, args, con) => {
     const data = {
       title: `XP for ${target.username}`,
       color: color,
-      thumbnail: target.avatarURL(),
+      thumbnail: "https://cdn.discordapp.com/avatars/189525406284644354/a01f388222ed03f75af14f6e0780ce0a.webp",
       timestamp: Date.now(),
       fields: [
         {
