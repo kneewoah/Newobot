@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
     return message.reply("Please enter a valid status: \`online | idle | dnd | invisible\`")
   } else {
     client.user.setStatus(args[0]);
-    message.channel.send("My status has been updated to + " args[0]);
+    message.channel.send("My status has been updated to " + args[0]);
   }
 
 
