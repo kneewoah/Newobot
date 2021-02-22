@@ -26,12 +26,12 @@ exports.run = (client, message, args, con) => {
       fields: [
         {
           name: "Yes",
-          value: '',
+          value: 'h',
           inline: true
         },
         {
           name: "No",
-          value: ``,
+          value: `h`,
           inline: true
         }
       ],
