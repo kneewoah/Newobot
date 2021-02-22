@@ -15,27 +15,28 @@ exports.run = async (client, message, args) => {
     message.channel.send("The code you entered did not match the correct format. You can select a color here: <https://htmlcolorcodes.com/color-picker/>");
   }
 
-function changeColor(color, author) {
-  if (!message.guild.roles.cache.find(role => role.name === author.id)) {
-    message.member.roles.add(
-      message.guild.roles.create({
-      data: {
-        name: `${author.id}`,
-        color: `0x${color}`,
-        hoist: false,
-        mentionable: false,
-      },
-      reason: `!color command for ${author.username}`
-    }));
-  } else {
-    var edited = message.guild.roles.cache.find(role => role.name === author.id).edit({color: `0x${color}`});
-    try {
-      message.member.roles.add(edited)
-    } catch (e) {
-      console.log(e);
+  function changeColor(color, author) {
+    if (!message.guild.roles.cache.find(role => role.name === author.id)) {
+      message.member.roles.add(
+        message.guild.roles.create({
+        data: {
+          name: `${author.id}`,
+          color: `0x${color}`,
+          hoist: false,
+          mentionable: false,
+        },
+        reason: `!color command for ${author.username}`
+      }));
+    } else {
+      var edited = message.guild.roles.cache.find(role => role.name === author.id).edit({color: `0x${color}`});
+      try {
+        message.member.roles.add(edited)
+      } catch (e) {
+        console.log(e);
+      }
     }
-  }
-};
+  };
+}
 
 exports.help = {
   description: "Get a custom role color in discord",
