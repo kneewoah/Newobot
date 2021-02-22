@@ -7,8 +7,8 @@ exports.run = (client, message, args) => {
 
   message.reply(args[0]);
 
-  if (query != 'online' || query != 'dnd' || query != 'idle' || query != 'invisible') {
-    return message.reply("Please enter a valid status: \`online | idle | dnd | invisible\`")
+  if ((query !== 'online') || (query != 'dnd') || (query != 'idle') || (query != 'invisible')) {
+    return message.reply("Please enter a valid status: \`online | idle | dnd | invisible\`");
   } else {
     client.user.setStatus(args[0]);
     message.channel.send("My status has been updated to " + args[0]);
