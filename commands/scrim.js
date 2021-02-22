@@ -20,7 +20,7 @@ exports.run = (client, message, args, con) => {
     }
 
     var embed = new Discord.MessageEmbed({
-      title: `Scrim?`,
+      title: `<@&474051331183607.828> Scrim ${time}pm EST ${date}\?`,
       color: "#3370FC",
       timestamp: Date.now(),
       fields: [
@@ -41,7 +41,7 @@ exports.run = (client, message, args, con) => {
       }
     });
 
-    message.guild.channels.cache.get(config.pillowsGeneralID).send(`<@&474051331183607.828> Scrim ${time}pm EST ${date}\?` + embed).then(m => {
+    message.guild.channels.cache.get(config.pillowsGeneralID).send(embed).then(m => {
       m.react("✅");
       m.react("❌");
     });
