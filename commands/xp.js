@@ -34,31 +34,31 @@ exports.run = (client, message, args, con) => {
     var color = message.guild.roles.cache.find(role => role.name === target.id).color;
     console.log(color.toString(16));
 
-  //   const data = {
-  //     "title": `XP for ${target.username}`,
-  //     "color": `${color}`,
-  //     "fields": [
-  //       {
-  //         "name": "XP",
-  //         "value": `${xp}`,
-  //         "inline": false
-  //       },
-  //       {
-  //         "name": "Level",
-  //         "value": `${lvl}`,
-  //         "inline": false
-  //       },
-  //       {
-  //         "name": "XP to Next Level",
-  //         "value": `${progress} / ${xpToNxtLvl}`,
-  //         "inline": false
-  //       }
-  //     ]
-  //   }
-  //
-  //   var embed = new Discord.MessageEmbed(data);
-  //   message.channel.send(embed);
-  // });
+    // const data = {
+    //   "title": `XP for ${target.username}`,
+    //   "color": `${color}`,
+    //   "fields": [
+    //     {
+    //       "name": "XP",
+    //       "value": `${xp}`,
+    //       "inline": false
+    //     },
+    //     {
+    //       "name": "Level",
+    //       "value": `${lvl}`,
+    //       "inline": false
+    //     },
+    //     {
+    //       "name": "XP to Next Level",
+    //       "value": `${progress} / ${xpToNxtLvl}`,
+    //       "inline": false
+    //     }
+    //   ]
+    // }
+    //
+    // var embed = new Discord.MessageEmbed(data);
+    // message.channel.send(embed);
+  });
 
 };
 
