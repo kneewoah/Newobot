@@ -37,7 +37,9 @@ function generateXp() {
 
 // ON MESSAGE
 client.on('message', async message => {
-  if (message.author.id === "198950035470155776") message.reply("STUPID FUCKING FAGGOT");
+  
+  // for trolling
+  // if (message.author.id === "198950035470155776") message.reply("message here");
 
   if(message.author.bot) return;
 
