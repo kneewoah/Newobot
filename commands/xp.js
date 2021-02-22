@@ -28,7 +28,7 @@ exports.run = (client, message, args, con) => {
 
     var xp = rows[0].xp;
     var lvl = findLvl(xp);
-    var xpToNxtLvl = 5*Math.pow((i),2)+50*(i)+100;
+    var xpToNxtLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
     var progress = xpToNxtLvl + recurseXp;
 
     const data = {
