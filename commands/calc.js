@@ -15,5 +15,5 @@ exports.run = (client, message, args) => {
 
 exports.help = {
   description: "calculator maybe",
-  usage: "!fuck"
+  usage: "!calc <basic math>
 };
