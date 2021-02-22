@@ -9,8 +9,7 @@ exports.run = (client, message, args, con) => {
     var date = args.slice(1).join(' ');
 
     client.guild.cache.find(config.pillowsID).channels.cache.find(config.scrimChannel)
-    .send(`@everyone Scrim ${time}pm EST ${date}?`).react(✅)
-
+    .send(`@everyone Scrim ${time}pm EST ${date}?`).react(✅);
 
 };
 
