@@ -16,44 +16,25 @@ exports.run = async (client, message, args) => {
   }
 
 function changeColor(color, author) {
-  let pos = deleteRole(author);
-  setTimeout(function() {makeRole(color, author, pos)}, 400);
-  setTimeout(function() {addRole(author)}, 1600);
-};
-
-function deleteRole(author) {
-  if (message.guild.roles.cache.find(role => role.name === author.id)) {
-    let role = message.guild.roles.cache.find(role => role.name === author.id)
-    let pos = role.position;
-    role.delete();
-    return pos;
-    console.log(author.id + " deleted");
+  if (!message.guild.roles.cache.find(role => role.name === author.id)) {
+    message.member.roles.add(
+      message.guild.roles.create({
+      data: {
+        name: `${author.id}`,
+        color: `0x${color}`,
+        hoist: false,
+        mentionable: false,
+      },
+      reason: `!color command for ${author.username}`
+    }));
   } else {
-    return 0;
+    var edited = message.guild.roles.cache.find(role => role.name === author.id).edit({color: `0x${color}`});
+    try {
+      message.member.roles.add(edited)
+    } catch (e) {
+      console.log(e);
+    }
   }
-};
-
-function makeRole(color, author, pos) {
-  message.guild.roles.create({
-    data: {
-      name: `${author.id}`,
-      color: `0x${color}`,
-      hoist: false,
-      mentionable: false,
-      position: pos,
-    },
-    reason: `!color command for ${author.username}`
-  });
-
-  console.log(author.id + " created");
-};
-
-function addRole(user) {
-  let roleID = message.guild.roles.cache.find(role => role.name === user.id).id;
-  message.member.roles.add(roleID);
-  console.log(roleID + " added");
-};
-
 };
 
 exports.help = {
