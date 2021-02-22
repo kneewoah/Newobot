@@ -19,7 +19,29 @@ exports.run = (client, message, args, con) => {
       date = args.slice(1).join(' ');
     }
 
-    message.guild.channels.cache.get(config.scrimChannel).send(`<@&474051331183607828> Scrim ${time}pm EST ${date}\?`).then(m => {
+    var embed = new Discord.MessageEmbed({
+      title: `Scrim?`,
+      color: "#3370FC",
+      timestamp: Date.now(),
+      fields: [
+        {
+          name: "Yes",
+          value: '',
+          inline: true
+        },
+        {
+          name: "No",
+          value: ``,
+          inline: true
+        }
+      ],
+      footer: {
+        icon_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Overwatch_circle_logo.svg/600px-Overwatch_circle_logo.svg.png",
+        text: "© 2021 Newo | Sent at "
+      }
+    });
+
+    message.guild.channels.cache.get(config.pillowsGeneralID).send(`<@&474051331183607.828> Scrim ${time}pm EST ${date}\?` + embed).then(m => {
       m.react("✅");
       m.react("❌");
     });
