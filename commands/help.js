@@ -34,7 +34,7 @@ exports.run = (client, message, args) => {
         var embed = new Discord.MessageEmbed({
           title: `Newo Bot Commands`, color: `#FFFFFF`});
 
-        cmdArray.forEach(element => embed.addField(element[0], `Description: ${require(`./${element[0]}.js`).help.description}`, `Usage: ${require(`./${element[0]}.js`).help.usage}`))
+        cmdArray.forEach(element => embed.addField(element[0], `${require(`./${element[0]}.js`).help.description}\n${require(`./${element[0]}.js`).help.usage}`))
 
         message.author.send(embed);
       }
