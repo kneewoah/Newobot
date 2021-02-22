@@ -19,7 +19,7 @@ exports.run = (client, message, args, con) => {
       date = args.slice(1).join(' ');
     }
 
-    var m = message.guild.channels.cache.get(config.scrimChannel).send(`<@&474051331183607828> Scrim ${time}pm EST ${date}\?`).then(m => {
+    message.guild.channels.cache.get(config.scrimChannel).send(`<@&474051331183607828> Scrim ${time}pm EST ${date}\?`).then(m => {
       m.react("✅");
       m.react("❌");
     });
