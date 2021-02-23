@@ -161,7 +161,7 @@ client.on('messageReactionAdd', (reaction, user) => {
   const reactions = require(`./modules/reactions.js`);
   const message = reaction.message
   const emoji = reaction.emoji;
-  reactions.add(reaction, user, message, emoji);
+  reactions.add(client, message, user, reaction, emoji);
 });
 
 client.on('messageReactionRemove', (reaction, user) => {
