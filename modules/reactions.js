@@ -7,7 +7,6 @@ exports.add = (client, message, user, reaction, emoji) => {
   if(message.channel.id !== "512706031843934217") return console.log("2");
 
   if(emoji.name == '✅') {
-      console.log('✅')
       var embed = message.embeds[0];
       // Type: MessageEmbed
 
@@ -17,12 +16,16 @@ exports.add = (client, message, user, reaction, emoji) => {
 
       embed.spliceFields(0, 2);
 
-      // embed.addField({name: "Yes", value: yes.value + " " + user.toString(), inline: true})
+      embed.addField({
+        name: "Yes",
+        value: yes.value + " " + user.toString(),
+        inline: true
+      });
       // embed.addField(no);
       message.edit(embed);
       reaction.users.remove(user);
 
-      message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can scrim.");
+      message.guild.channels.cache.get("512706031843934217").send(user.toString() + " can scrim.");
   }
 
   else if(emoji.name == '❌') {
