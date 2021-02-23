@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 
 exports.run = (client, message, args, con) => {
-  
+
   con.query(`SELECT * FROM xp_${message.guild.id}`, (err, data) => {
     if(err) throw err;
 
@@ -19,7 +19,6 @@ exports.run = (client, message, args, con) => {
         text: "© 2021 Newo"
       }
     });
-    embed.setThumbnail(target.avatarURL());
 
     var i = 0;
     var cache = message.guild.members.cache;
