@@ -25,7 +25,7 @@ exports.run = (client, message, args, con) => {
     sorted.forEach(entry => {
 
       var user = cache.get(entry.id).user;
-      embed.addField(`**${i}.** ${user.toString()}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
+      embed.addField(`**${i}.** ${user.username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
       i++;
     });
 
