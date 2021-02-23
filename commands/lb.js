@@ -25,8 +25,7 @@ exports.run = (client, message, args, con) => {
   con.query(`SELECT * FROM xp_${message.guild.id}`, (err, data) => {
     if(err) throw err;
 
-    data.sort((a, b) => b.xp - a.xp);
-    console.log(data);
+    const sorted = data.sort((a, b) => b.xp - a.xp);
 
     // var xp = rows[0].xp;
     // var lvl = findLvl(xp);
@@ -36,18 +35,25 @@ exports.run = (client, message, args, con) => {
     // var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
     //
     //
-    // var embed = new Discord.MessageEmbed({
-    //   title: `Pillows XP Leaderboard`,
-    //   color: color,
-    //   timestamp: Date.now(),
-    //   footer: {
-    //     icon_url: client.user.avatarURL(),
-    //     text: "© 2021 Newo"
-    //   }
-    // });
-    //
-    // embed.setThumbnail(target.avatarURL());
-    // message.channel.send(embed);
+    var embed = new Discord.MessageEmbed({
+      title: `Pillows XP Leaderboard`,
+      color: color,
+      timestamp: Date.now(),
+      footer: {
+        icon_url: client.user.avatarURL(),
+        text: "© 2021 Newo"
+      }
+    });
+    embed.setThumbnail(target.avatarURL());
+
+    var i = 0;
+    var cache = message.guild.members.cache;
+    data.forEach(entry => {
+      var username = cache.get(entry.id).username;
+      embed.addField(`**${i}.** ${username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
+      i++;
+    }
+    message.channel.send(embed);
   });
 
 };
