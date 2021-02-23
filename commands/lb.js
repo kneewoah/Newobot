@@ -21,7 +21,7 @@ exports.run = (client, message, args, con) => {
     });
 
     var i = 0;
-    var cache = message.guild.members.cache;
+    const cache = message.guild.members.cache;
     sorted.forEach(entry => {
       console.log(entry.id);
       // var username = cache.get(entry.id).username;
