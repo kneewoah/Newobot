@@ -25,6 +25,7 @@ exports.run = (client, message, args, con) => {
   con.query(`SELECT * FROM xp_${message.guild.id}`, (err, data) => {
     if(err) throw err;
 
+    data.sort((a, b) => b.xp - a.xp);
     console.log(data);
 
     // var xp = rows[0].xp;
