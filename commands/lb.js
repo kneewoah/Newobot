@@ -46,7 +46,7 @@ exports.run = (client, message, args, con) => {
       var username = cache.get(entry.id).username;
       embed.addField(`**${i}.** ${username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
       i++;
-    }
+    });
     message.channel.send(embed);
   });
 
