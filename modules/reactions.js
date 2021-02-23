@@ -18,7 +18,7 @@ exports.add = (client, message, user, reaction, emoji) => {
       embed.addField(no);
       message.edit(embed);
       message.channel.send(embed);
-      reaction.remove(user);
+      reaction.users.remove(user);
   }
 
   else if(emoji.name == '❌') {
@@ -29,7 +29,7 @@ exports.add = (client, message, user, reaction, emoji) => {
 
     embed.addField({name: "No", value: no.value + " " + user.toString(), inline: true});
     message.edit(embed);
-    reaction.remove(user);
+    reaction.users.remove(user);
   }
 
 };
