@@ -20,12 +20,12 @@ exports.run = (client, message, args, con) => {
       }
     });
 
+    console.log(sorted);
     var i = 0;
     const cache = message.guild.members.cache;
     sorted.forEach(entry => {
-      console.log(entry.id);
-      // var username = cache.get(entry.id).username;
-      //embed.addField(`**${i}.** ${username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
+      var username = cache.get(entry.id).username;
+      embed.addField(`**${i}.** ${username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
       i++;
     });
 
