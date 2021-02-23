@@ -22,7 +22,7 @@ exports.run = (client, message, args, con) => {
     target = message.author;
   }
 
-  con.query(`SELECT * FROM xp_${message.guild.id}'`, (err, data) => {
+  con.query(`SELECT * FROM xp_${message.guild.id}`, (err, data) => {
     if(err) throw err;
 
     console.log(data);
