@@ -16,8 +16,8 @@ exports.add = (client, message, user, reaction, emoji) => {
 
       embed.spliceFields(0, 2);
 
-      embed.addField("Yes", yes.value.replace(user.toString() + " ", "") + user.toString(), true);
-      embed.addField("No", no.value.replace(user.toString() + " ", ""), true);
+      embed.addField("Yes", yes.value.replace(user.toString(), "") + user.toString(), true);
+      embed.addField("No", no.value.replace(user.toString(), ""), true);
 
       message.edit(embed);
       reaction.users.remove(user);
@@ -32,8 +32,8 @@ exports.add = (client, message, user, reaction, emoji) => {
 
     embed.spliceFields(0, 2);
 
-    embed.addField("Yes", yes.value.replace(user.toString() + " ", ""), true);
-    embed.addField("No", no.value.replace(user.toString() + " ", "") + user.toString(), true);
+    embed.addField("Yes", yes.value.replace(user.toString(), ""), true);
+    embed.addField("No", no.value.replace(user.toString(), "") + user.toString(), true);
 
     message.edit(embed);
     reaction.users.remove(user);
