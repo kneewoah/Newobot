@@ -8,7 +8,7 @@ exports.run = (client, message, args, con) => {
 
     const sorted = data.sort((a, b) => b.xp - a.xp);
 
-    var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
+    var color = message.guild.roles.cache.find(role => role.name === message.author.id).color.toString(16);
 
     var embed = new Discord.MessageEmbed({
       title: `Pillows XP Leaderboard`,
