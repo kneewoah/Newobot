@@ -21,7 +21,7 @@ exports.run = (client, message, args, con) => {
     }
 
     var embed = new Discord.MessageEmbed({
-      title: `<@&474051331183607.828> Scrim ${time}pm EST ${date}\?`,
+      title: `<@&474051331183607828> Scrim ${time}pm EST ${date}\?`,
       color: "#3370FC",
       timestamp: Date.now(),
       fields: [
@@ -42,7 +42,7 @@ exports.run = (client, message, args, con) => {
       }
     });
 
-    message.guild.channels.cache.get("512706031843934217").send(embed).then(m => {
+    message.guild.channels.cache.get(config.scrimChannel).send(embed).then(m => {
       m.react("✅");
       m.react("❌");
     });

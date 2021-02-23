@@ -4,7 +4,7 @@ const fs = require("fs");
 
 exports.add = (client, message, user, reaction, emoji) => {
   if(message.author !== client.user)  return console.log("1");
-  if(message.channel.id !== "512706031843934217") return console.log("2");
+  if(message.channel.id !== config.scrimChannel) return console.log("2");
 
   if(emoji.name == '✅') {
       var embed = message.embeds[0];
@@ -22,7 +22,7 @@ exports.add = (client, message, user, reaction, emoji) => {
       message.edit(embed);
       reaction.users.remove(user);
 
-      message.guild.channels.cache.get("512706031843934217").send(user.toString() + " can scrim.");
+      message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can scrim.");
   }
 
   else if(emoji.name == '❌') {
@@ -38,7 +38,7 @@ exports.add = (client, message, user, reaction, emoji) => {
     message.edit(embed);
     reaction.users.remove(user);
 
-    message.guild.channels.cache.get("512706031843934217").send(user.toString() + " cannot scrim.");
+    message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.");
   }
 
 };
