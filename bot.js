@@ -157,6 +157,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('messageReactionAdd', (reaction, user) => {
+  if (user.bot) return;
   const reactions = require(`./modules/reactions.js`);
   const message = reaction.message
   const emoji = reaction.emoji;
@@ -164,6 +165,7 @@ client.on('messageReactionAdd', (reaction, user) => {
 });
 
 client.on('messageReactionRemove', (reaction, user) => {
+  if (user.bot) return;
   const reactions = require(`./modules/reactions.js`);
   const message = reaction.message
   const emoji = reaction.emoji;
