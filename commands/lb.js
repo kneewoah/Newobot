@@ -27,14 +27,8 @@ exports.run = (client, message, args, con) => {
 
     const sorted = data.sort((a, b) => b.xp - a.xp);
 
-    // var xp = rows[0].xp;
-    // var lvl = findLvl(xp);
-    // var xpToNxtLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
-    // var progress = xpToNxtLvl + recurseXp;
-    //
-    // var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
-    //
-    //
+    var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
+
     var embed = new Discord.MessageEmbed({
       title: `Pillows XP Leaderboard`,
       color: color,
@@ -48,7 +42,7 @@ exports.run = (client, message, args, con) => {
 
     var i = 0;
     var cache = message.guild.members.cache;
-    data.forEach(entry => {
+    sorted.forEach(entry => {
       var username = cache.get(entry.id).username;
       embed.addField(`**${i}.** ${username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
       i++;
