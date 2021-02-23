@@ -32,8 +32,11 @@ exports.add = (client, message, user, reaction, emoji) => {
     embed.spliceFields(1, 1);
 
     embed.addField("No", no.value + " " + user.toString(), true);
+
     message.edit(embed);
     reaction.users.remove(user);
+
+    message.guild.channels.cache.get("512706031843934217").send(user.toString() + " cannot scrim.");
   }
 
 };
