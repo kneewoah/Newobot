@@ -23,7 +23,7 @@ exports.run = (client, message, args, con) => {
     var i = 1;
     sorted.forEach(entry => {
 
-      var user = client.users.cache.get(entry.id);
+      var user = `<@!${entry.id}>`
       embed.addField(`**${i}.** ${user}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
       i++;
     });
