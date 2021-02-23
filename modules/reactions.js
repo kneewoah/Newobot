@@ -7,6 +7,7 @@ exports.add = (client, message, user, reaction, emoji) => {
   if(message.channel.id !== config.pillowsGeneralID) return console.log("2");
 
   if(emoji.name == '✅') {
+      console.log('✅')
       var embed = message.embeds[0];
       var yes = embed.fields[0];
       var no = embed.fields[1];
@@ -16,6 +17,7 @@ exports.add = (client, message, user, reaction, emoji) => {
       embed.addField({name: "Yes", value: yes.value + " " + user.toString(), inline: true})
       embed.addField(no);
       message.edit(embed);
+      message.channel.send(embed);
       reaction.remove(user);
   }
 
