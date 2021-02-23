@@ -24,7 +24,7 @@ exports.run = (client, message, args, con) => {
     var cache = message.guild.members.cache;
     sorted.forEach(entry => {
       console.log(entry.id);
-      //var username = cache.get(entry.id).username;
+      var username = cache.get(entry.id).username;
       embed.addField(`**${i}.** ${username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
       i++;
     });
