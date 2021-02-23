@@ -6,7 +6,6 @@ exports.run = (client, message, args, con) => {
   con.query(`SELECT * FROM xp_${message.guild.id}`, (err, data) => {
     if(err) throw err;
 
-    console.log(data);
     const sorted = data.sort((a, b) => (a.xp > b.xp ? -1 : 1));
 
     var color = message.guild.roles.cache.find(role => role.name === message.author.id).color.toString(16);
@@ -25,7 +24,7 @@ exports.run = (client, message, args, con) => {
     const cache = message.guild.members.cache;
     sorted.forEach(entry => {
       console.log(entry.id);
-      var username = cache.get(entry.id).username;
+      var username = cache.get(entry.id)//.username;
       embed.addField(`**${i}.** ${username}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
       i++;
     });
