@@ -9,15 +9,17 @@ exports.add = (client, message, user, reaction, emoji) => {
   if(emoji.name == '✅') {
       console.log('✅')
       var embed = message.embeds[0];
+      // Type: MessageEmbed
+
       var yes = embed.fields[0];
       var no = embed.fields[1];
+      // Type EmbedField
 
       embed.spliceFields(0, 2);
 
-      embed.addField({name: "Yes", value: yes.value + " " + user.toString(), inline: true})
-      embed.addField(no);
+      // embed.addField({name: "Yes", value: yes.value + " " + user.toString(), inline: true})
+      // embed.addField(no);
       message.edit(embed);
-      message.channel.send(embed);
       reaction.users.remove(user);
   }
 
