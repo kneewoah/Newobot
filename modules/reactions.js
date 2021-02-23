@@ -4,7 +4,7 @@ const fs = require("fs");
 
 exports.add = (client, message, user, reaction, emoji) => {
   if(message.author !== client.user)  return console.log("1");
-  if(message.channel.id !== config.pillowsGeneralID) return console.log("2");
+  if(message.channel.id !== "512706031843934217") return console.log("2");
 
   if(emoji.name == '✅') {
       console.log('✅')
@@ -21,6 +21,8 @@ exports.add = (client, message, user, reaction, emoji) => {
       // embed.addField(no);
       message.edit(embed);
       reaction.users.remove(user);
+
+      message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can scrim.");
   }
 
   else if(emoji.name == '❌') {

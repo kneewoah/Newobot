@@ -40,7 +40,7 @@ exports.run = (client, message, args, con) => {
       }
     });
 
-    message.guild.channels.cache.get(config.pillowsGeneralID).send(embed).then(m => {
+    message.guild.channels.cache.get("512706031843934217").send(embed).then(m => {
       m.react("✅");
       m.react("❌");
     });
