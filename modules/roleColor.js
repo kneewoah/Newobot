@@ -20,13 +20,13 @@ exports.run = (client, message, database, member) => {
           hoist: false,
           mentionable: false,
         },
-        reason: `Default color for ${message.author.username}`
+        reason: `Default color for ${member.username}`
       })
-      .then(r => console.log(`Created role '${r}'.`))
-      .catch();
+      .then(console.log(`Created role '${r}'.`))
+      .catch(console.error);
 
       message.member.roles.add(newRole, "Newo Bot")
       .then(u => console.log(`Added role '${newRole.name}' to ${u}.`))
-      .catch();
+      .catch(console.error);
     };
 };
