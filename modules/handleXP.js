@@ -3,8 +3,9 @@ const config = require("../config.json");
 const fs = require("fs");
 
 exports.run = (client, message, database) => {
-
+    // exit if not pillows
     if (message.guild.id != config.pillowsID) return;
+
     const table = `xp_${config.pillowsID}`;
     const newTime = new Date().getTime();
 
@@ -13,46 +14,52 @@ exports.run = (client, message, database) => {
 
       var genXp = generateXp();
 
+      // If new user
       if(rows.length < 1) {
+        var newData = {
+          xp: genXp,
+          timeStamp: newTime,
+          progress: genXp;,
+          level: 0;
+        };
 
-        var sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${genXp}, ${newTime}, ${genXp}, 0)`;
-        console.log("NEW QUERY: " + sql);
-        database.query(sql, console.log);
-        console.log("NEW QUERY: " + sql);
+        const sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${newData.xp}, ${newData.newTime}, ${newData.progress}, ${newData.level})`;
 
+        database.query(sql, () => {
+          if(err) throw err;
+          console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${newData}`);
+        });
+
+      // If existing User
       } else {
         var oldTime = rows[0].timestamp;
         var diff = (newTime - oldTime);
-        console.log("Diff: " + diff);
 
+        // If cooldown over
         if (diff >= 60) {
           // update params
-          var xp = rows[0].xp + genXp;
-          var progress = rows[0].progress + genXp;
-          var level = rows[0].level;
-          var thresh = 5*Math.pow(level, 2)+50*level+100;
-          var sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${newTime}, progress = ${progress} WHERE id = '${message.author.id}'`;
-
           var newData = {
-            xp: xp,
-            timeStamp: newTime,
-            progress: progress,
-          }
-
-          database.query(sql)
-          .then(console.log(`Updated XP for ${message.author.tag} in ${table} with the following parameters: ${newData}`))
-          .catch(console.error);
-
+            progress: rows[0].progress + genXp,
+            level: rows[0].level,
+            xp: rows[0].xp + genXp,
+            timeStamp: newTime
+          };
 
           // check if level update
+          var thresh = 5*Math.pow(newData.level, 2)+50*level+100;
           if (progress >= thresh) {
-            level++;
-            progress -= thresh;
-            sql2 = `UPDATE ${table} SET progress = ${progress}, level = ${level} WHERE id = '${message.author.id}'`;
-            console.log("NEW QUERY: " + sql2);
-            database.query(sql2, console.log);
-            message.channel.send("Level up!"); // will make detailed later
+            newData.level++;
+            newData.progress -= thresh;
+            levelUpMsg(newData.level);
           }
+
+          var sql = `UPDATE ${table} SET xp = ${newData.xp}, timeStamp = ${newData.timeStamp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
+
+          database.query(sql, () => {
+            if(err) throw err;
+            console.log(`SQL: Updated XP for ${message.author.tag} in ${table} with the following parameters: ${newData}`);
+          });
+
         }
       }
 
@@ -62,5 +69,9 @@ exports.run = (client, message, database) => {
       var min = 15;
       var max = 25;
       return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function levelUpMsg(newLevel) {
+      message.channel.send(`Level up! You are now level ${newLevel}`);
     }
 };
