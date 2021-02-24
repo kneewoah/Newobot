@@ -44,7 +44,7 @@ client.on('message', async message => {
   const xp = require(`./modules/handleXP.js`);
   xp.run(client, message, database);
 
-  if(message.content.indexOf(config.prefix) !== 0) {
+  if(message.content.indexOf(config.prefix) === 0) {
     const cmd = require(`./modules/commandHandler.js`);
     cmd.run(client, message, database);
   }
