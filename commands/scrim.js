@@ -27,13 +27,13 @@ exports.run = (client, message, args, con) => {
       fields: [
         {
           name: "Yes",
-          value: "0 - ‎",
-          inline: true
+          value: newArray(),
+          inline: false
         },
         {
           name: "No",
-          value: "‎0 - ",
-          inline: true
+          value: newArray(),
+          inline: false
         }
       ],
       footer: {
