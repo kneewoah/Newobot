@@ -18,7 +18,6 @@ client.on('ready', () => {
   // Scrim Messages
   client.guilds.cache.get(config.pillowsID).channels.cache.get(config.scrimChannel).messages.fetch({ limit: 10 }).then(messages => console.log(`Received ${messages.size} messages`));
 
-  });
 });
 
 // CONNECT TO DATABASE
