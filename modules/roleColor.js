@@ -9,8 +9,9 @@ exports.run = (client, message, database, member) => {
 
     // Apply old color
     var existingRole = member.guild.roles.cache.find(role => role.name === roleName);
+    if existingRole.members.find(mem => mem.id === roleName) return;
 
-    if (existingRole && !existingRole.members.find(mem => mem.id === roleName)) {
+    if (existingRole) {
       member.roles.add(existingRole, `Someone removed this role from ${member}`)
       .then(u => console.log(`Fixed missing role. Added role '${existingRole.name}' to ${u.user.tag}.`))
       .catch(console.error);
