@@ -22,8 +22,8 @@ exports.run = (client, message, database, member) => {
         },
         reason: `Default color for ${member.username}`
       })
-      .then(r => console.log(`Created role '${r}'.`))
-      .catch(console.error);
+      //.then(r => console.log(`Created role '${r}'.`))
+      //.catch(console.error);
 
       message.member.roles.add(newRole, "Newo Bot")
       .then(u => console.log(`Added role '${newRole.name}' to ${u}.`))
