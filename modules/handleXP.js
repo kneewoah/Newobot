@@ -20,7 +20,7 @@ exports.run = (client, message, database) => {
           xp: genXp,
           timeStamp: newTime,
           progress: genXp,
-          level: 0;
+          level: 0
         };
 
         const sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${newData.xp}, ${newData.newTime}, ${newData.progress}, ${newData.level})`;
