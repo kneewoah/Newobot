@@ -5,7 +5,7 @@ exports.run = (client, message, args) => {
   .then(message => console.log(`Sent message: ${message.content}`))
   .catch(console.error);
 
-  console.log(message.guild.members.cache;
+  console.log(message.guild.members.cache);
 
 }
 
