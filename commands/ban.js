@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
 
   if(!member.bannable) return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?")
     .then(() => {
-      console.log(`Could not ban ${member.user.tag}`);
+      console.log(`Attempt to ban ${member.user.tag} by ${message.author.tag} has failed`);
       console.log(`Sent a reply to ${message.author.tag}: 'I cannot ban this user! Do they have a higher role? Do I have ban permissions?'`);
     })
     .catch(console.error);
