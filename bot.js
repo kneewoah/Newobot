@@ -9,9 +9,22 @@ const mysql = require('mysql');
 // ON READY
 client.on('ready', () => {
   const owner = client.users.cache.find(user => user.id === config.ownerID)
+  console.log("OwnerID: " + owner);
   console.log("Newo Bot is Online.");
   client.user.setActivity("Destiny 2", {url: "https://twitch.tv/newox", type: 'PLAYING'});
   // client.user.setStatus('dnd');
+
+  // CACHE MESSAGES
+  database.query(`SELECT * FROM scrim_${config.pillowsID}`, (err, data) => {
+    if(err) throw err;
+
+    var scrim_chan = client.guilds.cache//.find(g => g.id === config.pillowsID);
+    console.log(scrim_chan);//.channels.cache.get(config.scrimChannel);
+    data.forEach(entry => {
+      // scrim_chan.cache.fetch(entry.message_id);
+    });
+
+  });
 });
 
 // CONNECT TO DATABASE
@@ -25,18 +38,6 @@ var database = mysql.createConnection({
 database.connect(err => {
   if(err) throw err;
   console.log("Connected to database");
-});
-
-// CACHE MESSAGES
-database.query(`SELECT * FROM scrim_${config.pillowsID}`, (err, data) => {
-  if(err) throw err;
-
-  var scrim_chan = client.guilds.cache//.find(g => g.id === config.pillowsID);
-  console.log(scrim_chan);//.channels.cache.get(config.scrimChannel);
-  data.forEach(entry => {
-    // scrim_chan.cache.fetch(entry.message_id);
-  });
-
 });
 
 // FUNCTIONS
