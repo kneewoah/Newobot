@@ -15,14 +15,14 @@ exports.run = (client, message, database) => {
 
       if(rows.length < 1) {
 
-        var sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${genXp}, ${unix}, ${genXp}, 0)`;
+        var sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${genXp}, ${newTime}, ${genXp}, 0)`;
         console.log("NEW QUERY: " + sql);
         database.query(sql, console.log);
         console.log("NEW QUERY: " + sql);
 
       } else {
         var oldTime = rows[0].timestamp;
-        var diff = (unix - oldTime);
+        var diff = (newTime - oldTime);
         console.log("Diff: " + diff);
 
         if (diff >= 60) {
@@ -31,11 +31,11 @@ exports.run = (client, message, database) => {
           var progress = rows[0].progress + genXp;
           var level = rows[0].level;
           var thresh = 5*Math.pow(level, 2)+50*level+100;
-          var sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${unix}, progress = ${progress} WHERE id = '${message.author.id}'`;
+          var sql = `UPDATE ${table} SET xp = ${xp}, timeStamp = ${newTime}, progress = ${progress} WHERE id = '${message.author.id}'`;
 
           var newData = {
             xp: xp,
-            timeStamp: unix,
+            timeStamp: newTime,
             progress: progress,
           }
 
