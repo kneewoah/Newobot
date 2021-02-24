@@ -8,8 +8,9 @@ exports.run = (client, message, args, database) => {
   const users = message.guild.members.cache;
   const color = require(`../modules/roleColor.js`);
 
-  users.forEach(u => {
-      color.run(client, message, database, u);
+  users.forEach(m => {
+      console.log(m.user.username);
+      color.run(client, message, database, m);
   });
 
 }
