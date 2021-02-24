@@ -20,7 +20,7 @@ exports.run = (client, message, database, member) => {
           hoist: false,
           mentionable: false,
         },
-        reason: `Default color for ${author.username}`
+        reason: `Default color for ${message.author.username}`
       })
       .then(r => console.log(`Created role '${r}'.`))
       .catch();
