@@ -36,7 +36,7 @@ exports.run = (client, message, database) => {
         var diff = (newTime - oldTime);
 
         // If cooldown over
-        if (diff >= 60) {
+        if (diff >= config.xpCoolDownMs) {
           // update params
           var newData = {
             progress: rows[0].progress + genXp,
