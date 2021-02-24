@@ -25,7 +25,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         reaction.users.remove(user);
 
         message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can scrim.");
-        
+
     } else if(emoji.name == '❌') {
       var embed = message.embeds[0];
       var yes = embed.fields[0];
@@ -45,7 +45,6 @@ exports.add = (client, message, user, reaction, emoji, database) => {
       message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.");
     }
   }
-
 
 
 };
