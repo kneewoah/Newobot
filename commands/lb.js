@@ -20,13 +20,10 @@ exports.run = (client, message, args, con) => {
       }
     });
 
-    var i = 1;
-    sorted.forEach(entry => {
-
-      var user = `<@!${entry.id}>`
-      embed.addField(`**${i}.** ${user}`, `**XP:** ${entry.xp}\n**Level:** ${entry.level}`, true);
-      i++;
-    });
+    for (var i = 0; i < sorted.length; i++) {
+      var user = `<@!${sorted[i].id}>`
+      embed.addField(`**${i+1}.** ${user}`, `**XP:** ${sorted[i].xp}\n**Level:** ${sorted[i].level}`, true);
+    }
 
     message.channel.send(embed);
   });
