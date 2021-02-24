@@ -1,6 +1,6 @@
 const config = require("../config.json");
 
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, database) => {
   var input = args.join(" ")
   var x;
   try {

@@ -1,6 +1,6 @@
 const config = require("../config.json");
 
-exports.run = (client, message, args) => {
+exports.run = (client, message, args, database) => {
 
   if(message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.");
   let style = args[0].toUpperCase();

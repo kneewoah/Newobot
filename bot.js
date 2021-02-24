@@ -49,9 +49,6 @@ client.on('message', async message => {
     cmd.run(client, message, database);
   }
 
-
-
-
 });
 
 // USER JOIN
