@@ -45,7 +45,7 @@ exports.run = (client, message, args, con) => {
     message.guild.channels.cache.get(config.scrimChannel).send(embed).then(m => {
       m.react("✅");
       m.react("❌");
-      m.channel.send("<@&474051331183607828>");
+      //m.channel.send("<@&474051331183607828>");
     });
 
 
