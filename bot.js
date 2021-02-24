@@ -15,9 +15,16 @@ client.on('ready', () => {
   .catch(console.error);
 
   // CACHE MESSAGES
+  const pillowsServer = client.guilds.cache.get(config.pillowsID)
+
   // Scrim Messages
-  client.guilds.cache.get(config.pillowsID).channels.cache.get(config.scrimChannel).messages.fetch({ limit: 10 })
+  pillowsServer.channels.cache.get(config.scrimChannel).messages.fetch({ limit: 10 })
   .then(messages => console.log(`Cached ${messages.size} messages in the scrim channel`))
+  .catch(console.error);
+
+  // Pillows Mmbers
+  pillowsServer.members.fetch()
+  .then(members => console.log(`Cached ${members.size} members in the Pillows Discord`))
   .catch(console.error);
 
 });
