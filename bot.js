@@ -2,7 +2,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client({disableMentions: 'everyone'});
 const config = require('./config.json');
-const moment = require('moment');
 const fs = require('fs');
 const mysql = require('mysql');
 

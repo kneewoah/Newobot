@@ -5,7 +5,8 @@ const fs = require("fs");
 exports.run = (client, message, database) => {
 
     if (message.guild.id != config.pillowsID) return;
-    var table = `xp_${config.pillowsID}`;
+    const table = `xp_${config.pillowsID}`;
+    const newTime = new Date().getTime();
 
     database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
       if(err) throw err;
