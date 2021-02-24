@@ -27,7 +27,7 @@ exports.run = (client, message, database, member) => {
       .then(r => {
         console.log(`Created role '${r.name}'.`);
         message.member.roles.add(r, "Newo Bot")
-        .then(u => console.log(`Added role '${newRole.name}' to ${u.user.tag}.`))
+        .then(u => console.log(`Added role '${r.name}' to ${u.user.tag}.`))
         .catch(console.error);
       })
       .catch(console.error);
