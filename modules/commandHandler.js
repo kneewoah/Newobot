@@ -21,8 +21,8 @@ exports.run = (client, message, database) => {
 
   if (exists) {
     try {
-      cmdFile.run(client, message, args, database);
       console.log(`Running command \'${command}\'.`);
+      cmdFile.run(client, message, args, database);
       message.react('☁');
     } catch (error) {
       console.log(`Could not process command \'${command}\'.`);
