@@ -3,6 +3,7 @@ const config = require("../config.json");
 const fs = require("fs");
 
 exports.add = (client, message, user, reaction, emoji) => {
+  console.log(message);
   if(message.author !== client.user)  return console.log("1");
   if(message.channel.id !== config.scrimChannel) return console.log("2");
 
