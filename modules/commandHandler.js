@@ -16,7 +16,7 @@ exports.run = (client, message, database) => {
     exists = true;
   } catch (failure) {
     exists = false;
-    console.log(failure);
+    console.log(`${cmdFile} does not exist.`);
   }
 
   if (exists) {
