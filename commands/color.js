@@ -9,6 +9,8 @@ exports.run = async (client, message, args) => {
 
   if (args[0].toLowerCase() === "random") {
     changeColor(Math.floor(Math.random()*16777215).toString(16), mAuthor);
+  } else if (args[0].toLowerCase() === "def" || args[0].toLowerCase() === "default") {
+    changeColor("FFFFFF", mAuthor);
   } else if (args[0].match(/^#(?:[0-9a-fA-F]{6})$/g)) {
     changeColor(args[0].substring(1), mAuthor);
   } else if (args[0].match(/^(?:[0-9a-fA-F]{6})$/g)) {
