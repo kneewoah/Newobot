@@ -18,10 +18,9 @@ client.on('ready', () => {
   database.query(`SELECT * FROM scrim_${config.pillowsID}`, (err, data) => {
     if(err) throw err;
 
-    var scrim_chan = client.guilds.cache//.find(g => g.id === config.pillowsID);
-    console.log(scrim_chan);//.channels.cache.get(config.scrimChannel);
+    var scrim_chan = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.scrimChannel);
     data.forEach(entry => {
-      // scrim_chan.cache.fetch(entry.message_id);
+      scrim_chan.cache.fetch(entry.message_id);
     });
 
   });
