@@ -29,7 +29,7 @@ database.connect(err => {
 
 // CACHE MESSAGES
 database.query(`SELECT * FROM scrim_${config.pillowsID}`, (err, data) => {
-  var scrim_chan = client.guilds.cache.get(config.pillowsID);
+  var scrim_chan = client.guilds.cache.find(g => g.id === config.pillowsID);
   console.log(scrim_chan);//.channels.cache.get(config.scrimChannel);
   data.forEach(entry => {
     scrim_chan.cache.fetch(entry.message_id);
