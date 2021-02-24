@@ -22,13 +22,14 @@ exports.run = (client, message, database, member) => {
           hoist: false,
           mentionable: false,
         },
-        reason: `Default color for ${member.username}`
+        reason: `Default color for ${member.user.tag}`
       })
-      .then(r => console.log(`Created role '${r.name}'.`))
-      .catch(console.error);
-
-      message.member.roles.add(roleName, "Newo Bot")
-      .then(u => console.log(`Added role '${newRole.name}' to ${u}.`))
+      .then(r => {
+        console.log(`Created role '${r.name}'.`);
+        message.member.roles.add(r, "Newo Bot")
+        .then(u => console.log(`Added role '${newRole.name}' to ${u.user.tag}.`))
+        .catch(console.error);
+      })
       .catch(console.error);
 
     };
