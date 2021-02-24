@@ -27,7 +27,7 @@ exports.run = (client, message, database) => {
 
         database.query(sql, () => {
           if(err) throw err;
-          console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${newData}`);
+          console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
         });
 
       // If existing User
