@@ -2,20 +2,17 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-exports.run = (client, message, args, database) => {
+exports.run = (client, message, database, member) => {
 
     // COLOR GREETER
     let roleName = `${member.id}`;
 
     // Apply old color
-    if(member.guild.roles.cache.find(role => role.name === roleName)) {
-      member.roles.add(member.guild.roles.cache.find(role => role.name === roleName).id);
-
+    var existingRole = member.guild.roles.cache.find(role => role.name === roleName);
+    if (existingRole) {
+      member.roles.add(existingRole);
 
     } else {
-      let channel = member.guild.channels.cache.find(ch => ch.id === config.pillowsGeneralID || ch.id === config.testingChannelID);
-      if (!channel) return;
-
       // Assign random color
       message.member.roles.add(
         message.guild.roles.create({
@@ -26,7 +23,6 @@ exports.run = (client, message, args, database) => {
           mentionable: false,
         },
         reason: `Default color for ${author.username}`
-      }))
-      channel.send(`Welcome ${member.displayName}! Type \`!color #HEXCODEHERE\` to chose your role color! You can choose a color here: <https://tr.im/hexwheel>.`);
+      }), "Newo Bot");
     };
 };

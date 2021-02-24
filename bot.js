@@ -57,8 +57,9 @@ client.on('message', async message => {
 // USER JOIN
 client.on('guildMemberAdd', member => {
 
-  const color = require(`./modules/colorGreeter.js`);
-  color.run(client, message, args, database);
+  const color = require(`./modules/roleColor.js`);
+  color.run(client, message, database, member);
+  member.guild.send(`Welcome ${member}! Type \`!color #HEXCODEHERE\` to chose your role color! You can choose a color here: <https://tr.im/hexwheel>.`);
 
 });
 
