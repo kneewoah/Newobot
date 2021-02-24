@@ -173,7 +173,7 @@ client.on('messageReactionAdd', (reaction, user) => {
 
 client.on('messageReactionRemove', (reaction, user) => {
   if (user.bot) return;
-  const reactions = require(`./modules/scrim-reaction.js`);
+  const reactions = require(`./modules/reactions.js`);
   const message = reaction.message
   const emoji = reaction.emoji;
   reactions.remove(client, message, user, reaction, database);
