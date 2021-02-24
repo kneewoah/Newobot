@@ -45,11 +45,7 @@ exports.run = (client, message, args, con) => {
     message.guild.channels.cache.get(config.scrimChannel).send(embed).then(m => {
       m.react("✅");
       m.react("❌");
-      m.channel.send("<@&474051331183607828>")
-      con.query(`INSERT INTO scrim_${config.pillowsID} ('ch_id', 'message_id') VALUES ('${m.channel.id}', '${m.id}')`, (err, data) => {
-        if(err) throw err;
-      });
-      // will need to delete old scrims at some point
+      m.channel.send("<@&474051331183607828>");
     });
 
 
