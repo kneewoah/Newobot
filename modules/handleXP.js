@@ -19,7 +19,7 @@ exports.run = (client, message, database) => {
         var newData = {
           xp: genXp,
           timeStamp: newTime,
-          progress: genXp;,
+          progress: genXp,
           level: 0;
         };
 
