@@ -32,12 +32,7 @@ exports.run = async (client, message, args) => {
         reason: `!color command for ${author.username}`
       }));
     } else {
-      var edited = message.guild.roles.cache.find(role => role.name === author.id).edit({color: `0x${color}`});
-      try {
-        message.member.roles.add(edited)
-      } catch (e) {
-        console.log(e);
-      }
+      var edited = message.guild.roles.cache.find(role => role.name === author.id).edit({color: `0x${color}`}).then(r => message.member.roles.add(r));
     }
   };
 }
