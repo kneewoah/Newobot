@@ -19,6 +19,7 @@ client.on('ready', () => {
     if(err) throw err;
 
     var scrim_chan = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.scrimChannel);
+    console.log(scrim_chan);
     data.forEach(entry => {
       console.log(scrim_chan.messages.cache.fetch(entry.message_id))
     });
