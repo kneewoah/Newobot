@@ -1,6 +1,10 @@
 // BEFORE LAUNCH
 const Discord = require('discord.js');
-const client = new Discord.Client({disableMentions: 'everyone'});
+const { Client, Intents} = require('discord.js');
+const client = new Discord.Client({
+  disableMentions: 'everyone',
+  partials: ['GUILD_MEMBERS']
+});
 const config = require('./config.json');
 const fs = require('fs');
 const mysql = require('mysql');
