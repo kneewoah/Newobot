@@ -27,6 +27,15 @@ database.connect(err => {
   console.log("Connected to database");
 });
 
+// CACHE MESSAGES
+database.query(`SELECT * FROM scrim_${config.pillowsID}`, (err, data) => {
+  var scrim_chan = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.scrimChannel);
+  data.forEach(entry => {
+    scrim_chan.cache.fetch(entry.message_id);
+  });
+
+});
+
 // FUNCTIONS
 function generateXp() {
   var min = 15;
@@ -162,15 +171,15 @@ client.on('messageReactionAdd', (reaction, user) => {
   const reactions = require(`./modules/reactions.js`);
   const message = reaction.message
   const emoji = reaction.emoji;
-  reactions.add(client, message, user, reaction, emoji);
+  reactions.add(client, message, user, reaction, emoji, database);
 });
 
 client.on('messageReactionRemove', (reaction, user) => {
   if (user.bot) return;
-  const reactions = require(`./modules/reactions.js`);
+  const reactions = require(`./modules/scrim-reaction.js`);
   const message = reaction.message
   const emoji = reaction.emoji;
-  reactions.remove(client, message, user, reaction, emoji);
+  reactions.remove(client, message, user, reaction, database);
 });
 
 // ERROR

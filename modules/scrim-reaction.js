@@ -2,9 +2,10 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-exports.add = (client, message, user, reaction, emoji) => {
-  if(message.author !== client.user)  return console.log("1");
-  if(message.channel.id !== config.scrimChannel) return console.log("2");
+exports.add = (client, message, user, reaction, emoji, database) => {
+
+  if(message.author !== client.user)  return;
+  if(message.channel.id !== config.scrimChannel) return;
 
   if(emoji.name == '✅') {
       var embed = message.embeds[0];
@@ -43,6 +44,6 @@ exports.add = (client, message, user, reaction, emoji) => {
 
 };
 
-exports.remove = (reaction, user, message, emoji) => {
+exports.remove = (reaction, user, message, emoji, database) => {
 
 };
