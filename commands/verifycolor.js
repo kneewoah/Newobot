@@ -6,7 +6,7 @@ exports.run = (client, message, args, database) => {
   .catch(console.error);
 
   const users = message.guild.members.cache;
-  const color = require(`./modules/roleColor.js`);
+  const color = require(`../modules/roleColor.js`);
 
   users.forEach(u => {
       color.run(client, message, database, u);
