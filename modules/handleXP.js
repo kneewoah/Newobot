@@ -47,7 +47,7 @@ exports.run = (client, message, database) => {
 
           // check if level update
           var thresh = 5*Math.pow(newData.level, 2)+50*newData.level+100;
-          if (progress >= thresh) {
+          if (newData.progress >= thresh) {
             newData.level++;
             newData.progress -= thresh;
             levelUpMsg(newData.level);
