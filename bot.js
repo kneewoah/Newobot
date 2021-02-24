@@ -23,7 +23,7 @@ client.on('ready', () => {
   .catch(console.error);
 
   // Pillows Mmbers
-  pillowsServer.members.fetch({limit: pillowServer.memberCount})
+  pillowsServer.members.fetch({limit: pillowsServer.memberCount})
   .then(members => console.log(`Cached ${members.size} members in the Pillows Discord`))
   .catch(console.error);
 
