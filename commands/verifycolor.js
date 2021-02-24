@@ -9,7 +9,7 @@ exports.run = (client, message, args, database) => {
   const color = require(`../modules/roleColor.js`);
 
   users.forEach(m => {
-      console.log(m.user.username);
+      //console.log(m.user.username);
       color.run(client, message, database, m);
   });
 
