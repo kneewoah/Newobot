@@ -11,7 +11,7 @@ exports.run = (client, message, database, member) => {
     var existingRole = member.guild.roles.cache.find(role => role.name === roleName);
     if (existingRole) {
       member.roles.add(existingRole, `Someone removed this role from ${member}`)
-      .then(u => console.log(`Added role '${existingRole.name}' to ${u}.`))
+      .then(u => console.log(`Fixed missing role. Added role '${existingRole}' to ${u}.`))
       .catch(console.error);
 
     } else {
@@ -27,7 +27,7 @@ exports.run = (client, message, database, member) => {
       .then(r => {
         console.log(`Created role '${r.name}'.`);
         message.member.roles.add(r, "Newo Bot")
-        .then(u => console.log(`Added role '${r.name}' to ${u.user.tag}.`))
+        .then(u => console.log(`Added role '${r.name}' to ${u.user}.`))
         .catch(console.error);
       })
       .catch(console.error);
