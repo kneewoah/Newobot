@@ -17,7 +17,10 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
       embed.spliceFields(0, 2);
 
-      embed.addField("Yes", yes.value.replace(user.toString(), "") + user.toString(), true);
+      var count = parseInt(yes.value.substring(0,1), 10);
+      count++;
+
+      embed.addField("Yes", count + yes.value.substring(1).replace(user.toString(), "") + user.toString(), true);
       embed.addField("No", no.value.replace(user.toString(), ""), true);
 
       message.edit(embed);
@@ -33,8 +36,11 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
     embed.spliceFields(0, 2);
 
+    var count = parseInt(no.value.substring(0,1), 10);
+    count++;
+
     embed.addField("Yes", yes.value.replace(user.toString(), ""), true);
-    embed.addField("No", no.value.replace(user.toString(), "") + user.toString(), true);
+    embed.addField("No", count + no.value.substring(1).replace(user.toString(), "") + user.toString(), true);
 
     message.edit(embed);
     reaction.users.remove(user);
