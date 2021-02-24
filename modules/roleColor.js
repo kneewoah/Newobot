@@ -11,7 +11,7 @@ exports.run = (client, message, database, member) => {
     var existingRole = member.guild.roles.cache.find(role => role.name === roleName);
     if (existingRole) {
       member.roles.add(existingRole, `Someone removed this role from ${member}`)
-      .then(u => console.log(`Added role '${exisitingRole.name}' to ${u}.`))
+      .then(u => console.log(`Added role '${existingRole.name}' to ${u}.`))
       .catch(console.error);
 
     } else {
@@ -24,12 +24,11 @@ exports.run = (client, message, database, member) => {
         },
         reason: `Default color for ${member.username}`
       })
-      .then(r => {
-        console.log(`Created role '${r}'.`);
-        message.member.roles.add(roleName, "Newo Bot")
-        .then(u => console.log(`Added role '${newRole.name}' to ${u}.`))
-        .catch(console.error);
-      })
+      .then(r => console.log(`Created role '${r.name}'.`))
+      .catch(console.error);
+
+      message.member.roles.add(roleName, "Newo Bot")
+      .then(u => console.log(`Added role '${newRole.name}' to ${u}.`))
       .catch(console.error);
 
     };
