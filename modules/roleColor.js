@@ -13,9 +13,7 @@ exports.run = (client, message, database, member) => {
       member.roles.add(existingRole);
 
     } else {
-      // Assign random color
-      message.member.roles.add(
-        message.guild.roles.create({
+      var newRole = message.guild.roles.create({
         data: {
           name: `${roleName}`,
           color: `0x${Math.floor(Math.random()*16777215).toString(16)}`,
@@ -23,6 +21,12 @@ exports.run = (client, message, database, member) => {
           mentionable: false,
         },
         reason: `Default color for ${author.username}`
-      }), "Newo Bot");
+      })
+      .then(r => console.log(`Created role ${r}.`))
+      .catch();
+
+      message.member.roles.add(newRole, "Newo Bot")
+      .then(u => console.log(`Added role '${newRole.name}' to ${u}.`))
+      .catch();
     };
 };
