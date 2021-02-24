@@ -39,14 +39,16 @@ database.connect(err => {
 // ON MESSAGE
 client.on('message', async message => {
 
-
   if(message.author.bot) return;
 
   const xp = require(`./modules/handleXP.js`);
   xp.run(client, message, database);
 
-  const cmd = require(`./modules/commandHandler.js`);
-  cmd.run(client, message, args, database);
+  if(message.content.indexOf(config.prefix) !== 0) {
+    const cmd = require(`./modules/commandHandler.js`);
+    cmd.run(client, message, database);
+  }
+
 
 
 

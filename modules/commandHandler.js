@@ -2,8 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-exports.run = (client, message, args, database) => {
-  if(message.content.indexOf(config.prefix) !== 0) return;
+exports.run = (client, message, database) => {
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
