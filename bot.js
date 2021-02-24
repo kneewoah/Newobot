@@ -16,7 +16,7 @@ client.on('ready', () => {
 
   // CACHE MESSAGES
   // Scrim Messages
-  client.guilds.cache.get(config.pillowsID).channels.cache.get(config.scrimChannel).messages.fetch({ limit: 10 }).then(messages => console.log(`Received ${messages.size} messages`));
+  client.guilds.cache.get(config.pillowsID).channels.cache.get(config.scrimChannel).messages.fetch({ limit: 10 }).then(messages => console.log(`Cached ${messages.size} messages in the scrim channel`));
 
 });
 
