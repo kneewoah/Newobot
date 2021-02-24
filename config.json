@@ -6,5 +6,6 @@
   "levelUpMessage": "Level up!",
   "pillowsID": "434701823358795780",
   "scrimChannel": "667496648209072129",
-  "races": ["White", "Black", "Hispanic", "Middle-Eastern", "South-Asian", "East-Asian", "Native-American", "Pacific-Islander"]
+  "races": ["White", "Black", "Hispanic", "Middle-Eastern", "South-Asian", "East-Asian", "Native-American", "Pacific-Islander"],
+  "defaultbanreason": "having an ugly face"
 }
