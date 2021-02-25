@@ -15,11 +15,12 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         embed.spliceFields(0, 2);
 
         console.log(yes[1]);
-        console.log(`'<@${user.id}>'`)
-        var yesIndex = yes.indexOf(`'<@${user.id}>'`);
-        var noIndex = no.indexOf(`'<@${user.id}>'`);
+        console.log(`user.id}>'`);
+
+        var yesIndex = yes.indexOf(user.username);
+        var noIndex = no.indexOf(user.username);
         if (yesIndex = -1) {
-          yes.push(user.toString());
+          yes.push(user.username);
           yes[0]++;
         } else if (noIndex > -1) {
           array.splice(noIndex, 1);
