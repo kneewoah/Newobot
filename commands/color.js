@@ -7,7 +7,7 @@ exports.run = async (client, message, args, database) => {
   .catch(console.error);
 
   var mAuthor = message.author;
-  console.log("Editing color for " + mAuthor.id);
+  console.log("Editing color for " + mAuthor.id + "...");
 
   if (args[0].toLowerCase() === "random") {
     changeColor(Math.floor(Math.random()*16777215).toString(16), mAuthor);
@@ -24,7 +24,7 @@ exports.run = async (client, message, args, database) => {
   }
 
   function changeColor(color, author) {
-    const role = require(`../modules/roleColor.js`).run(client, message, database, author, color);
+    const role = require(`../modules/roleColor.js`).run(client, message, database, message.guild.member(author), color);
     role.edit({color: `0x${color}`})
     .then(updated => console.log(`Edited role color for ${author.tag} to ${updated.color}`))
     .catch(console.error);

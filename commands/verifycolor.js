@@ -5,10 +5,10 @@ exports.run = (client, message, args, database) => {
   .then(message => console.log(`Sent message: ${message.content}`))
   .catch(console.error);
 
-  const users = message.guild.members.cache.sweep(guildMember => guildMember.user.bot);
+  const members = message.guild.members.cache.sweep(guildMember => guildMember.user.bot);
   const color = require(`../modules/roleColor.js`);
 
-  users.forEach(m => {
+  members.forEach(m => {
       color.run(client, message, database, m);
   });
 
