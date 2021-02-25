@@ -24,7 +24,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
           message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can scrim.")
             .then(message => console.log(`Sent message: ${message.content}`))
             .catch(console.error);
-        } else if (noIndex > -1) {
+        } if (noIndex > -1) {
           no.splice(noIndex, 1);
           console.log(`Removed ${user.username} as a no for scrim message ${message.id}`)
           no[0]--;
@@ -60,7 +60,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.")
           .then(message => console.log(`Sent message: ${message.content}`))
           .catch(console.error);
-      } else if (yesIndex > -1) {
+      } if (yesIndex > -1) {
         yes.splice(yesIndex, 1);
         console.log(`Removed ${user.username} as a yes for scrim message ${message.id}`)
         yes[0]--;
