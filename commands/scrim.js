@@ -51,7 +51,7 @@ exports.run = (client, message, args, con) => {
       m.react("❌")
         .then((reaction) => console.log(`Reacted with ${reaction.emoji.name} to message ${message.id}`))
         .catch(console.error);
-      m.channel.send("<@&474051331183607828>")
+      m.channel.send("<@&474051331183607.828>")
         .then(message => console.log(`Sent message: ${message.content}`))
         .catch(console.error);
     });

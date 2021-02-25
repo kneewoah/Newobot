@@ -60,8 +60,8 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.")
           .then(message => console.log(`Sent message: ${message.content}`))
           .catch(console.error);
-      } else if (noIndex > -1) {
-        yes.splice(noIndex, 1);
+      } else if (yesIndex > -1) {
+        yes.splice(yesIndex, 1);
         console.log(`Removed ${user.username} as a yes for scrim message ${message.id}`)
         yes[0]--;
         console.log(`Decreased 'yesses' to ${yes[0]} for scrim message ${message.id}`)
