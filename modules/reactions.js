@@ -25,7 +25,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
             .then(message => console.log(`Sent message: ${message.content}`))
             .catch(console.error);
         } else if (noIndex > -1) {
-          array.splice(noIndex, 1);
+          no.splice(noIndex, 1);
           console.log(`Removed ${user.username} as a no for scrim message ${message.id}`)
           no[0]--;
           console.log(`Decreased 'noes' to ${no[0]} for scrim message ${message.id}`)
@@ -61,7 +61,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
           .then(message => console.log(`Sent message: ${message.content}`))
           .catch(console.error);
       } else if (noIndex > -1) {
-        array.splice(noIndex, 1);
+        yes.splice(noIndex, 1);
         console.log(`Removed ${user.username} as a yes for scrim message ${message.id}`)
         yes[0]--;
         console.log(`Decreased 'yesses' to ${yes[0]} for scrim message ${message.id}`)
