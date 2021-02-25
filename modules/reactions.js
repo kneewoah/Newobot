@@ -55,7 +55,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
       if (noIndex == -1) {
         no.push(user.toString());
         console.log(`Added ${user.username} as a no for scrim message ${message.id}`)
-        yes[0]++;
+        no[0]++;
         console.log(`Increased 'noes' to ${no[0]} for scrim message ${message.id}`)
         message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.")
           .then(message => console.log(`Sent message: ${message.content}`))
