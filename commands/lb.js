@@ -22,7 +22,7 @@ exports.run = (client, message, args, con) => {
 
     for (var i = 0; i < sorted.length; i++) {
       var user = `<@!${sorted[i].id}>`
-      embed.addField(`**${i+1}.** ${user.toString()}`, `**XP:** ${sorted[i].xp}\n**Level:** ${sorted[i].level}`, true);
+      embed.addField(`${i+1}. ${user.toString()}`, `**XP:** ${sorted[i].xp}\n**Level:** ${sorted[i].level}`, true);
     }
 
     message.channel.send(embed);
