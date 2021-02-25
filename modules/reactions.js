@@ -74,7 +74,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         .then(() => console.log(`Updated the embed for scrim message ${message.id}`))
         .catch(console.error);
       reaction.users.remove(user)
-        .then(() => console.log(`Removed ${user.username}'s reaction from scrim message ${message.id}`))
+        .then(() => console.log(`Removed ${user.username}'s ${reaction.emoji.name} reaction from scrim message ${message.id}`))
         .catch(console.error);
 
     }
