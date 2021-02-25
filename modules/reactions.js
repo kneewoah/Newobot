@@ -18,7 +18,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
         var yesIndex = yes.indexOf(user);
         if (yesIndex = -1) {
-          //yes.push(user);
+          yes.push(user.toString());
           yes[0]++;
         }
 
