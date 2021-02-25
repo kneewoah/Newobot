@@ -9,14 +9,14 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         var embed = message.embeds[0];
         // Type: MessageEmbed
 
-        var yes = embed.fields[0].value.split(" ");
-        var no = embed.fields[1].value.split(" ");
+        var yes = embed.fields[0].value.split("\n");
+        var no = embed.fields[1].value.split("\n");
         console.log(yes);
         console.log(no);
 
         embed.spliceFields(0, 2);
 
-        var yesIndex = yes.indexOf(user);
+        var yesIndex = yes.indexOf(user.toString());
         if (yesIndex = -1) {
           yes.push(user.toString());
           yes[0]++;
