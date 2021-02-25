@@ -38,7 +38,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
           .then(() => console.log(`Updated the embed for scrim message ${message.id}`))
           .catch(console.error);
         reaction.users.remove(user)
-          .then(() => console.log(`Removed ${user.username}'s reaction from scrim message ${message.id}`))
+          .then(() => console.log(`Removed ${user.username}'s ${reaction.emoji.name} reaction from scrim message ${message.id}`))
           .catch(console.error);
 
     } else if(emoji.name == '❌') {
@@ -67,8 +67,8 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         console.log(`Decreased 'yesses' to ${yes[0]} for scrim message ${message.id}`)
       }
 
-      embed.addField("Yes", yes, false);
-      embed.addField("No", no, false);
+      embed.addField("Yes", yes, true);
+      embed.addField("No", no, true);
 
       message.edit(embed)
         .then(() => console.log(`Updated the embed for scrim message ${message.id}`))

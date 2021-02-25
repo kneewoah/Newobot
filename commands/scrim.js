@@ -30,12 +30,12 @@ exports.run = (client, message, args, con) => {
         {
           name: "Yes",
           value: [0],
-          inline: false
+          inline: true
         },
         {
           name: "No",
           value: [0],
-          inline: false
+          inline: true
         }
       ],
       footer: {
@@ -44,6 +44,8 @@ exports.run = (client, message, args, con) => {
       }
     });
 
+    embed.setThumbnail("../assets/mlgpillows.jpg");
+
     message.guild.channels.cache.get(config.scrimChannel).send(embed).then(m => {
       m.react("✅")
         .then((reaction) => console.log(`Reacted with ${reaction.emoji.name} to message ${message.id}`))
@@ -51,7 +53,7 @@ exports.run = (client, message, args, con) => {
       m.react("❌")
         .then((reaction) => console.log(`Reacted with ${reaction.emoji.name} to message ${message.id}`))
         .catch(console.error);
-      m.channel.send("<@&474051331183607.828>")
+      m.channel.send("<@&474051331183607828>")
         .then(message => console.log(`Sent message: ${message.content}`))
         .catch(console.error);
     });
