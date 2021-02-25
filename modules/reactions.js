@@ -63,7 +63,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
       } else if (noIndex > -1) {
         array.splice(noIndex, 1);
         console.log(`Removed ${user.username} as a yes for scrim message ${message.id}`)
-        no[0]--;
+        yes[0]--;
         console.log(`Decreased 'yesses' to ${yes[0]} for scrim message ${message.id}`)
       }
 
