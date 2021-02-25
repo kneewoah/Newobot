@@ -27,12 +27,12 @@ exports.run = (client, message, args, con) => {
       fields: [
         {
           name: "Yes",
-          value: new Array(),
+          value: ["1"],
           inline: false
         },
         {
           name: "No",
-          value: new Array(),
+          value: ["1"],
           inline: false
         }
       ],
