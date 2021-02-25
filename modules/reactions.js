@@ -53,7 +53,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
       var noIndex = no.indexOf(user.toString());
 
       if (noIndex == -1) {
-        yes.push(user.toString());
+        no.push(user.toString());
         console.log(`Added ${user.username} as a no for scrim message ${message.id}`)
         yes[0]++;
         console.log(`Increased 'noes' to ${no[0]} for scrim message ${message.id}`)
