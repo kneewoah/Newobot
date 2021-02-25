@@ -9,25 +9,25 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         var embed = message.embeds[0];
         // Type: MessageEmbed
 
-        var yes = embed.fields[0].value;
-        var no = embed.fields[1].value;
+        var yes = embed.fields[0].value;//.split(" ");
+        var no = embed.fields[1].value;//.split(" ");
         console.log(yes);
         console.log(no);
 
         embed.spliceFields(0, 2);
 
-        // var yesIndex = yes.indexOf(user);
-        // if (yesIndex = -1) {
-        //   yes.push(user);
-        //   yes[0]++;
-        // }
-        //
-        //
-        // var noIndex = no.indexOf(user);
-        // if (yesIndex > -1) {
-        //   array.splice(index, 1);
-        //   no[0]--;
-        // }
+        var yesIndex = yes.indexOf(user);
+        if (yesIndex = -1) {
+          //yes.push(user);
+          yes[0]++;
+        }
+
+
+        var noIndex = no.indexOf(user);
+        if (yesIndex > -1) {
+          array.splice(index, 1);
+          no[0]--;
+        }
 
         embed.addField("Yes", yes, false);
         embed.addField("No", no, false);
@@ -35,7 +35,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         message.edit(embed);
         reaction.users.remove(user);
 
-        message.guild.channels.cache.get(config.pillowsGeneralID).send(user + " can scrim.");
+        message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can scrim.");
 
     } else if(emoji.name == '❌') {
       var embed = message.embeds[0];
