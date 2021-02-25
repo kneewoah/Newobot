@@ -11,6 +11,7 @@ exports.run = (client, message, args, database) => {
   mems.forEach(m => {
       color.run(client, message, database, m);
   });
+  console.log(`All color roles now applied correctly.`);
 
 }
 

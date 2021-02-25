@@ -24,7 +24,7 @@ exports.run = async (client, message, args, database) => {
   }
 
   function changeColor(color, author) {
-    const role = require(`../modules/roleColor.js`).run(client, message, database, message.guild.member(author), color);
+    const role = require(`../modules/roleColor.js`).run(client, message, database, message.guild.member(author));
     role.edit({color: `0x${color}`})
     .then(updated => console.log(`Edited role color for ${author.tag} to ${updated.color}`))
     .catch(console.error);
