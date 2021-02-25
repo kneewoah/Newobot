@@ -9,8 +9,8 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         var embed = message.embeds[0];
         // Type: MessageEmbed
 
-        var yes = embed.fields[0].value;//.split(" ");
-        var no = embed.fields[1].value;//.split(" ");
+        var yes = embed.fields[0].value.split(" ");
+        var no = embed.fields[1].value.split(" ");
         console.log(yes);
         console.log(no);
 
