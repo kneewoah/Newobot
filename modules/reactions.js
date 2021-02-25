@@ -14,17 +14,17 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
         embed.spliceFields(0, 2);
 
-
         var yesIndex = yes.indexOf(user);
-        if (yesIndex > -1) {
-          yes.splice(index, 1);
+        if (yesIndex = -1) {
+          yes.push(user);
+          yes[0]++;
         }
 
-        yes.push(user);
 
         var noIndex = no.indexOf(user);
         if (yesIndex > -1) {
           array.splice(index, 1);
+          no[0]--;
         }
 
         embed.addField("Yes", yes, false);
