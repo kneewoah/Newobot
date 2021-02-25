@@ -6,7 +6,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
   if((message.author === client.user) && (message.channel.id === config.scrimChannel))  {
     if(emoji.name == '✅') {
-        console.log(`${user.username} reacted ${reaction.emoji.name} to scrim message ${message.id}`);
+        console.log(`Processing ${user.username}'s ${reaction.emoji.name} reaction to scrim message ${message.id}`);
         var embed = message.embeds[0];
 
         var yes = embed.fields[0].value.split("\n");
@@ -43,7 +43,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
           .catch(console.error);
 
     } else if(emoji.name == '❌') {
-      console.log(`${user.username} reacted ${reaction.emoji.name} to scrim message ${message.id}`)
+      console.log(`Processing ${user.username}'s ${reaction.emoji.name} reaction to scrim message ${message.id}`)
       var embed = message.embeds[0];
 
       var yes = embed.fields[0].value.split("\n");

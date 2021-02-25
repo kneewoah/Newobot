@@ -66,7 +66,8 @@ client.on('message', async message => {
 client.on('guildMemberAdd', member => {
 
   const color = require(`./modules/roleColor.js`);
-  color.run(client, message, database, member);
+  const randColor = `0x${Math.floor(Math.random()*16777215).toString(16)}`
+  color.run(client, message, database, member, randColor);
   member.guild.send(`Welcome ${member}! Type \`!color #HEXCODEHERE\` to chose your role color! You can choose a color here: <https://tr.im/hexwheel>.`);
 
 });

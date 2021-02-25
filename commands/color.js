@@ -1,8 +1,10 @@
 const config = require("../config.json");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, database) => {
 
-  if (!args[0]) message.channel.send("Please select a color here: <https://htmlcolorcodes.com/color-picker/>. Then, you may type \`!color #URCODE\`");
+  if (!args[0]) message.channel.send("Please select a color here: <https://htmlcolorcodes.com/color-picker/>. Then, you may type \`!color #URCODE\`")
+  .then(message => console.log(`Sent message: ${message.content}`))
+  .catch(console.error);
 
   var mAuthor = message.author;
   console.log("Editing color for " + mAuthor.id);
@@ -16,26 +18,18 @@ exports.run = async (client, message, args) => {
   } else if (args[0].match(/^(?:[0-9a-fA-F]{6})$/g)) {
     changeColor(args[0], mAuthor);
   } else {
-    message.channel.send("The code you entered did not match the correct format. You can select a color here: <https://htmlcolorcodes.com/color-picker/>");
+    message.channel.send("The code you entered did not match the correct format. You can select a color here: <https://htmlcolorcodes.com/color-picker/>")
+    .then(message => console.log(`Sent message: ${message.content}`))
+    .catch(console.error);
   }
 
   function changeColor(color, author) {
-    if (!message.guild.roles.cache.find(role => role.name === author.id)) {
-      message.member.roles.add(
-        message.guild.roles.create({
-        data: {
-          name: `${author.id}`,
-          color: `0x${color}`,
-          hoist: false,
-          mentionable: false,
-        },
-        reason: `!color command for ${author.username}`
-      }));
-    } else {
-      var edited = message.guild.roles.cache.find(role => role.name === author.id).edit({color: `0x${color}`}).then(r => message.member.roles.add(r));
-    }
-  };
-}
+    const role = require(`../modules/roleColor.js`).run(client, message, database, member, color);
+    role.edit({color: `0x${color}`})
+    .then(updated => console.log(`Edited role color for ${author.tag} to ${updated.color}`))
+    .catch(console.error);
+  }
+};
 
 exports.help = {
   description: "Get a custom role color in discord",
