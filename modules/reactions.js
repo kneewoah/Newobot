@@ -14,13 +14,10 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
         embed.spliceFields(0, 2);
 
-        console.log(yes[1]);
-        console.log(user.username);
-
-        var yesIndex = yes.indexOf(user.username);
-        var noIndex = no.indexOf(user.username);
-        if (yesIndex = -1) {
-          yes.push(user.username);
+        var yesIndex = yes.indexOf(user.toString());
+        var noIndex = no.indexOf(user.toString());
+        if (yesIndex == -1) {
+          yes.push(user.toString());
           yes[0]++;
           console.log("user added");
         } else if (noIndex > -1) {
