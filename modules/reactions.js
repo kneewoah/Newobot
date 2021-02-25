@@ -11,21 +11,23 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
         var yes = embed.fields[0].value;
         var no = embed.fields[1].value;
+        console.log(yes);
+        console.log(no);
 
         embed.spliceFields(0, 2);
 
-        var yesIndex = yes.indexOf(user);
-        if (yesIndex = -1) {
-          yes.push(user);
-          yes[0]++;
-        }
-
-
-        var noIndex = no.indexOf(user);
-        if (yesIndex > -1) {
-          array.splice(index, 1);
-          no[0]--;
-        }
+        // var yesIndex = yes.indexOf(user);
+        // if (yesIndex = -1) {
+        //   yes.push(user);
+        //   yes[0]++;
+        // }
+        //
+        //
+        // var noIndex = no.indexOf(user);
+        // if (yesIndex > -1) {
+        //   array.splice(index, 1);
+        //   no[0]--;
+        // }
 
         embed.addField("Yes", yes, false);
         embed.addField("No", no, false);
