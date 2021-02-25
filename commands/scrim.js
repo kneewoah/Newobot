@@ -44,7 +44,7 @@ exports.run = (client, message, args, con) => {
       }
     });
 
-    embed.setThumbnail("https://cdn.discordapp.com/attachments/434701823358795782/814306105077268490/mlgpillows.jpg");
+    embed.setThumbnail(config.mlgpillowsicon);
 
     message.guild.channels.cache.get(config.scrimChannel).send(embed).then(m => {
       m.react("✅")

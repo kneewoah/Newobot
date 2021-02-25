@@ -8,5 +8,6 @@
   "scrimChannel": "667496648209072129",
   "races": ["White", "Black", "Hispanic", "Middle-Eastern", "South-Asian", "East-Asian", "Native-American", "Pacific-Islander"],
   "defaultbanreason": "having an ugly face",
-  "xpCoolDownMs": 60000
+  "xpCoolDownMs": 60000,
+  "mlgpillowsicon": "https://cdn.discordapp.com/attachments/434701823358795782/814306105077268490/mlgpillows.jpg"
 }
