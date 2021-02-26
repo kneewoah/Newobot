@@ -5,7 +5,11 @@ exports.run = (client, message, args) => {
   let number = parseInt(args[0], 10);
 
   if(number < 1 || number > 100) {
-    return message.reply("You did not specify a valid number of sides. Choose 1-100, or leave blank for 6.")
+    console.log(`Failed to process roll. ${number} is an invalid parameter`)
+    message.reply("You did not specify a valid number of sides. Choose 1-100, or leave blank for 6.")
+      .then(() => console.log(`Sent a reply to ${message.author.tag}: 'You did not specify a valid number of sides. Choose 1-100, or leave blank for 6.'`))
+      .catch(console.error);
+    return;
   }
 
   let sides;
@@ -31,7 +35,10 @@ exports.run = (client, message, args) => {
        msg.edit(`${rolling}⚫⚫🎲⚫️⚫️${rolling2}`);
        }, 1000)}
        msg.edit(`${rolling}⚫🎲⚫️⚫️⚫️${rolling2}`);
-       }, 1000)});
+      }, 1000);
+        console.log(`Sent message & edited dice message`);
+      })
+      .catch(console.error);
 
 };
 
