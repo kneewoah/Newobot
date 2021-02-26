@@ -25,7 +25,9 @@ exports.run = (client, message, args, con) => {
   con.query(`SELECT * FROM xp_${message.guild.id} WHERE id = '${target.id}'`, (err, rows) => {
     if(err) throw err;
 
-    if(!rows[0]) return message.channel.send("imagine having 0 xp lol");
+    if(!rows[0]) return message.channel.send("imagine having 0 xp lol")
+      .then(message => console.log(`Sent message: ${message.content}`))
+      .catch(console.error);
 
     var xp = rows[0].xp;
     var lvl = findLvl(xp);
@@ -62,7 +64,9 @@ exports.run = (client, message, args, con) => {
 
     var embed = new Discord.MessageEmbed(data);
     embed.setThumbnail(target.avatarURL());
-    message.channel.send(embed);
+    message.channel.send(embed)
+      .then(message => console.log(`Sent message: ${message.content}`))
+      .catch(console.error);
   });
 
 };

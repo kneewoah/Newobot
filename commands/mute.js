@@ -22,17 +22,24 @@ exports.run = async (client, message, args) => {
 
   let rb = message.mentions.members.first();
   if(!rb) message.reply("you need to mention a user")
+    .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
+    .catch(console.error));
 
   let role = message.guild.roles.cache.find(role => role.name === "Muted");
 
   if(message.author.id === rb.id) {
-      message.reply("you can't mute yourself, idiot.");
+      message.reply("you can't mute yourself, idiot.")
+        .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
+        .catch(console.error));
   } else if(rb.roles.cache.find(role => role.name === "Muted")) {
-      message.reply(rb + " is already muted you mormon.");
+      message.reply(rb + " is already muted you mormon.")
+        .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
+        .catch(console.error));
   } else {
     message.reply(rb + " has been muted.");
-    await rb.roles.add(role.id)
-          .catch(error => message.reply(`Sorry ${message.author} I couldn't unmute because of : ${error}. Maybe they have a higher role?`));
+    await rb.roles.add(role.id, "Mute")
+      .then(() => console.log(`Added the muted role to ${rb.user.tag}`))
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't unmute because of : ${error}. Maybe they have a higher role?`));
   }
 
 };
