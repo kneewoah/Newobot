@@ -63,5 +63,5 @@ exports.run = (client, message, args, con) => {
 
 exports.help = {
   description: "scrim announcement",
-  usage: "!scrim <time> <date>"
+  usage: `${config.prefix}scrim [time] [date]``
 };

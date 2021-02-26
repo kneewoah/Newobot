@@ -2,7 +2,9 @@ const config = require("../config.json");
 
 exports.run = async (client, message, args) => {
 
-  if(!message.member.hasPermission("MANAGE_MESSAGES" || "ADMINISTRATOR") || message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.");
+  if(!message.member.hasPermission("MANAGE_MESSAGES" || "ADMINISTRATOR") || message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.")
+    .then(message => console.log(`Sent message: ${message.content}`))
+    .catch(console.error);
 
   if(!message.guild.roles.cache.find(role => role.name === "Muted")) {
     message.guild.roles.create({

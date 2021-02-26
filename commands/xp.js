@@ -68,6 +68,6 @@ exports.run = (client, message, args, con) => {
 };
 
 exports.help = {
-  description: "WIP - XP tracker",
-  usage: "!xp"
+  description: "XP tracker",
+  usage: `${config.prefix}xp`
 };

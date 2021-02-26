@@ -3,12 +3,19 @@ const config = require("../config.json");
 exports.run = async (client, message, args) => {
 
   let member = message.mentions.members.first();
+
   if(!member) return message.reply("Please mention a valid member of this server")
-    .then(() => console.log(`Sent a reply to ${message.author.tag}: 'Please mention a valid member of this server'`))
+    .then(() => {
+      console.log(`${message.author.tag} was unable to kick ${member.user.toString()}`)
+      console.log(`Sent a reply to ${message.author.tag}: 'Please mention a valid member of this server'`);
+    })
     .catch(console.error);
 
-  if(message.author.id === member.id) return message.reply("You can't ban yourself you idiot.")
-    .then(() => console.log(`Sent a reply to ${message.author.tag}: 'You can't ban yourself you idiot.'`))
+  if(message.author.id === member.id) return message.reply("you can't ban yourself you idiot.")
+    .then(() => {
+      console.log(`${message.author.tag} was unable to ban themself`);
+      console.log(`Sent a reply to ${message.author.tag}: 'you can't ban yourself you idiot.'`);
+    })
     .catch(console.error);
 
   if(!member.bannable) return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?")

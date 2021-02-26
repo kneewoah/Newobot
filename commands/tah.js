@@ -24,5 +24,5 @@ exports.run = (client, message, args, database) => {
 
 exports.help = {
   description: "Change the task-at-hand the bot is doing.",
-  usage: `${config.prefix}tah [playing, listening, watching, streaming] <message>`
+  usage: `${config.prefix}tah {playing, listening, watching, streaming} <message>`
 };

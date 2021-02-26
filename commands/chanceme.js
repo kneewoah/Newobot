@@ -17,5 +17,5 @@ exports.run = (client, message, args) => {
 
 exports.help = {
   description: "how likely you are to get into a school",
-  usage: "!chanceme <school>"
+  usage: `${config.prefix}chanceme <school>`
 };

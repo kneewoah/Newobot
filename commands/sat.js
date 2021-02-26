@@ -10,5 +10,5 @@ exports.run = (client, message, args) => {
 
 exports.help = {
   description: "what is my SAT score?",
-  usage: "!SAT"
+  usage: `${config.prefix}sat`
 };

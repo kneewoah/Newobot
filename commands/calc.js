@@ -21,5 +21,5 @@ exports.run = (client, message, args, database) => {
 
 exports.help = {
   description: "calculator maybe",
-  usage: "!calc basic math"
+  usage: `${config.prefix}calc <basic math>`
 };

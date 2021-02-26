@@ -37,5 +37,5 @@ exports.run = (client, message, args) => {
 
 exports.help = {
   description: "Roll a die.",
-  usage: `${config.prefix}roll <# of sides [optional]>`
+  usage: `${config.prefix}roll []# of sides]`
 };

@@ -25,12 +25,14 @@ exports.run = (client, message, args, con) => {
       embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i].xp}\n**Level:** ${sorted[i].level}`, true);
     }
 
-    message.channel.send(embed);
+    message.channel.send(embed)
+    .then(message => console.log(`Sent a leaderboard embed`))
+    .catch(console.error);
   });
 
 };
 
 exports.help = {
   description: "Leaderboard!",
-  usage: "!lb"
+  usage: `${config.prefix}lb`
 };

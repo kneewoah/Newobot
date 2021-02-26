@@ -23,5 +23,5 @@ exports.run = (client, message, args, con) => {
 
 exports.help = {
   description: "DNA Analysis",
-  usage: "!race"
+  usage: `${config.prefix}race`
 };

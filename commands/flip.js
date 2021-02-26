@@ -10,7 +10,9 @@ exports.run = (client, message, args) => {
      flip = "TAILS";
   }
 
-  message.channel.send(`https://bit.ly/pillowsbotcoinflip${flip}`);
+  message.channel.send(`https://bit.ly/pillowsbotcoinflip${flip}`)
+  .then(message => console.log(`Sent message: ${message.content}`))
+  .catch(console.error);
 
 }
 

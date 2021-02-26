@@ -17,5 +17,5 @@ exports.run = (client, message, args) => {
 
 exports.help = {
   description: "Update the bot's status (Newo Only).",
-  usage: `${config.prefix}status [dnd, idle, online, invisible]`
+  usage: `${config.prefix}status {dnd, idle, online, invisible}`
 };
