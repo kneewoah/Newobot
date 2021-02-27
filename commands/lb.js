@@ -49,6 +49,6 @@ exports.run = (client, message, args, con) => {
 };
 
 exports.help = {
-  description: "Leaderboard!",
-  usage: `${config.prefix}lb`
+  description: "Leaderboard command, leaving the 1st option blank will dis play the all time leaderboard",
+  usage: `${config.prefix}lb {daily | weekly | monthly}`
 };
