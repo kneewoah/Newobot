@@ -12,11 +12,6 @@ exports.daily = (client, database) => {
 
 exports.weekly = (client, database) => {
   console.log(`Resetting WEEKLY XP totals...`)
-  database.query(`UPDATE xp_${config.pillowsID} SET weekly = 0 WHERE 1`, (err) => {
-    if(err) throw err;
-  });
-
-  console.log(`SQL: Reset WEEKLY XP totals.`);
 
   const embed = new Discord.MessageEmbed({
     color: `0x2F69EC`,
@@ -28,13 +23,17 @@ exports.weekly = (client, database) => {
   });
 
   const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
-  
+
   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, data) => {
     if(err) throw err;
     require(`../commands/lb.js`).sendCategoryLb("weekly", embed, channel, data);
   });
 
+  database.query(`UPDATE xp_${config.pillowsID} SET weekly = 0 WHERE 1`, (err) => {
+    if(err) throw err;
+  });
 
+  console.log(`SQL: Reset WEEKLY XP totals.`);
 };
 
 exports.monthly = (client, database) => {
