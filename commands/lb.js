@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const config = require("../config.json");
 
-
 exports.run = (client, message, args, con) => {
 
   con.query(`SELECT * FROM xp_${message.guild.id}`, (err, data) => {
@@ -19,14 +18,7 @@ exports.run = (client, message, args, con) => {
     });
 
     if ((args[0]) && (args[0].toLowerCase() === "daily" || args[0].toLowerCase() === "weekly" || args[0].toLowerCase() === "monthly")) {
-      var category = args[0].toLowerCase();
-      const sorted = data.sort((a, b) => (a.category > b.category ? -1 : 1)).filter(obj => (obj[category] !== 0));
-      for (var i = 0; i < sorted.length; i++) {
-        var user = message.guild.members.cache.get(sorted[i].id).user
-        embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
-      }
-
-      embed.setTitle(`Pillows ${category.charAt(0).toUpperCase() + category.slice(1)} XP Rankings`);
+      require(`lb.js`).sendCategoryLb(args[0].toLowerCase(), embed, message.channel, data);
 
     } else {
       const sorted = data.sort((a, b) => (a.xp > b.xp ? -1 : 1));
@@ -37,14 +29,29 @@ exports.run = (client, message, args, con) => {
       }
 
       embed.setTitle(`Pillows XP Leaderboard`);
-    }
 
-    message.channel.send(embed)
-    .then(message => console.log(`Sent a leaderboard embed`))
-    .catch(console.error);
+      message.channel.send(embed)
+      .then(message => console.log(`Sent a leaderboard embed`))
+      .catch(console.error);
+    }
 
   });
 
+};
+
+exports.sendCategoryLb = (style, embed, channel, data) => {
+  var category = style.toLowerCase();
+  const sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0));
+  for (var i = 0; i < sorted.length; i++) {
+    var user = channel.guild.members.cache.get(sorted[i].id).user;
+    embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
+  }
+
+  embed.setTitle(`Pillows ${category.charAt(0).toUpperCase() + category.slice(1)} XP Rankings`);
+
+  channel.send(embed)
+  .then(message => console.log(`Sent a ${category} leaderboard embed`))
+  .catch(console.error);
 };
 
 exports.help = {
