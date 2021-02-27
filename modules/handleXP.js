@@ -79,9 +79,9 @@ exports.text = (client, message, database) => {
 
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
-  if (oldVoiceState.guild.id !== config.pillowsID || newVoiceState.guild.id !== config.pillowsID) return;
-
   if (newVoiceState.channel == null || newVoiceState.deaf || (oldVoiceState.channel !== newVoiceState.channel)) { // END XP COUNT
+    if (oldVoiceState.guild.id !== config.pillowsID) return;
+
     database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
         const time = new Date().getTime() / 60000;
         const diff = time - data[0].voiceStart;
@@ -112,6 +112,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
         });
     });
   } else if (oldVoiceState.channel == null || !newVoiceState.deaf) { // BEGIN XP COUNT
+    if (newVoiceState.guild.id !== config.pillowsID) return;
     const time = new Date().getTime() / 60000;
     database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
       if(err) throw(err);
