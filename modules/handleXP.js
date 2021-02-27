@@ -28,6 +28,7 @@ exports.text = (client, message, database) => {
       // If new user
       if(rows.length < 1) {
         var newData = {
+          id: message.author.id,
           xp: genXp,
           timeStamp: newTime,
           progress: genXp,
