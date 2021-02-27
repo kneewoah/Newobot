@@ -2,6 +2,17 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
+function levelUpMsg(user, Level) {
+  console.log(`${user.toString} leveled up to level ${level}`);
+  message.channel.send(`Level up, ${user.toString}! You are now level ${level}`)
+    .then(message => console.log(`Sent message: ${message.content}`))
+    .catch(console.error);
+}
+
+function generateXp(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 exports.text = (client, message, database) => {
     // exit if not pillows
     if (message.guild.id != config.pillowsID) return;
@@ -12,7 +23,7 @@ exports.text = (client, message, database) => {
     database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
       if(err) throw err;
 
-      var genXp = generateXp();
+      var genXp = generateXp(15, 25);
 
       // If new user
       if(rows.length < 1) {
@@ -50,7 +61,7 @@ exports.text = (client, message, database) => {
           if (newData.progress >= thresh) {
             newData.level++;
             newData.progress -= thresh;
-            levelUpMsg(newData.level);
+            levelUpMsg(message.autuhor, newData.level);
           }
 
           var sql = `UPDATE ${table} SET xp = ${newData.xp}, timeStamp = ${newData.timeStamp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
@@ -64,19 +75,45 @@ exports.text = (client, message, database) => {
       }
 
     });
-
-    function generateXp() {
-      var min = 15;
-      var max = 25;
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function levelUpMsg(newLevel) {
-      message.channel.send(`Level up! You are now level ${newLevel}`);
-    }
 };
 
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
-  console.log(oldVoiceState.channelID);
-  console.log(newVoiceState.channelID);
+
+  if (oldVoiceState.guild.id !== config.pillowsID && newVoiceState.guild.id !== config.pillowsID) return;
+
+  if (newVoiceState.channel == null || newVoiceState.deaf) { // END XP COUNT
+    database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${message.author.id}'`, (err, data) => {
+        const time = Date.now().getMinutes();
+        const diff = time - data[0].voiceStart;
+
+        var newXP = 0;
+        for (var i = 0; i < diff; i++) {
+          newXP += generateXp(3, 5);
+        }
+
+        var newData = {
+          xp: data[0].xp + newXp,
+          voiceStart: time,
+          level: data[0].level,
+          progress: data[0].progress + newXp
+        };
+
+        // check if level updates
+        while (newData.progress >= 5*Math.pow(newData.level, 2)+50*newData.level+100) {
+          newData.progress -= (5*Math.pow(newData.level, 2)+50*newData.level+100);
+          newData.level++;
+          levelUpMsg(newVoiceState.member.user, newData.level);
+        }
+
+        var sql = `UPDATE ${table} SET xp = ${newData.xp}, voiceStart = ${newData.timeStamp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
+
+        database.query(sql, () => {
+          if(err) throw err;
+          console.log(`SQL: Updated XP for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
+        });
+    });
+  } else if (oldVoiceState.channel == null || !newVoiceState.deaf) { // BEGIN XP COUNT
+    const time = Date.now().getMinutes();
+    database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${message.author.id}'`, (err) => if(err) throw(err));
+  }
 };
