@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-function levelUpMsg(user, Level) {
+function levelUpMsg(user, level) {
   console.log(`${user.toString} leveled up to level ${level}`);
   message.channel.send(`Level up, ${user.toString}! You are now level ${level}`)
     .then(message => console.log(`Sent message: ${message.content}`))
