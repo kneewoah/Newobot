@@ -21,7 +21,7 @@ exports.run = (client, message, args, con) => {
     var category = args[0].toLowerCase();
 
     if (category === "daily" || category === "weekly" || category === "monthly") {
-      const sorted = data.sort((a, b) => (a.category > b.category ? -1 : 1));
+      const sorted = data.sort((a, b) => (a.category > b.category ? -1 : 1)).filter(obj => (obj[category] !== 0));
       for (var i = 0; i < sorted.length; i++) {
         var user = message.guild.members.cache.get(sorted[i].id).user
         embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
