@@ -18,9 +18,8 @@ exports.run = (client, message, args, con) => {
       }
     });
 
-    var category = args[0].toLowerCase();
-
-    if (category === "daily" || category === "weekly" || category === "monthly") {
+    if ((args[0]) && (args[0].toLowerCase() === "daily" || args[0].toLowerCase() === "weekly" || args[0].toLowerCase() === "monthly")) {
+      var category = args[0].toLowerCase();
       const sorted = data.sort((a, b) => (a.category > b.category ? -1 : 1)).filter(obj => (obj[category] !== 0));
       for (var i = 0; i < sorted.length; i++) {
         var user = message.guild.members.cache.get(sorted[i].id).user
