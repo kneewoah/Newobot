@@ -108,7 +108,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
         database.query(sql, () => {
           if(err) throw err;
-          console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
+          console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify(newData)}`);
         });
     });
   } else if (oldVoiceState.channel == null || !newVoiceState.deaf) { // BEGIN XP COUNT
