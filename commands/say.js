@@ -3,15 +3,13 @@ const config = require("../config.json");
 exports.run = (client, message, args) => {
 
   const sayMessage = args.join(" ");
-  const chan = message.channel;
-  const author = message.author;
 
   message.channel.send(sayMessage)
-  .then(msg => console.log(`Echo'd message from ${author.tag}: ${msg.content}`))
+  .then(msg => console.log(`Echo'd message from ${msg.author.tag}: ${msg.content}`))
   .catch(console.error);
 
   message.delete()
-    .then(msg => console.log(`Deleted message from ${author.tag}`))
+    .then(msg => console.log(msg => console.log(`Deleted message from ${msg.author.username}`))
     .catch(console.error);
 
 };
