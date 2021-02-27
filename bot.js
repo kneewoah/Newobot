@@ -92,7 +92,7 @@ client.on('messageReactionRemove', (reaction, user) => {
 
 // VOICE CHANNEL UPDATE
 client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
-  if (user.bot) return;
+  if (oldVoiceState.member.user.bot) return;
   require(`./modules/handleXP.js`).voice(client, oldVoiceState, newVoiceState, database);
 });
 
