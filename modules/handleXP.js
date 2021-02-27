@@ -79,7 +79,7 @@ exports.text = (client, message, database) => {
 
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
-  if ((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || newVoiceState.deaf || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf)) { // END XP COUNT
+  if ((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || newVoiceState.deaf || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf && oldVoiceState.channel !== null)) { // END XP COUNT
     if (oldVoiceState.guild.id !== config.pillowsID) return;
 
     console.log(`Logging voice channel XP for ${oldVoiceState.member.user.tag}`);
@@ -117,7 +117,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     if (newVoiceState.guild.id === config.pillowsAFK) return;
 
     console.log(`Logging start time for voice channel XP for ${oldVoiceState.member.user.tag}`);
-    
+
     const time = Math.floor(new Date().getTime() / 60000);
     database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
       if(err) throw(err);
