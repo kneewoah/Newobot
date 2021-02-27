@@ -23,7 +23,7 @@ exports.run = async (client, message, args) => {
   let rb = message.mentions.members.first();
   if(!rb) message.reply("you need to mention a user")
     .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
-    .catch(console.error));
+    .catch(console.error);
 
   let role = message.guild.roles.cache.find(role => role.name === "Muted");
 
