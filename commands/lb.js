@@ -24,7 +24,7 @@ exports.run = (client, message, args, con) => {
       const sorted = data.sort((a, b) => (a.category > b.category ? -1 : 1));
       for (var i = 0; i < sorted.length; i++) {
         var user = message.guild.members.cache.get(sorted[i].id).user
-        embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i].xp}`, false);
+        embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
       }
 
       embed.setTitle(`Pillows ${category.charAt(0).toUpperCase() + category.slice(1)} XP Rankings`);
