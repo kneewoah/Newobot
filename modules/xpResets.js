@@ -32,7 +32,7 @@ exports.weekly = (client, database) => {
     data = returned;
   }
 
-  const channel client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
+  const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
 
   require(`lb.js`).sendCategoryLb("weekly", embed, channel, data);
 });
