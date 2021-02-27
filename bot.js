@@ -53,7 +53,7 @@ client.on('message', async message => {
   if(message.author.bot) return;
 
   const xp = require(`./modules/handleXP.js`);
-  xp.run(client, message, database);
+  xp.text(client, message, database);
 
   if(message.content.indexOf(config.prefix) === 0) {
     const cmd = require(`./modules/commandHandler.js`);
@@ -62,7 +62,7 @@ client.on('message', async message => {
 
 });
 
-// USER JOIN
+// USER JOINS SERVER
 client.on('guildMemberAdd', member => {
 
   const color = require(`./modules/roleColor.js`);
@@ -72,6 +72,7 @@ client.on('guildMemberAdd', member => {
 
 });
 
+// REACTION ADD
 client.on('messageReactionAdd', (reaction, user) => {
   if (user.bot) return;
   const reactions = require(`./modules/reactions.js`);
@@ -80,12 +81,18 @@ client.on('messageReactionAdd', (reaction, user) => {
   reactions.add(client, message, user, reaction, emoji, database);
 });
 
+// REACTION REMOVE
 client.on('messageReactionRemove', (reaction, user) => {
   if (user.bot) return;
   const reactions = require(`./modules/reactions.js`);
   const message = reaction.message
   const emoji = reaction.emoji;
   reactions.remove(client, message, user, reaction, database);
+});
+
+// VOICE CHANNEL UPDATE
+client.on('voiceStateUpdate', (oldUser, newUser) => {
+    console.log(oldUser.user.tag);
 });
 
 // ERROR

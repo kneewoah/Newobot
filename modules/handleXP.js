@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-exports.run = (client, message, database) => {
+exports.text = (client, message, database) => {
     // exit if not pillows
     if (message.guild.id != config.pillowsID) return;
 
