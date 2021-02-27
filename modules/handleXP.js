@@ -66,7 +66,7 @@ exports.text = (client, message, database) => {
 
           var sql = `UPDATE ${table} SET xp = ${newData.xp}, timeStamp = ${newData.timeStamp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
 
-          database.query(sql, () => {
+          database.query(sql, (err) => {
             if(err) throw err;
             console.log(`SQL: Updated XP for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
           });
@@ -109,11 +109,14 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
         database.query(sql, () => {
           if(err) throw err;
-          console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
+          console.log(`SQL: Updated XP for ${newVoiceState.member.user
+            .tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
         });
     });
   } else if (oldVoiceState.channel == null || !newVoiceState.deaf) { // BEGIN XP COUNT
     const time = Date.now().getMinutes();
-    database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${message.author.id}'`, (err) => if(err) throw(err));
+    database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${message.author.id}'`, (err) => {
+      if(err) throw(err);
+    });
   }
 };
