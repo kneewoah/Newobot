@@ -31,7 +31,7 @@ exports.weekly = (client, database) => {
   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, returned) => {
     if(err) throw err;
     data = returned;
-  }
+  });
 
   const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
 
