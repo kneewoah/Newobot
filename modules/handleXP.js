@@ -82,39 +82,37 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
   if ((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || newVoiceState.deaf || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf && oldVoiceState.channel !== null)) { // END XP COUNT
     if (oldVoiceState.channel.id === config.pillowsAFK) return;
     if (oldVoiceState.guild.id !== config.pillowsID) return;
-
-    console.log(newVoiceState.channel.id);
     if (newVoiceState.channel.id === config.pillowsAFK) return;
-    // console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
-    // database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
-    //     const time = Math.floor(new Date().getTime() / 60000);
-    //     const diff = time - data[0].voiceStart;
-    //
-    //     var newXp = 0;
-    //     for (var i = 0; i < diff; i++) {
-    //       newXp += generateXp(3, 5);
-    //     }
-    //
-    //     var newData = {
-    //       xp: data[0].xp + newXp,
-    //       level: data[0].level,
-    //       progress: data[0].progress + newXp
-    //     };
-    //
-    //     // check if level updates
-    //     while (newData.progress >= 5*Math.pow(newData.level, 2)+50*newData.level+100) {
-    //       newData.progress -= (5*Math.pow(newData.level, 2)+50*newData.level+100);
-    //       newData.level++;
-    //       sendLevelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.pillowsGeneralID), newData.level);
-    //     }
-    //     console.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
-    //     var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${newVoiceState.member.id}'`;
-    //
-    //     database.query(sql, () => {
-    //       if(err) throw err;
-    //       console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify(newData)}`);
-    //     });
-    // });
+    console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
+    database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
+        const time = Math.floor(new Date().getTime() / 60000);
+        const diff = time - data[0].voiceStart;
+
+        var newXp = 0;
+        for (var i = 0; i < diff; i++) {
+          newXp += generateXp(3, 5);
+        }
+
+        var newData = {
+          xp: data[0].xp + newXp,
+          level: data[0].level,
+          progress: data[0].progress + newXp
+        };
+
+        // check if level updates
+        while (newData.progress >= 5*Math.pow(newData.level, 2)+50*newData.level+100) {
+          newData.progress -= (5*Math.pow(newData.level, 2)+50*newData.level+100);
+          newData.level++;
+          sendLevelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.pillowsGeneralID), newData.level);
+        }
+        console.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
+        var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${newVoiceState.member.id}'`;
+
+        database.query(sql, () => {
+          if(err) throw err;
+          console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify(newData)}`);
+        });
+    });
   } else if ((!newVoiceState.deaf && newVoiceState.channel !== null) && (oldVoiceState.deaf || oldVoiceState.channel !== newVoiceState.channel)) { // BEGIN XP COUNT
     if (newVoiceState.guild.id !== config.pillowsID) return;
     if (newVoiceState.guild.id === config.pillowsAFK) return;
