@@ -83,7 +83,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     if (oldVoiceState.channel.id === config.pillowsAFK) return;
     if (oldVoiceState.guild.id !== config.pillowsID) return;
 
-    console.log(oldVoiceState.channel.id);
+    console.log(newVoiceState.channel.id);
     if (newVoiceState.channel.id === config.pillowsAFK) return;
     // console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
     // database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
