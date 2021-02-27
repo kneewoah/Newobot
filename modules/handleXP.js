@@ -86,9 +86,9 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
         const time = new Date().getTime() / 60000;
         const diff = time - data[0].voiceStart;
 
-        var newXP = 0;
+        var newXp = 0;
         for (var i = 0; i < diff; i++) {
-          newXP += generateXp(3, 5);
+          newXp += generateXp(3, 5);
         }
 
         var newData = {
