@@ -121,4 +121,5 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
       if(err) throw(err);
       console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${{time: time}}`);
     });
+  }
 };
