@@ -18,7 +18,7 @@ exports.run = (client, message, args, con) => {
     });
 
     if ((args[0]) && (args[0].toLowerCase() === "daily" || args[0].toLowerCase() === "weekly" || args[0].toLowerCase() === "monthly")) {
-      require(`lb.js`).sendCategoryLb(args[0].toLowerCase(), embed, message.channel, data);
+      require(`./lb.js`).sendCategoryLb(args[0].toLowerCase(), embed, message.channel, data);
 
     } else {
       const sorted = data.sort((a, b) => (a.xp > b.xp ? -1 : 1));
