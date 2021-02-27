@@ -92,7 +92,7 @@ client.on('messageReactionRemove', (reaction, user) => {
 
 // VOICE CHANNEL UPDATE
 client.on('voiceStateUpdate', (oldUser, newUser) => {
-    console.log(oldUser.user.tag);
+    console.log(oldUser.member.user.tag);
 });
 
 // ERROR
