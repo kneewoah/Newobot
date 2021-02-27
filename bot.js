@@ -102,6 +102,19 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
   require(`./modules/handleXP.js`).voice(client, oldVoiceState, newVoiceState, database);
 });
 
+// TIMERS
+setInterval(() => {
+  var date = new Date()
+  var hour = date.getHours();
+  var dayOfWeek = date.getDay();
+  var dayOfMonth = date.getDate();
+
+  if(dayOfMonth == 0 && hour == 0) require(`./modules/xpResets.js`).monthly(client, database);
+  if(dayOfWeek == 0 && hour == 0) require(`./modules/xpResets.js`).weekly(client, database);
+  if(hour == 0) require(`./modules/xpResets.js`).daily(client, database);
+
+}, 60*60000); // (1 hour)
+
 // ERROR
 client.on('error', console.error);
 
