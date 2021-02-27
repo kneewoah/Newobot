@@ -112,7 +112,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
           console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify(newData)}`);
         });
     });
-  } else if (oldVoiceState.channel == null || !newVoiceState.deaf) { // BEGIN XP COUNT
+  } else if (newVoiceState.deaf && newVoiceState.channel !== null) { // BEGIN XP COUNT
     if (newVoiceState.guild.id !== config.pillowsID) return;
 
     console.log(`Logging start time for voice channel XP for ${oldVoiceState.member.user.tag}`);
