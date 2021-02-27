@@ -79,7 +79,7 @@ exports.text = (client, message, database) => {
 
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
-  if (oldVoiceState.guild.id !== config.pillowsID && newVoiceState.guild.id !== config.pillowsID) return;
+  if (oldVoiceState.guild.id !== config.pillowsID || newVoiceState.guild.id !== config.pillowsID) return;
 
   if (newVoiceState.channel == null || newVoiceState.deaf || (oldVoiceState.channel !== newVoiceState.channel)) { // END XP COUNT
     database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
