@@ -82,7 +82,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
   if ((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || newVoiceState.deaf || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf && oldVoiceState.channel !== null)) { // END XP COUNT
     if (oldVoiceState.channel.id === config.pillowsAFK) return;
     if (oldVoiceState.guild.id !== config.pillowsID) return;
-    if (newVoiceState.channel.id === config.pillowsAFK) return;
+    if (oldVoiceState.channel === null && newVoiceState.channel.id === config.pillowsAFK) return;
     console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
     database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
         const time = Math.floor(new Date().getTime() / 60000);
