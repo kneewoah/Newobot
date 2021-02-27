@@ -80,7 +80,7 @@ exports.text = (client, message, database) => {
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
   if ((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || newVoiceState.deaf || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf && oldVoiceState.channel !== null)) { // END XP COUNT
-    if (oldVoiceState.guild.id === config.pillowsAFK) return;
+    if (oldVoiceState.channel.id === config.pillowsAFK) return;
     if (oldVoiceState.guild.id !== config.pillowsID) return;
 
     console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
