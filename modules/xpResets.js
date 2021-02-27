@@ -24,6 +24,7 @@ exports.weekly = (client, database) => {
     footer: {
       icon_url: client.user.avatarURL(),
       text: "© 2021 Newo"
+    }
   });
 
   var data;
