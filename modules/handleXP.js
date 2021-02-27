@@ -4,7 +4,7 @@ const fs = require("fs");
 
 function sendLevelUpMsg(user, channel, level) {
   console.log(`${user.toString} leveled up to level ${level}`);
-  message.channel.send(`Level up, ${user.toString()}! You are now level ${level}`)
+  channel.send(`Level up, ${user.toString()}! You are now level ${level}`)
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
 }
