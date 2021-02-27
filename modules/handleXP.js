@@ -104,7 +104,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
           levelUpMsg(newVoiceState.member.user, newData.level);
         }
 
-        var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
+        var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${newVoiceState.member.id}'`;
 
         database.query(sql, () => {
           if(err) throw err;
