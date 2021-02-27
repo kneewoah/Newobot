@@ -35,7 +35,7 @@ exports.weekly = (client, database) => {
 
   const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
 
-  require(`lb.js`).sendCategoryLb("weekly", embed, channel, data);
+  require(`../commands/lb.js`).sendCategoryLb("weekly", embed, channel, data);
 };
 
 exports.monthly = (client, database) => {
