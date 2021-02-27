@@ -120,7 +120,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     const time = new Date().getTime() / 60000;
     database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
       if(err) throw(err);
-      console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${SON.stringify({time: time})}`);
+      console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify({time: time})}`);
     });
   }
 };
