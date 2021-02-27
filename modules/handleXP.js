@@ -35,7 +35,7 @@ exports.text = (client, message, database) => {
           level: 0
         };
 
-        const sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES ('${message.author.id}', ${newData.xp}, ${newData.newTime}, ${newData.progress}, ${newData.level})`;
+        const sql = `INSERT INTO ${table} (id, xp, timeStamp, progress, level) VALUES (${message.author.id}, ${newData.xp}, ${newData.newTime}, ${newData.progress}, ${newData.level})`;
 
         database.query(sql, () => {
           if(err) throw err;
