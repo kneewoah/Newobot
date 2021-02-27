@@ -65,7 +65,7 @@ exports.run = (client, message, args, con) => {
     var embed = new Discord.MessageEmbed(data);
     embed.setThumbnail(target.avatarURL());
     message.channel.send(embed)
-      .then(message => console.log(`Sent message: ${message.content}`))
+      .then(message => console.log(`Sent message: <XP embed>`))
       .catch(console.error);
   });
 
