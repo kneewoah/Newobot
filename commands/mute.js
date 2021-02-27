@@ -30,11 +30,11 @@ exports.run = async (client, message, args) => {
   if(message.author.id === rb.id) {
       message.reply("you can't mute yourself, idiot.")
         .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
-        .catch(console.error));
+        .catch(console.error);
   } else if(rb.roles.cache.find(role => role.name === "Muted")) {
       message.reply(rb + " is already muted you mormon.")
         .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
-        .catch(console.error));
+        .catch(console.error);
   } else {
     message.reply(rb + " has been muted.");
     await rb.roles.add(role.id, "Mute")
