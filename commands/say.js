@@ -9,7 +9,7 @@ exports.run = (client, message, args) => {
     .catch(console.error);
 
   message.channel.send(sayMessage)
-  .then(message => console.log(`Echo'd message: ${message.content}`))
+  .then(msg => console.log(`Echo'd message ${msg.content}`))
   .catch(console.error);
 
 };
