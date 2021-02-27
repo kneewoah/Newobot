@@ -104,7 +104,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
           newData.level++;
           levelUpMsg(newVoiceState.member.user, newData.level);
         }
-
+          onsole.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
         var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${newVoiceState.member.id}'`;
 
         database.query(sql, () => {
@@ -120,7 +120,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     const time = new Date().getTime() / 60000;
     database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
       if(err) throw(err);
-      console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${{time: time}}`);
+      console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${SON.stringify({time: time})}`);
     });
   }
 };
