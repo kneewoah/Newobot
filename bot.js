@@ -46,6 +46,12 @@ database.connect(err => {
   console.log("Connected to database");
 });
 
+// RECONNECT EVERY 5 SECONDS
+setInterval(() => {
+    database.query('SELECT 1');
+    console.log(`Refreshing database connection`)
+}, 300000);
+
 
 // ON MESSAGE
 client.on('message', async message => {
