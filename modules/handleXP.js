@@ -89,7 +89,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
         var newXp = 0;
         for (var i = 0; i < diff; i++) {
-          newXp += generateXp(3, 5);
+          newXp += generateXp(8, 12);
         }
 
         var newData = {

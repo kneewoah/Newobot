@@ -46,7 +46,7 @@ database.connect(err => {
   console.log("Connected to database");
 });
 
-// RECONNECT EVERY 5 SECONDS
+// RECONNECT EVERY 5 MINUTES
 setInterval(() => {
     database.query('SELECT 1');
     console.log(`Refreshing database connection`)
