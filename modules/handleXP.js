@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-function levelUpMsg(user, channel, level) {
+function sendLevelUpMsg(user, channel, level) {
   console.log(`${user.toString} leveled up to level ${level}`);
   message.channel.send(`Level up, ${user.toString()}! You are now level ${level}`)
     .then(message => console.log(`Sent message: ${message.content}`))
@@ -61,7 +61,7 @@ exports.text = (client, message, database) => {
           if (newData.progress >= thresh) {
             newData.level++;
             newData.progress -= thresh;
-            levelUpMsg(message.autuhor, message.channel, newData.level);
+            sendLevelUpMsg(message.autuhor, message.channel, newData.level);
           }
 
           var sql = `UPDATE ${table} SET xp = ${newData.xp}, timeStamp = ${newData.timeStamp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
@@ -84,7 +84,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
     console.log(`Logging voice channel XP for ${oldVoiceState.member.user.tag}`);
     database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
-        const time = new Date().getTime() / 60000;
+        const time = Math.floor(new Date().getTime() / 60000);
         const diff = time - data[0].voiceStart;
 
         var newXp = 0;
@@ -102,7 +102,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
         while (newData.progress >= 5*Math.pow(newData.level, 2)+50*newData.level+100) {
           newData.progress -= (5*Math.pow(newData.level, 2)+50*newData.level+100);
           newData.level++;
-          levelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.pillowsGeneralID), newData.level);
+          sendLevelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.pillowsGeneralID), newData.level);
         }
         console.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
         var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${newVoiceState.member.id}'`;
