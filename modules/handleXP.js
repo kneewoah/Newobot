@@ -117,7 +117,8 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     if (newVoiceState.guild.id === config.pillowsAFK) return;
 
     console.log(`Logging start time for voice channel XP for ${oldVoiceState.member.user.tag}`);
-    const time = new Date().getTime() / 60000;
+    
+    const time = Math.floor(new Date().getTime() / 60000);
     database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
       if(err) throw(err);
       console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify({time: time})}`);
