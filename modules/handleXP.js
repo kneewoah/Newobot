@@ -61,7 +61,7 @@ exports.text = (client, message, database) => {
           if (newData.progress >= thresh) {
             newData.level++;
             newData.progress -= thresh;
-            sendLevelUpMsg(message.autuhor, message.channel, newData.level);
+            sendLevelUpMsg(message.author, message.channel, newData.level);
           }
 
           var sql = `UPDATE ${table} SET xp = ${newData.xp}, timeStamp = ${newData.timeStamp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
