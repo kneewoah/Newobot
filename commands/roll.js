@@ -24,17 +24,17 @@ exports.run = (client, message, args) => {
    let rolling = "🔹      |   **Rolling**...   |      🔹\n**==================**\n➡️ | ";
    let rolling2 = "  | ⬅️";
 
-   message.channel.send(`${rolling}🎲⚫️⚫️⚫️⚫️${rolling2}`)
+   message.channel.send(`${rolling}🎲⚫⚫⚫⚫${rolling2}`)
        .then((msg)=>{setTimeout(function() {{setTimeout(function() {{setTimeout(function() {{setTimeout(function() {{setTimeout(function() {
        msg.edit("🔹      |     **Rolled**     |      🔹\n**==================**\n➡️      |   ➖ **" + roll + "** ➖   |     ⬅️");
        }, 1000)}
        msg.edit(`${rolling}⚫⚫⚫⚫🎲${rolling2}`);
        }, 1000)}
-       msg.edit(`${rolling}⚫⚫⚫🎲⚫️${rolling2}`);
+       msg.edit(`${rolling}⚫⚫⚫🎲⚫${rolling2}`);
        }, 1000)}
-       msg.edit(`${rolling}⚫⚫🎲⚫️⚫️${rolling2}`);
+       msg.edit(`${rolling}⚫⚫🎲⚫⚫${rolling2}`);
        }, 1000)}
-       msg.edit(`${rolling}⚫🎲⚫️⚫️⚫️${rolling2}`);
+       msg.edit(`${rolling}⚫🎲⚫⚫⚫${rolling2}`);
       }, 1000);
         console.log(`Sent message & edited dice message`);
       })
