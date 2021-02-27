@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     console.log(`${message.author.tag} was unable to kick ${member.user.toString()}`)
     console.log(`Sent a reply to ${message.author.tag}: 'Please mention a valid member of this server'`);
   })
-  .catch(console.error);]
+  .catch(console.error);
 
   if(message.author.id === member.id) return message.reply("you can't kick yourself you idiot.")
   .then(() => {
