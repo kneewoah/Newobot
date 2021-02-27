@@ -104,7 +104,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
           newData.level++;
           levelUpMsg(newVoiceState.member.user, newData.level);
         }
-          onsole.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
+        console.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
         var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${newVoiceState.member.id}'`;
 
         database.query(sql, () => {
