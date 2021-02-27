@@ -3,7 +3,7 @@ const config = require("../config.json");
 const fs = require("fs");
 
 function sendLevelUpMsg(user, channel, level) {
-  console.log(`${user.toString} leveled up to level ${level}`);
+  console.log(`${user.toString()} leveled up to level ${level}`);
   channel.send(`Level up, ${user.toString()}! You are now level ${level}`)
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
@@ -80,9 +80,10 @@ exports.text = (client, message, database) => {
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
   if ((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || newVoiceState.deaf || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf && oldVoiceState.channel !== null)) { // END XP COUNT
+    if (oldVoiceState.guild.id === config.pillowsAFK) return;
     if (oldVoiceState.guild.id !== config.pillowsID) return;
 
-    console.log(`Logging voice channel XP for ${oldVoiceState.member.user.tag}`);
+    console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
     database.query(`SELECT xp, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
         const time = Math.floor(new Date().getTime() / 60000);
         const diff = time - data[0].voiceStart;
