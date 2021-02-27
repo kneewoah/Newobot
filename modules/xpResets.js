@@ -27,15 +27,14 @@ exports.weekly = (client, database) => {
     }
   });
 
-  var data;
-  database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, returned) => {
+  const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
+  
+  database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, data) => {
     if(err) throw err;
-    data = returned;
+    require(`../commands/lb.js`).sendCategoryLb("weekly", embed, channel, data);
   });
 
-  const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
 
-  require(`../commands/lb.js`).sendCategoryLb("weekly", embed, channel, data);
 };
 
 exports.monthly = (client, database) => {
