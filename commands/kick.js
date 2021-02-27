@@ -38,7 +38,7 @@ exports.run = async (client, message, args) => {
       message.reply(`Sorry ${message.author} I couldn't kick the user because of: ${error}`)
     });
   message.reply(`${member.user.tag} has been kicked by ${message.author.tag} for ${reason}`)
-    .then(() => console.log(`Sent a reply to ${message.author.tag}: 'you can't kick yourself you idiot.'`)).
+    .then(() => console.log(`Sent a reply to ${message.author.tag}: 'you can't kick yourself you idiot.'`))
     .catch(console.error);
 
 }
