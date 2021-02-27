@@ -114,7 +114,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     });
   } else if (oldVoiceState.channel == null || !newVoiceState.deaf) { // BEGIN XP COUNT
     const time = new Date.now().getTime() / 60000;
-    database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${message.author.id}'`, (err) => {
+    database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
       if(err) throw(err);
     });
   }
