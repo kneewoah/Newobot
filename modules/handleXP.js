@@ -75,3 +75,8 @@ exports.text = (client, message, database) => {
       message.channel.send(`Level up! You are now level ${newLevel}`);
     }
 };
+
+exports.voice = (client, oldVoiceState, newVoiceState, database) => {
+  console.log(oldVoiceState.channelID);
+  console.log(newVoiceState.channelID);
+};

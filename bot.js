@@ -91,8 +91,9 @@ client.on('messageReactionRemove', (reaction, user) => {
 });
 
 // VOICE CHANNEL UPDATE
-client.on('voiceStateUpdate', (oldUser, newUser) => {
-    console.log(oldUser.member.user.tag);
+client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
+  if (user.bot) return;
+  require(`./modules/handleXP.js`).voice(client, oldVoiceState, newVoiceState, database);
 });
 
 // ERROR
