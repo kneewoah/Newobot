@@ -106,7 +106,7 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 setInterval(() => {
   console.log(`Checking Date...`);
   var date = new Date();
-  date = date.setTime(date.getTime() + 18000000);
+  date = date.setTime(date.getTime() - 18000000);
   var hour = date.getHours();
   var dayOfWeek = date.getDay();
   var dayOfMonth = date.getDate();
