@@ -113,7 +113,7 @@ setInterval(() => {
 
   console.log(`Hour: ${hour}, Day of the Week: ${dayOfWeek}, Day of the Month: ${dayOfMonth}`);
 
-  if(dayOfMonth == 0 && hour == 0) require(`./modules/xpResets.js`).monthly(client, database);
+  if(dayOfMonth == 1 && hour == 0) require(`./modules/xpResets.js`).monthly(client, database);
   if(dayOfWeek == 0 && hour == 0) require(`./modules/xpResets.js`).weekly(client, database);
   if(hour == 0) require(`./modules/xpResets.js`).daily(client, database);
 
