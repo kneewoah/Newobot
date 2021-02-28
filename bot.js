@@ -105,8 +105,9 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 // TIMERS
 setInterval(() => {
   console.log(`Checking Date...`);
+  const hourOffset = -5;
   var date = new Date();
-  date = date.setTime(date.getTime() - 18000000);
+  date.setTime(date.getTime() + hourOffset*3600000); // convert to EST;
   var hour = date.getHours();
   var dayOfWeek = date.getDay();
   var dayOfMonth = date.getDate();
