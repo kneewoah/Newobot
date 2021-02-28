@@ -105,9 +105,7 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 // TIMERS
 setInterval(() => {
   console.log(`Checking Date...`);
-  const hourOffset = -5;
-  var date = new Date();
-  date.setTime(date.getTime() + hourOffset*3600000); // convert to EST;
+  var date = new Date().setTime(date.getTime() + config.timeOffset*3600000); // apply offset;
   var hour = date.getHours();
   var dayOfWeek = date.getDay();
   var dayOfMonth = date.getDate();
@@ -118,7 +116,7 @@ setInterval(() => {
   if(dayOfWeek == 0 && hour == 0) require(`./modules/xpResets.js`).weekly(client, database);
   if(hour == 0) require(`./modules/xpResets.js`).daily(client, database);
 
-}, 60000); // (1 hour)
+}, 60*60000); // (1 hour)
 
 // ERROR
 client.on('error', console.error);
