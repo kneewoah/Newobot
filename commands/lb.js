@@ -18,7 +18,7 @@ exports.run = (client, message, args, con) => {
     });
 
     if ((args[0]) && (args[0].toLowerCase() === "daily" || args[0].toLowerCase() === "weekly" || args[0].toLowerCase() === "monthly")) {
-      embed.setTitle(`Pillows ${args[].toLowerCase().charAt(0).toUpperCase() + args[0].toLowerCase().slice(1)} XP Rankings`);
+      embed.setTitle(`Pillows ${args[0].toLowerCase().charAt(0).toUpperCase() + args[0].toLowerCase().slice(1)} XP Rankings`);
       require(`./lb.js`).sendCategoryLb(args[0].toLowerCase(), embed, message.channel, data);
 
     } else {
