@@ -104,10 +104,13 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 
 // TIMERS
 setInterval(() => {
+  console.log(`Checking Date...`);
   var date = new Date()
   var hour = date.getHours();
   var dayOfWeek = date.getDay();
   var dayOfMonth = date.getDate();
+
+  console.log(`Hour: ${hour}, Day of the Week: ${dayOfWeek}, Day of the Month: ${dayOfMonth}`);
 
   if(dayOfMonth == 0 && hour == 0) require(`./modules/xpResets.js`).monthly(client, database);
   if(dayOfWeek == 0 && hour == 0) require(`./modules/xpResets.js`).weekly(client, database);
