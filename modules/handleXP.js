@@ -86,7 +86,7 @@ exports.text = (client, message, database) => {
 
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
-  if (((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || newVoiceState.deaf || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf && oldVoiceState.channel !== null)) && !((oldVoiceState.channel == null && oldVoiceState.channel.id === config.pillowsAFK) || oldVoiceState.guild.id !== config.pillowsID || (oldVoiceState.channel === null && newVoiceState.channel.id === config.pillowsAFK))) { // END XP COUNT
+  if (((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || (newVoiceState.deaf && newVoiceState.channel == oldVoiceState.channel) || ((oldVoiceState.channel !== newVoiceState.channel) && !oldVoiceState.deaf && oldVoiceState.channel !== null)) && !((oldVoiceState.channel == null && oldVoiceState.channel.id === config.pillowsAFK) || oldVoiceState.guild.id !== config.pillowsID || (oldVoiceState.channel === null && newVoiceState.channel.id === config.pillowsAFK))) { // END XP COUNT
 
     console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
     database.query(`SELECT xp, daily, weekly, monthly, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
