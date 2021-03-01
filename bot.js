@@ -14,9 +14,6 @@ client.on('ready', () => {
   console.log("Newo Bot is Online");
   console.log(`Owner ID: ${config.ownerID}`);
 
-  client.guilds.cache.get("459894790654263336").leave();
-  console.log(client.guilds.cache);
-
   client.user.setActivity("Destiny 2", {url: "https://twitch.tv/newox", type: 'PLAYING'})
   .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
   .catch(console.error);
