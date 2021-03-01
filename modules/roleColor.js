@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-exports.run = (client, message, database, member, color) => {
+exports.run = (client, database, member, randColor) => {
 
     var roleName = `${member.id}`;
 
@@ -16,7 +16,7 @@ exports.run = (client, message, database, member, color) => {
       return exisitngRole;
 
     } else {
-      message.guild.roles.create({
+      member.guild.roles.create({
         data: {
           name: `${roleName}`,
           color: (color === undefined) ? `0x000000` : color,
