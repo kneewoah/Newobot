@@ -34,6 +34,14 @@ exports.run = (client, message, args, con) => {
     var xpToNxtLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
     var progress = xpToNxtLvl + recurseXp;
     var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
+    var progString = "";
+    for (var i = 0; i < Math.floor(progress/xpToNextLvl * 10); i++) {
+      progString = progString + "✦";
+    }
+
+    while (progString.length() < 10) {
+      progString = progString + "✧";
+    }
 
     const data = {
       title: `XP for ${target.username}`,
@@ -52,7 +60,8 @@ exports.run = (client, message, args, con) => {
         },
         {
           name: "XP to Next Level",
-          value: `${progress} / ${xpToNxtLvl}`,
+          value: `${progress} / ${xpToNxtLvl}\n
+                ${progString}`,
           inline: false
         }
       ],
