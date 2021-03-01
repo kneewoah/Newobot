@@ -9,11 +9,7 @@ exports.run = (client, message, args) => {
 
   var failedUserTags = [];
   memberList.forEach(member => {
-    try {
-      member.send(msg)
-    } catch (e) {
-      failedUserTags.push(member.user.tag);
-    }
+      member.send(msg).catch(() => failedUserTags.push(member.user.tag));
   });
 
   console.log(`Failed to send DMs to ${failedUserTags.length} users: ${failed.toString()}`);
