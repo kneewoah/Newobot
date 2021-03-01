@@ -37,10 +37,10 @@ exports.run = (client, message, args, con) => {
 
     var progString = "";
     for (var i = 0; i < Math.floor(progress/xpToNextLvl * 15); i++) {
-      progString = progString + "⚫";
+      progString = progString + "🔵";
     }
     while (progString.length < 15) {
-      progString = progString + "◯";
+      progString = progString + "⚫";
     }
 
     const data = {
