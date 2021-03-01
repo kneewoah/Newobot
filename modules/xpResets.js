@@ -55,7 +55,7 @@ exports.monthly = (client, database) => {
   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, data) => {
     if(err) throw err;
     const winner = require(`../commands/lb.js`).sendCategoryLb("monthly", embed, channel, data);
-    channel.send(`Congratulations, ${channel.guild.users.cache.get(winner.id).toString()}, you topped the leaderboard this month with ${winner.xp} xp!`)
+    channel.send(`Congratulations, ${channel.guild.members.cache.get(winner.id).user.toString()}, you topped the leaderboard this month with ${winner.xp} xp!`)
       .then(message => console.log(`Sent message: ${message.content}`))
       .catch(console.error);
   });
