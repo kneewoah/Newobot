@@ -39,7 +39,7 @@ exports.run = (client, message, args, con) => {
     for (var i = 0; i < Math.floor(progress/xpToNextLvl * 10); i++) {
       progString = progString + "✦";
     }
-    while (progString.length() < 10) {
+    while (progString.length < 10) {
       progString = progString + "✧";
     }
 
