@@ -12,7 +12,7 @@ exports.run = async (client, message, args) => {
     extra = ".";
   }
 
-  message.channel.send(`CRACK! ${message.author} just whipped ${randomPerson}` + extra)
+  message.channel.send(`CRACK! ${message.author} just whipped ${person}` + extra)
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
 
