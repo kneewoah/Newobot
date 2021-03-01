@@ -2,18 +2,6 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 
 exports.run = (client, message, args, con) => {
-  var recurseXp;
-
-  function findLvl(xp) {
-    recurseXp = xp;
-    var i = 0;
-    var leftover = 0;
-    while (recurseXp >= 0) {
-      recurseXp -= (5*Math.pow((i),2)+50*(i)+100);
-      i++;
-    }
-    return i-1;
-  }
 
   let target;
   if (message.mentions.members.first()) {
@@ -29,11 +17,12 @@ exports.run = (client, message, args, con) => {
       .then(message => console.log(`Sent message: ${message.content}`))
       .catch(console.error);
 
-    var xp = rows[0].xp;
-    var lvl = findLvl(xp);
-    var xpToNextLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
-    var progress = xpToNextLvl + recurseXp;
-    var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
+    const xp = rows[0].xp;
+    const lvlObj = require(`../modules/handleXP.js`).getLevel(xp);
+    const lvl = lvlObj.level;
+    const progress = lvlObj.progress;
+    const xpToNextLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
+    const color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
 
     var progString = "";
     var i;

@@ -136,3 +136,16 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     });
   }
 };
+
+exports.getLevel = (xp) => {
+  var recurseXp = xp;
+  var i = 0;
+  while (recurseXp >= 0) {
+    recurseXp -= (5*Math.pow((i),2)+50*(i)+100);
+    i++;
+  }
+  return {
+    level: i-1,
+    progress: recurseXp
+  };
+};
