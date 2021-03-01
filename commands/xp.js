@@ -18,7 +18,7 @@ exports.run = (client, message, args, con) => {
       .catch(console.error);
 
     const xp = rows[0].xp;
-    const lvlObj = require(`../modules/handleXP.js`).getLevel(200);
+    const lvlObj = require(`../modules/handleXP.js`).getLevel(xp);
     const lvl = lvlObj.level;
     const progress = lvlObj.progress;
     const xpToNextLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
