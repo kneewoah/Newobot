@@ -21,7 +21,7 @@ exports.run = (client, message, args) => {
   message.reply(`I have attempted to send messages to ${memberList.length} users`)
     .then(message => console.log(`Sent a reply: ${message.content}`))
     .catch(console.error);
-    
+
   message.channel.send(`The following users did not recieve a DM: ${failed.toString()}`)
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
