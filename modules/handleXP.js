@@ -146,6 +146,6 @@ exports.getLevel = (xp) => {
   }
   return {
     level: i-1,
-    progress: recurseXp
+    progress: recurseXp + 5*Math.pow((i-1),2)+50*(i-1)+100
   };
 };
