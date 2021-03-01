@@ -36,11 +36,11 @@ exports.run = (client, message, args, con) => {
     var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
 
     var progString = "";
-    for (var i = 0; i < Math.floor(progress/xpToNextLvl * 10); i++) {
-      progString = progString + "✦";
+    for (var i = 0; i < Math.floor(progress/xpToNextLvl * 15); i++) {
+      progString = progString + "⚫";
     }
-    while (progString.length < 10) {
-      progString = progString + "✧";
+    while (progString.length < 15) {
+      progString = progString + "◯";
     }
 
     const data = {
@@ -60,8 +60,7 @@ exports.run = (client, message, args, con) => {
         },
         {
           name: "XP to Next Level",
-          value: `${progress} / ${xpToNextLvl}\n
-                ${progString}`,
+          value: `${progress} / ${xpToNextLvl}\n${progString}`,
           inline: false
         }
       ],
