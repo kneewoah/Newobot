@@ -5,7 +5,7 @@ exports.run = (client, message, args) => {
   const sayMessage = args.join(" ");
 
   message.channel.send(sayMessage)
-    .then(msg => console.log(`Echoed message ${msg.content}`))
+    .then(msg => console.log(`Echoed message from ${message.author.tag}: ${msg.content}`))
     .catch(console.error);
 
   message.delete();
