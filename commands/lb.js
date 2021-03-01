@@ -26,8 +26,9 @@ exports.run = (client, message, args, con) => {
 
       for (var i = 0; i < sorted.length; i++) {
         var user = message.guild.members.cache.get(sorted[i].id).user
-        var level = require(`../modules/handleXP.js`).getLevel(data.xp).level;
-        embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i].xp}\n**Level:** ${level}`, true);
+        var xp = sorted[i].xp;
+        var level = require(`../modules/handleXP.js`).getLevel(xp).level;
+        embed.addField(`${i+1}. ${user.username}`, `**XP:** ${xp}\n**Level:** ${level}`, true);
       }
 
       embed.setTitle(`Pillows XP Leaderboard`);
