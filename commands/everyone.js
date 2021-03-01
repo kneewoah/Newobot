@@ -12,13 +12,13 @@ exports.run = (client, message, args) => {
       member.send(msg).catch(() => failedUserTags.push(member.user.tag));
   });
 
-  console.log(`Failed to send DMs to ${failedUserTags.length} users: ${failed.toString()}`);
+  console.log(`Failed to send DMs to ${failedUserTags.length} users: ${failedUserTags.toString()}`);
 
   message.reply(`I have attempted to send messages to ${memberList.length} users`)
     .then(message => console.log(`Sent a reply: ${message.content}`))
     .catch(console.error);
 
-  message.channel.send(`The following users did not recieve a DM: ${failed.toString()}`)
+  message.channel.send(`The following users did not recieve a DM: ${failedUserTags.toString()}`)
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
 
