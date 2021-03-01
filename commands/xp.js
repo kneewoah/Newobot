@@ -36,11 +36,13 @@ exports.run = (client, message, args, con) => {
     var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
 
     var progString = "";
-    for (var i = 0; i < Math.floor(progress/xpToNextLvl * 10); i++) {
-      progString = progString + "🔵";
-    }
+    var count = Math.floor(progress/xpToNextLvl * 10);
     while (progString.length < 10) {
-      progString = progString + "⚫";
+      if (progString.length < count) {
+        progString = progString + "🔵";
+      } else {
+        progString = progString + "⚫";
+      }
     }
 
     const data = {
