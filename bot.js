@@ -58,6 +58,8 @@ client.on('message', async message => {
 
   if(message.author.bot) return;
 
+  if(!message.guild) return require(`./modules/logDM.js`).run(client, message);
+
   const xp = require(`./modules/handleXP.js`);
   xp.text(client, message, database);
 
