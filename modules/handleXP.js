@@ -36,7 +36,7 @@ exports.text = (client, message, database) => {
           timeStamp: newTime,
         };
 
-        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.newTime})`;
+        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
 
         database.query(sql, () => {
           console.log(sql);
