@@ -9,7 +9,7 @@ exports.run = (client, message, args) => {
     .catch(console.error);
 
   message.delete()
-    .then(msg => console.log(`Deleted message from ${msg.author.tag}`))
+    .then(() => console.log(`Deleted my !say message`))
     .catch(console.error);
 
 };
