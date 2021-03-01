@@ -121,7 +121,7 @@ setInterval(() => {
   if(dayOfWeek == 0 && hour == 0) require(`./modules/xpResets.js`).weekly(client, database);
   if(hour == 0) require(`./modules/xpResets.js`).daily(client, database);
 
-}, 60000); // (1 hour)
+}, 60*60000); // (1 hour)
 
 // ERROR
 client.on('error', console.error);
