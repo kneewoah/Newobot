@@ -39,7 +39,6 @@ exports.text = (client, message, database) => {
         const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
 
         database.query(sql, () => {
-          console.log(sql);
           if(err) throw err;
           console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
         });
