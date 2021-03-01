@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
     .then(msg => console.log(`Echoed message from ${message.author.tag}: ${msg.content}`))
     .catch(console.error);
 
-  message.delete();
+  message.delete().catch(console.error);
   console.log(`Deleted my !say message`);
 
 };
