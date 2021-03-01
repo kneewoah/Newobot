@@ -5,11 +5,26 @@ exports.run = (client, message, args) => {
   if(message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.");
 
   let msg = args.slice(0).join(' ');
-  var memberList = message.guild.members.array();
+  var memberList = message.guild.members.cache;
 
-  memberList.forEach(member => member.send(msg));
+  var failedUserTags = [];
+  memberList.forEach(member => {
+    try {
+      member.send(msg)
+    } catch (e) {
+      failedUserTags.push(member.user.tag);
+    }
+  });
 
-  message.reply(`I have attempted to send messages to ${memberList.length} users`);
+  console.log(`Failed to send DMs to ${failedUserTags.length} users: ${failed.toString()}`);
+
+  message.reply(`I have attempted to send messages to ${memberList.length} users`)
+    .then(message => console.log(`Sent a reply: ${message.content}`))
+    .catch(console.error);
+    
+  message.channel.send(`The following users did not recieve a DM: ${failed.toString()}`)
+    .then(message => console.log(`Sent message: ${message.content}`))
+    .catch(console.error);
 
 };
 
