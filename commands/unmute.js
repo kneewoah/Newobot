@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
   if(message.author.id === rb.id) {
     message.reply("why are you trying to unmute yourself?")
       .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
-      .catch(console.error));
+      .catch(console.error);
   } else if(!rb.roles.cache.find(role => role.name === "Muted")) {
     message.reply(rb + " isn't even muted you mormon.")
       .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
