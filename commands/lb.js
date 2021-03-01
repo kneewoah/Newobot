@@ -18,6 +18,7 @@ exports.run = (client, message, args, con) => {
     });
 
     if ((args[0]) && (args[0].toLowerCase() === "daily" || args[0].toLowerCase() === "weekly" || args[0].toLowerCase() === "monthly")) {
+      embed.setTitle(`Pillows ${args[0].toLowerCase().charAt(0).toUpperCase() + args[0].toLowerCase().slice(1)} XP Rankings`);
       require(`./lb.js`).sendCategoryLb(args[0].toLowerCase(), embed, message.channel, data);
 
     } else {
@@ -46,8 +47,6 @@ exports.sendCategoryLb = (style, embed, channel, data) => {
     var user = channel.guild.members.cache.get(sorted[i].id).user;
     embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
   }
-
-  embed.setTitle(`Pillows ${category.charAt(0).toUpperCase() + category.slice(1)} XP Rankings`);
 
   channel.send(embed)
   .then(message => console.log(`Sent a ${category} leaderboard embed`))
