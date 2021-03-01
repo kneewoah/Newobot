@@ -31,7 +31,7 @@ exports.run = (client, message, args, con) => {
 
     var xp = rows[0].xp;
     var lvl = findLvl(xp);
-    var xpToNxtLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
+    var xpToNextLvl = 5*Math.pow((lvl),2)+50*(lvl)+100;
     var progress = xpToNextLvl + recurseXp;
     var color = message.guild.roles.cache.find(role => role.name === target.id).color.toString(16);
 
