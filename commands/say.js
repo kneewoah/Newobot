@@ -3,7 +3,7 @@ const config = require("../config.json");
 exports.run = (client, message, args) => {
 
   const sayMessage = args.join(" ");
-  const channel = message.channel.fetch().catch(console.error);;
+  const channel = message.channel.fetch().catch(console.error);
 
   message.delete()
     .then(msg => console.log(`Deleted message from ${msg.author.tag}`))
