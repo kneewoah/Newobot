@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
   } else if(!rb.roles.cache.find(role => role.name === "Muted")) {
     message.reply(rb + " isn't even muted you mormon.")
       .then((message) => console.log(`Sent a reply to ${message.author.tag}: ${message.content}`))
-      .catch(console.error));
+      .catch(console.error);
   } else {
 
     message.reply(rb.toString() + " has been unmuted.");
