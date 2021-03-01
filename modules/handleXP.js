@@ -34,11 +34,9 @@ exports.text = (client, message, database) => {
           weekly: genXp,
           monthly: genXp,
           timeStamp: newTime,
-          progress: genXp,
-          level: 0
         };
 
-        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp, progress, level) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.newTime}, ${newData.progress}, ${newData.level})`;
+        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.newTime})`;
 
         database.query(sql, () => {
           if(err) throw err;
@@ -54,8 +52,6 @@ exports.text = (client, message, database) => {
         if (diff >= config.xpCoolDownMs) {
           // update params
           var newData = {
-            progress: rows[0].progress + genXp,
-            level: rows[0].level,
             xp: rows[0].xp + genXp,
             daily: rows[0].daily + genXp,
             weekly: rows[0].weekly + genXp,
@@ -64,14 +60,12 @@ exports.text = (client, message, database) => {
           };
 
           // check if level update
-          var thresh = 5*Math.pow(newData.level, 2)+50*newData.level+100;
-          if (newData.progress >= thresh) {
-            newData.level++;
-            newData.progress -= thresh;
-            sendLevelUpMsg(message.author, message.channel, newData.level);
+          const newLvl = require(`./handleXP.js`).getLevel(newData.xp).level;
+          if (newLvl > require(`./handleXP.js`).getLevel(rows[0].xp).level) {
+            sendLevelUpMsg(message.author, message.channel, newLvl);
           }
 
-          var sql = `UPDATE ${table} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly}, timeStamp = ${newData.timeStamp}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${message.author.id}'`;
+          var sql = `UPDATE ${table} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly}, timeStamp = ${newData.timeStamp} WHERE id = '${message.author.id}'`;
 
           database.query(sql, (err) => {
             if(err) throw err;
@@ -91,7 +85,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     if(!newVoiceState.deaf && !oldVoiceState.deaf && oldVoiceState.channel !== null && newVoiceState.channel !== null && oldVoiceState.channel !== newVoiceState.channel) return;
 
     console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
-    database.query(`SELECT xp, daily, weekly, monthly, progress, level, voiceStart FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
+    database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
         const time = Math.floor(new Date().getTime() / 60000);
         const diff = time - data[0].voiceStart;
 
@@ -105,18 +99,15 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
           daily: data[0].daily + newXp,
           weekly: data[0].weekly + newXp,
           monthly: data[0].monthly + newXp,
-          level: data[0].level,
-          progress: data[0].progress + newXp
         };
 
-        // check if level updates
-        while (newData.progress >= 5*Math.pow(newData.level, 2)+50*newData.level+100) {
-          newData.progress -= (5*Math.pow(newData.level, 2)+50*newData.level+100);
-          newData.level++;
-          sendLevelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.pillowsGeneralID), newData.level);
+        const newLvl = require(`./handleXP.js`).getLevel(newData.xp).level;
+        if (newLvl > require(`./handleXP.js`).getLevel(data[0].xp).level) {
+          sendLevelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.pillowsGeneralID), newLvl);
         }
+
         console.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
-        var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly}, level = ${newData.level}, progress = ${newData.progress} WHERE id = '${newVoiceState.member.id}'`;
+        var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly} WHERE id = '${newVoiceState.member.id}'`;
 
         database.query(sql, () => {
           if(err) throw err;
