@@ -1,6 +1,6 @@
 const config = require("../config.json");
 
-exports.run = (client, message, args, con) => {
+exports.run = async (client, message, args, con) => {
 
   const sayMessage = args.join(" ");
 
@@ -8,7 +8,7 @@ exports.run = (client, message, args, con) => {
     .then(msg => console.log(`Echoed message from ${message.author.tag}: ${msg.content}`))
     .catch(console.error);
 
-  message.delete().catch(console.error);
+  await message.delete().catch(console.error);
   console.log(`Deleted my !say message`);
 
 };
