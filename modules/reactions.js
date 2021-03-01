@@ -59,9 +59,9 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         console.log(`Added ${user.username} as a no for scrim message ${message.id}`)
         no[0]++;
         console.log(`Increased 'noes' to ${no[0]} for scrim message ${message.id}`)
-        message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.")
-          .then(message => console.log(`Sent message: ${message.content}`))
-          .catch(console.error);
+        // message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.")
+        //   .then(message => console.log(`Sent message: ${message.content}`))
+        //   .catch(console.error);
         message.guild.channels.cache.get(config.pillowsGeneralID).send("Please let us know why you cannot scrim, " + user.toString())
           .then(message => console.log(`Sent message: ${message.content}`))
           .catch(console.error);
