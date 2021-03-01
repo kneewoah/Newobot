@@ -52,6 +52,8 @@ exports.sendCategoryLb = (style, embed, channel, data) => {
   channel.send(embed)
   .then(message => console.log(`Sent a ${category} leaderboard embed`))
   .catch(console.error);
+
+  return sorted[0];
 };
 
 exports.help = {

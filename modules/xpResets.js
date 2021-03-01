@@ -54,7 +54,10 @@ exports.monthly = (client, database) => {
 
   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, data) => {
     if(err) throw err;
-    require(`../commands/lb.js`).sendCategoryLb("monthly", embed, channel, data);
+    const winner = require(`../commands/lb.js`).sendCategoryLb("monthly", embed, channel, data);
+    channel.send(`Congratulations, ${channel.guild.users.cache.get(winner.id).toString()}, you topped the leaderboard this month with ${winner.xp} xp!`)
+      .then(message => console.log(`Sent message: ${message.content}`))
+      .catch(console.error);
   });
 
   database.query(`UPDATE xp_${config.pillowsID} SET monthly = 0 WHERE 1`, (err) => {
