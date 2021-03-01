@@ -8,9 +8,8 @@ exports.run = (client, message, args) => {
     .then(msg => console.log(`Echo'd message ${msg.content}`))
     .catch(console.error);
 
-  message.delete()
-    .then(() => console.log(`Deleted my !say message`))
-    .catch(console.error);
+  message.delete();
+  console.log(`Deleted my !say message`);
 
 };
 
