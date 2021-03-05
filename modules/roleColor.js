@@ -7,6 +7,7 @@ exports.run = (client, database, member, randColor) => {
     var roleName = `${member.id}`;
 
     // Apply old color
+    console.log(member.guild);
     var existingRole = member.guild.roles.cache.find(role => role.name === roleName);
     if (existingRole && existingRole.members.find(mem => mem.id === roleName)) return existingRole;
     else if (existingRole) {
