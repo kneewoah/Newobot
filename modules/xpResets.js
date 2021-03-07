@@ -16,7 +16,7 @@ exports.weekly = (client, database) => {
   const date = new Date();
   const date2 = new Date();
 
-  date.setTime(date.getTime() - 62*60*1000);
+  date.setTime(date.getTime() - 24*60*60*1000);
   date2.setTime(date.getTime() - 7*24*60*60*1000);
 
   var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
@@ -52,7 +52,7 @@ exports.monthly = (client, database) => {
   console.log(`Resetting MONTHLY XP totals...`);
 
   const date = new Date();
-  date.setTime(date.getTime() - 62*60*1000);
+  date.setTime(date.getTime() - 24*60*60*1000);
   var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
   const month = months[date.getMonth()];
 
