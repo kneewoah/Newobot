@@ -51,6 +51,11 @@ exports.weekly = (client, database) => {
 exports.monthly = (client, database) => {
   console.log(`Resetting MONTHLY XP totals...`);
 
+  const date = new Date();
+  date.setTime(date.getTime() - 62*60*1000);
+  var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+  const month = months[date.getMonth()];
+
   const embed = new Discord.MessageEmbed({
     color: `0x2F69EC`,
     timestamp: Date.now(),
@@ -58,7 +63,7 @@ exports.monthly = (client, database) => {
       icon_url: client.user.avatarURL(),
       text: "© 2021 Newo"
     },
-    title: `Final Monthly XP Totals for this month!`
+    title: `Final Monthly XP Totals for the month of ${month}`
   });
 
   const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
