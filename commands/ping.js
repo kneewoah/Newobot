@@ -2,15 +2,16 @@ const config = require("../config.json");
 
 exports.run = async (client, message, args) => {
 
-  const msg = await message.channel.send("Ping?")
+  message.channel.send("Ping?")
     .then(m => {
       console.log(`Sent message: ${m.content}`);
+      m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`)
+       .then(edt => console.log(`Updated the content of a message to ${edt.content}`))
+       .catch(console.error);
     })
     .catch(console.error);
 
-  msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`)
-    .then(edt => console.log(`Updated the content of a message to ${edt.content}`))
-    .catch(console.error);
+ 
 
 
 };
