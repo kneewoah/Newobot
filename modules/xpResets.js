@@ -15,6 +15,8 @@ exports.weekly = (client, database) => {
 
   const date = new Date();
   const date2 = new Date();
+
+  date.setTime(date.getTime() - 62*60*1000);
   date2.setTime(date.getTime() - 7*24*60*60*1000);
 
   var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
