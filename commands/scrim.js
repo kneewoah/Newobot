@@ -10,20 +10,13 @@ exports.run = (client, message, args, con) => {
 
     let time;
     if (!args[0]) {
-      time = 8;
+      time = "Scrim 8pm EDT tonight?
     } else {
-      time = args[0];
-    }
-
-    let date;
-    if (!args[1]) {
-      date = "tonight";
-    } else {
-      date = args.slice(1).join(' ');
+      time = args.join(' ');
     }
 
     var embed = new Discord.MessageEmbed({
-      title: `Scrim ${time}pm EST ${date}\?`,
+      title: time,
       color: "#3370FC",
       timestamp: Date.now(),
       fields: [
