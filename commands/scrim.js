@@ -10,7 +10,7 @@ exports.run = (client, message, args, con) => {
 
     let time;
     if (!args[0]) {
-      time = "Scrim 8pm EDT tonight?
+      time = "Scrim 8pm EDT tonight?";
     } else {
       time = args.join(' ');
     }
