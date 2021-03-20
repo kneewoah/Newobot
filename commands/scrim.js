@@ -4,7 +4,7 @@ const config = require("../config.json");
 
 exports.run = (client, message, args, con) => {
 
-    if(message.author.id !== config.ownerID) return message.channel.send("You do not have permission to execute this command.")
+    if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("You do not have permission to execute this command.")
       .then(message => console.log(`Sent message: ${message.content}`))
       .catch(console.error);
 
