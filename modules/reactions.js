@@ -22,7 +22,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
           console.log(`Added ${user.username} as a yes for scrim message ${message.id}`)
           yes[0]++;
           console.log(`Increased 'yesses' to ${yes[0]} for scrim message ${message.id}`)
-          message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can scrim.")
+          message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can play.")
             .then(message => console.log(`Sent message: ${message.content}`))
             .catch(console.error);
         } if (noIndex > -1) {
