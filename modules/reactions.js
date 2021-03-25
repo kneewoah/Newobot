@@ -62,7 +62,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
         // message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.")
         //   .then(message => console.log(`Sent message: ${message.content}`))
         //   .catch(console.error);
-        message.guild.channels.cache.get(config.pillowsGeneralID).send("Please let us know why you cannot scrim, " + user.toString())
+        message.guild.channels.cache.get(config.pillowsGeneralID).send("Please let us know why you cannot play, " + user.toString())
           .then(message => console.log(`Sent message: ${message.content}`))
           .catch(console.error);
       } if (yesIndex > -1) {
