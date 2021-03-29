@@ -72,6 +72,7 @@ client.on('message', async message => {
 
 // USER JOINS SERVER
 client.on('guildMemberAdd', member => {
+  require(`./modules/handleXP.js`).new(database);
 
   const color = require(`./modules/roleColor.js`);
   const randColor = `0x${Math.floor(Math.random()*16777215).toString(16)}`
