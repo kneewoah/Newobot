@@ -142,5 +142,6 @@ exports.new = (database) => {
           console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
         });
     }
+}
 
 };
