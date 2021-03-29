@@ -122,6 +122,10 @@ exports.getLevel = (xp) => {
 
 exports.new = (database) => {
 
+   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, userArr) => {
+
+    if(userArr.length < 1)  {
+
         var newData = {
           id: message.author.id,
           xp: 0,
@@ -137,5 +141,6 @@ exports.new = (database) => {
           if(err) throw err;
           console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
         });
+    }
 
 };
