@@ -24,27 +24,7 @@ exports.text = (client, message, database) => {
       if(err) throw err;
 
       var genXp = generateXp(15, 25);
-
-      // If new user
-      if(rows.length < 1) {
-        var newData = {
-          id: message.author.id,
-          xp: genXp,
-          daily: genXp,
-          weekly: genXp,
-          monthly: genXp,
-          timeStamp: newTime,
-        };
-
-        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
-
-        database.query(sql, () => {
-          if(err) throw err;
-          console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
-        });
-
-      // If existing User
-      } else {
+     
         var oldTime = rows[0].timestamp;
         var diff = (newTime - oldTime);
 
@@ -73,7 +53,6 @@ exports.text = (client, message, database) => {
           });
 
         }
-      }
 
     });
 };
@@ -139,4 +118,24 @@ exports.getLevel = (xp) => {
     level: i-1,
     progress: recurseXp + 5*Math.pow((i-1),2)+50*(i-1)+100
   };
+};
+
+exports.new = (database) => {
+
+        var newData = {
+          id: message.author.id,
+          xp: 0,
+          daily: 0,
+          weekly: 0,
+          monthly: 0,
+          timeStamp: newTime
+        };
+
+        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
+
+        database.query(sql, () => {
+          if(err) throw err;
+          console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
+        });
+
 };
