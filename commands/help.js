@@ -7,6 +7,8 @@ exports.run = (client, message, args) => {
   fs.readdir("./commands", (err, files) => {
       if(err) console.error(err);
 
+      let helpMessage;
+
       // with args (!help <cmd>)
       if(args[0]) {
 
@@ -20,23 +22,15 @@ exports.run = (client, message, args) => {
           var cmdFile2 = require(`./${cmdNameLower}.js`)
           var cmdDesc = cmdFile2.help.description;
           var cmdUsage = cmdFile2.help.usage;
-
-          try {
-            message.author.send(`\`Newo Bot Commands\`\n__Command__: **${cmdNameLower}**\n__Description__: ${cmdDesc}\n__Usage__: ${cmdUsage}`)
-            .then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
-            .catch(console.error);
-          } catch (err) {
-            console.log(`Failed to send a help dm to ${message.author.tag}`);
-            message.reply("sorry, I can't help because you blocked me.")
-            .then(() => console.log(`Sent a reply to ${message.author.tag}`))
-            .catch(console.error);
-          }
+          helpMessage = `\`Newo Bot Commands\`\n__Command__: **${cmdNameLower}**\n__Description__: ${cmdDesc}\n__Usage__: ${cmdUsage}`;
 
         } catch (e) {
           message.channel.send(`\'${cmdNameLower}\' is not a valid command`)
           .then(message => console.log(`Sent message: ${message.content}`))
           .catch(console.error);
         };
+
+
 
       // no args
       } else {
@@ -46,19 +40,20 @@ exports.run = (client, message, args) => {
         console.log(`Help Embed created`)
 
         cmdArray.forEach(element => embed.addField(element[0], `${require(`./${element[0]}.js`).help.description}\n${require(`./${element[0]}.js`).help.usage}`))
-
-        try {
-          message.author.send(embed)
-          .then(message => console.log(`Private Messaged ${message.author.tag} the help embed`))
-          .catch(console.error);
-        } catch (err) {
-          console.log(`Failed to send a help dm to ${message.author.tag}`);
-          message.reply("sorry, I can't help because you blocked me.")
-          .then(() => console.log(`Sent a reply to ${message.author.tag}`))
-          .catch(console.error);
-        }
+        
+        helpMessage = embed;
       }
 
+       // send dm
+        try {
+            message.author.send(helpMessage)
+            .then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
+          } catch (err) {
+            console.log(`Failed to send a help dm to ${message.author.tag}`);
+            message.reply("sorry, I can't help because you blocked me.")
+            .then(() => console.log(`Sent a reply to ${message.author.tag}`))
+            .catch(console.error);
+          }
     });
 
 };
