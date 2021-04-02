@@ -23,7 +23,7 @@ exports.run = (client, message, args) => {
 
           try {
             message.author.send(`\`Newo Bot Commands\`\n__Command__: **${cmdNameLower}**\n__Description__: ${cmdDesc}\n__Usage__: ${cmdUsage}`)
-            .then(message => console.log(`Private Messaged ${message.author.tag}: ${message.content}`))
+            .then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
             .catch(console.error);
           } catch (err) {
             console.log(`Failed to send a help dm to ${message.author.tag}`);
