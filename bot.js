@@ -128,9 +128,9 @@ setInterval(() => {
 var minutesSinceCrash = 0;
 setInterval(() => {
 
-
   minutesSinceCrash++;
-  client.user.setActivity(`for ${minutesSinceCrash} minutes without a crash!`, {type: 'PLAYING'})
+
+  client.user.setActivity(`${minutesSinceCrash} minutes without a crash!`, {type: 'PLAYING'})
   .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
   .catch(console.error);
 
