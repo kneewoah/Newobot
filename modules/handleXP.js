@@ -24,7 +24,7 @@ exports.text = (client, message, database) => {
       if(err) throw err;
 
       var genXp = generateXp(15, 25);
-     
+
         var oldTime = rows[0].timestamp;
         var diff = (newTime - oldTime);
 
@@ -120,9 +120,9 @@ exports.getLevel = (xp) => {
   };
 };
 
-exports.new = (database) => {
+exports.new = (member, database) => {
 
-   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, userArr) => {
+   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${member.id}'`, (err, userArr) => {
 
     if(userArr.length < 1)  {
 
