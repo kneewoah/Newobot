@@ -120,11 +120,11 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
   oldActivities = oldMember.presence.activities;
   newActivities = newMember.presence.activities;
   for (var i = 0; i < oldActivities.length; i++) {
-      if (newActivities[i].type == "STREAMING" && oldActivities[i].type !== "STREAMING") {
+      if (newActivities[i].type === "STREAMING" && oldActivities[i].type !== "STREAMING") {
         newMember.roles.add(newMember.guild.roles.cache.get(config.streamingRoleID), "Now Streaming")
         .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
         .catch(console.error);
-      } else if (oldActivities[i].type == "STREAMING" && newActivities[i].type !== "STREAMING") {
+      } else if (oldActivities[i].type === "STREAMING" && newActivities[i].type !== "STREAMING") {
         newMember.roles.remove(newMember.guild.roles.cache.get(config.streamingRoleID), "Now Streaming")
         .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
         .catch(console.error);
