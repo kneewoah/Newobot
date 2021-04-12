@@ -14,7 +14,7 @@ exports.run = (client, database, member, color) => {
       member.roles.add(existingRole, `Someone removed this role from ${member}`)
       .then(u => console.log(`Fixed missing role. Added role '${existingRole.name}' to ${u.user.tag}.`))
       .catch(console.error);
-      return exisitngRole;
+      return existingRole;
 
     } else {
       member.guild.roles.create({
