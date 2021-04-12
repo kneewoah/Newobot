@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-exports.run = (client, database, member, color) => {
+exports.run = (client, database, member, color, reason) => {
 
     var roleName = `${member.id}`;
 
@@ -11,7 +11,7 @@ exports.run = (client, database, member, color) => {
     var existingRole = member.guild.roles.cache.find(role => role.name === roleName);
     if (existingRole && existingRole.members.find(mem => mem.id === roleName)) return existingRole;
     else if (existingRole) {
-      member.roles.add(existingRole, `Someone removed this role from ${member}`)
+      member.roles.add(existingRole, `Someone removed this role from ${member}`, reason);
       .then(u => console.log(`Fixed missing role. Added role '${existingRole.name}' to ${u.user.tag}.`))
       .catch(console.error);
       return existingRole;
@@ -24,7 +24,7 @@ exports.run = (client, database, member, color) => {
           hoist: false,
           mentionable: false,
         },
-        reason: `Default color for ${member.user.tag}`
+        reason: `Default color for ${member.user.tag} - ${reason}`
       })
       .then(r => {
         console.log(`Created role '${r.name}'.`);

@@ -9,7 +9,7 @@ exports.run = (client, message, args, database) => {
   const color = require(`../modules/roleColor.js`);
 
   mems.forEach(member => {
-    color.run(client, database, member, undefined);
+    color.run(client, database, member, undefined, "!verify color command");
   });
   console.log(`All color roles now applied correctly.`);
 

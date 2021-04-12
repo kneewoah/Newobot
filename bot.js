@@ -72,7 +72,7 @@ client.on('message', async message => {
 
 // USER JOINS SERVER
 client.on('guildMemberAdd', member => {
-  require(`./modules/handleXP.js`).new(database);
+  require(`./modules/handleXP.js`).new(member, database);
 
   const color = require(`./modules/roleColor.js`);
   const randColor = `0x${Math.floor(Math.random()*16777215).toString(16)}`
@@ -139,6 +139,19 @@ setInterval(() => {
   .catch(console.error);
 
 }, 60000); // (1 minute)
+
+setInterval(() => {
+  console.log(`Verifying all color roles are properly applied...`);
+  const mems = client.guilds.cache.get(config.pillowsID).members.cache.filter(guildMember => !guildMember.user.bot);
+  const color = require(`./modules/roleColor.js`);
+
+  mems.forEach(member => {
+    color.run(client, database, member, undefined, "Newo Bot Timer");
+  });
+  console.log(`All color roles now applied correctly.`);
+}, 6*60*60000); // (6 hours)
+
+
 
 
 // ERROR
