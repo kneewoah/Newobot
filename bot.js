@@ -119,7 +119,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
   // STREAMING ROLL
   oldActivities = oldMember.presence.activities;
   newActivities = newMember.presence.activities;
-  for (int i = 0; i < oldActivities.length; i++) {
+  for (var i = 0; i < oldActivities.length; i++) {
       if (newActivities[i].type == "STREAMING") && (oldActivities[i].type !== "STREAMING") {
         newMember.roles.add(newMember.guild.roles.cache.get(config.streamingRoleID), "Now Streaming")
         .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
