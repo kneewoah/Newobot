@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const fs = require("fs");
 
-exports.run = (client, database, member, randColor) => {
+exports.run = (client, database, member, color) => {
 
     var roleName = `${member.id}`;
 
