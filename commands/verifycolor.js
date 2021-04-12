@@ -16,9 +16,9 @@ exports.run = (client, message, args, database) => {
 
   roles.forEach(role => {
     members = role.members.array();
-    if (members == undefined) console.log("delete");//role.delete("extraneous role color - verify color command")
-    // .then(deleted => console.log(`Deleted role ${deleted.name}`))
-    // .catch(console.error);
+    if (members == undefined) role.delete("extraneous role color - verify color command")
+      .then(deleted => console.log(`Deleted role ${deleted.name}`))
+      .catch(console.error);
 
     else {
       members.forEach(member => {
