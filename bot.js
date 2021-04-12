@@ -14,7 +14,7 @@ client.on('ready', () => {
   console.log("Newo Bot is Online");
   console.log(`Owner ID: ${config.ownerID}`);
 
-  client.user.setActivity("Destiny 2", {url: "https://twitch.tv/newox", type: 'PLAYING'})
+  client.user.setActivity(`for 0 hours without a crash`, {type: 'PLAYING'})
   .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
   .catch(console.error);
 
@@ -109,6 +109,7 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 
 // TIMERS
 setInterval(() => {
+
   console.log(`Checking Date...`);
   var date = new Date()
   date.setTime(date.getTime() + config.timeOffset*3600000); // apply offset;
@@ -123,6 +124,18 @@ setInterval(() => {
   if(hour == 0) require(`./modules/xpResets.js`).daily(client, database);
 
 }, 60*60000); // (1 hour)
+
+var minutesSinceCrash = 0;
+setInterval(() => {
+
+  client.user.setActivity(`for {minutesSinceCrash} minutes without a crash!`, {type: 'PLAYING'})
+  .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
+  .catch(console.error);
+
+  minutesSinceCrash++;
+
+}, 60000); // (1 minute)
+
 
 // ERROR
 client.on('error', console.error);
