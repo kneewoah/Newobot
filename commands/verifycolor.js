@@ -23,7 +23,7 @@ exports.run = (client, message, args, database) => {
     else {
       members.forEach(member => {
         if (member.id !== role.name) member.roles.remove(role, "this role was not made for this user - verify color command")
-          .then(u => console.log(`Removed role '${r.name}' from ${u.user.tag}.`))
+          .then(usr => console.log(`Removed role '${role.name}' from ${usr.user.tag}.`))
           .catch(console.error);
       });
     }
