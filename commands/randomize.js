@@ -9,10 +9,15 @@ exports.run = (client, message, args, database) => {
   const color = require(`../modules/roleColor.js`);
 
   mems.forEach(member => {
-    color.run(client, database, member, undefined, "!verify color command");
+    const role = require(`../modules/roleColor.js`).run(client, database, member, undefined, "!color command");
+    role.edit({color: `0x${Math.floor(Math.random()*16777215).toString(16)}`}, "!randomize")
+      .then(updated => console.log(`Edited role color for ${member.user.tag} to ${updated.color}`))
+      .catch(console.error);
   });
 
+}
+
 exports.help = {
-  description: "Verify everyone has their color role (Newo Only)",
-  usage: `${config.prefix}verifycolor`
+  description: "Randomize everyone's colors (Newo Only)",
+  usage: `${config.prefix}randomize`
 };
