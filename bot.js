@@ -83,6 +83,12 @@ client.on('guildMemberAdd', member => {
 
 });
 
+// USER LEAVES SERVER
+client.on('guildMemberAdd', member => {
+  // Delete role color
+  require(`./modules/roleColor.js`).delete(client, member, member.guild);
+});
+
 // REACTION ADD
 client.on('messageReactionAdd', (reaction, user) => {
   if (user.bot) return;
