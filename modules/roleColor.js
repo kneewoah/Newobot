@@ -44,3 +44,22 @@ exports.delete = (client, member, guild) => {
   .then(deleted => console.log(`Deleted role ${deleted.name}`))
   .catch(console.error);
 };
+
+exports.verify = (guild, reasonLoc) => {
+  const roles = guild.roles.cache.filter(role => role.name.match(/[0-9]{18}/g));
+
+  roles.forEach(role => {
+    members = role.members.array();
+    if (members.length == 0) role.delete("extraneous role color - " + reasonLoc)
+      .then(deleted => console.log(`Deleted role ${deleted.name}`))
+      .catch(console.error);
+
+    else {
+      members.forEach(member => {
+        if (member.id !== role.name) member.roles.remove(role, "this role was not made for this user - " + reasonLoc)
+          .then(usr => console.log(`Removed role '${role.name}' from ${usr.user.tag}.`))
+          .catch(console.error);
+      });
+    }
+  });
+};

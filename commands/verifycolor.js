@@ -12,22 +12,7 @@ exports.run = (client, message, args, database) => {
     color.run(client, database, member, undefined, "!verify color command");
   });
 
-  const roles = message.guild.roles.cache.filter(role => role.name.match(/[0-9]{18}/g));
-
-  roles.forEach(role => {
-    members = role.members.array();
-    if (members.length == 0) role.delete("extraneous role color - verify color command")
-      .then(deleted => console.log(`Deleted role ${deleted.name}`))
-      .catch(console.error);
-
-    else {
-      members.forEach(member => {
-        if (member.id !== role.name) member.roles.remove(role, "this role was not made for this user - verify color command")
-          .then(usr => console.log(`Removed role '${role.name}' from ${usr.user.tag}.`))
-          .catch(console.error);
-      });
-    }
-  });
+  require(`../modules/roleColor.js`).verify(message.guild, "!verify command");
 
   console.log(`All color roles now applied correctly.`);
 }
