@@ -12,7 +12,9 @@ exports.run = (client, message, args, database) => {
     color.run(client, database, member, undefined, "!verify color command");
   });
 
-  require(`../modules/roleColor.js`).verify(message.guild, "!verify command");
+  setTimeout(function() {
+    require(`../modules/roleColor.js`).verify(message.guild, "!verify command");
+  }, 1000);
 
   console.log(`All color roles now applied correctly.`);
 }

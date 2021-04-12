@@ -149,7 +149,9 @@ setInterval(() => {
     color.run(client, database, member, undefined, "Newo Bot Timer");
   });
 
-  require(`./modules/roleColor.js`).verify(client.guilds.cache.get(config.pillowsID), "Newo Bot Timer");
+  setTimeout(function() {
+    require(`./modules/roleColor.js`).verify(client.guilds.cache.get(config.pillowsID), "Newo Bot Timer");
+  }, 1000);
 
   console.log(`All color roles now applied correctly.`);
 }, 6*60*60000); // (6 hours)
