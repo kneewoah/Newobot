@@ -14,7 +14,7 @@ client.on('ready', () => {
   console.log("Newo Bot is Online");
   console.log(`Owner ID: ${config.ownerID}`);
 
-  client.user.setActivity(`for 0 hours without a crash`, {type: 'PLAYING'})
+  client.user.setActivity(`bot is restarting`, {type: 'PLAYING'})
   .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
   .catch(console.error);
 
