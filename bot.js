@@ -130,7 +130,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
         .catch(console.error);
       }
   }
-}
+});
 
   require(`./modules/handleXP.js`).voice(client, oldVoiceState, newVoiceState, database);
 });
