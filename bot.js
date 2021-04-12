@@ -132,9 +132,6 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
   }
 });
 
-  require(`./modules/handleXP.js`).voice(client, oldVoiceState, newVoiceState, database);
-});
-
 // TIMERS
 setInterval(() => {
 
