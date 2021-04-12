@@ -15,8 +15,8 @@ exports.run = (client, message, args, database) => {
   const roles = message.guild.roles.cache.filter(role => role.name.match(/[0-9]{18}/g));
 
   roles.forEach(role => {
-    console.log(role.name);
-    // members = role.members.cache;
+    members = role.members.cache;
+    console.log(members[0]);
     // if (members == undefined) role.delete("extraneous role color - verify color command")
     // .then(deleted => console.log(`Deleted role ${deleted.name}`))
     // .catch(console.error);
