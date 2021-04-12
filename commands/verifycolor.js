@@ -16,18 +16,17 @@ exports.run = (client, message, args, database) => {
 
   roles.forEach(role => {
     members = role.members.cache;
-    console.log(members[0]);
-    // if (members == undefined) role.delete("extraneous role color - verify color command")
+    if (members == undefined) console.log("delete");//role.delete("extraneous role color - verify color command")
     // .then(deleted => console.log(`Deleted role ${deleted.name}`))
     // .catch(console.error);
-    //
-    // else {
-    //   members.forEach(member => {
-    //     if (member.id !== role.name) member.roles.remove(role, "this role was not made for this user - verify color command")
-    //       .then(u => console.log(`Removed role '${r.name}' from ${u.user.tag}.`))
-    //       .catch(console.error);
-    //   });
-    // }
+
+    else {
+      members.forEach(member => {
+        if (member.id !== role.name) member.roles.remove(role, "this role was not made for this user - verify color command")
+          .then(u => console.log(`Removed role '${r.name}' from ${u.user.tag}.`))
+          .catch(console.error);
+      });
+    }
   });
 
   console.log(`All color roles now applied correctly.`);
