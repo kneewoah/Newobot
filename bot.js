@@ -113,6 +113,28 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
   require(`./modules/handleXP.js`).voice(client, oldVoiceState, newVoiceState, database);
 });
 
+// GUILDMEMBER UPDATE
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+
+  // STREAMING ROLL
+  oldActivities = oldMember.presence.activities;
+  newActivities = newMember.presence.activities;
+  for (int i = 0; i < oldActivities.length; i++) {
+      if (newActivities[i].type == "STREAMING") && (oldActivities[i].type !== "STREAMING") {
+        newMember.roles.add(newMember.guild.roles.cache.get(config.streamingRoleID), "Now Streaming")
+        .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
+        .catch(console.error);
+      } else if (oldActivities[i].type == "STREAMING") && (newActivities[i].type !== "STREAMING") {
+        newMember.roles.remove(newMember.guild.roles.cache.get(config.streamingRoleID), "Now Streaming")
+        .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
+        .catch(console.error);
+      }
+  }
+}
+
+  require(`./modules/handleXP.js`).voice(client, oldVoiceState, newVoiceState, database);
+});
+
 // TIMERS
 setInterval(() => {
 
