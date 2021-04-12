@@ -8,7 +8,7 @@ exports.run = (client, message, args, database) => {
   const mems = message.guild.members.cache.filter(guildMember => !guildMember.user.bot);
   const color = require(`../modules/roleColor.js`);
 
-  mems.forEach(member => {s
+  mems.forEach(member => {
     color.run(client, database, member, undefined, "!verify color command");
   });
 
