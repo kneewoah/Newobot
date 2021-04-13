@@ -127,7 +127,7 @@ exports.new = (member, database) => {
     if(userArr.length < 1)  {
 
         var newData = {
-          id: message.author.id,
+          id: member.id,
           xp: 0,
           daily: 0,
           weekly: 0,
@@ -135,7 +135,7 @@ exports.new = (member, database) => {
           timeStamp: newTime
         };
 
-        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${message.author.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
+        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${member.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
 
         database.query(sql, () => {
           if(err) throw err;
