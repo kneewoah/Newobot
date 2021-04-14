@@ -129,6 +129,7 @@ exports.new = (member, database) => {
     if(userArr.length < 1)  {
 
         const newTime = new Date().getTime();
+        const table = `xp_${config.pillowsID}`;
 
         var newData = {
           id: member.id,
@@ -139,11 +140,11 @@ exports.new = (member, database) => {
           timeStamp: newTime
         };
 
-        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${member.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
+        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${newData.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
 
         database.query(sql, () => {
           if(err) throw err;
-          console.log(`SQL: Inserted a new row for ${message.author.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
+          console.log(`SQL: Inserted a new row for ${member.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
         });
     }
 });
