@@ -114,7 +114,7 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 });
 
 // GUILDMEMBER UPDATE
-client.on('guildMemberUpdate', (oldPresence, newPresence) => {
+client.on('presenceUpdate', (oldPresence, newPresence) => {
 
   // STREAMING ROLL
   if (!newPresence.activities) return false;
