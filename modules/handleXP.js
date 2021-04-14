@@ -122,9 +122,13 @@ exports.getLevel = (xp) => {
 
 exports.new = (member, database) => {
 
+
+
    database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${member.id}'`, (err, userArr) => {
 
     if(userArr.length < 1)  {
+
+        const newTime = new Date().getTime();
 
         var newData = {
           id: member.id,
