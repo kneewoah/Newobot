@@ -47,12 +47,12 @@ exports.run = (client, message, args, con) => {
 
 exports.sendCategoryLb = (style, embed, channel, data) => {
   var category = style.toLowerCase();
-  var sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0)).toArray();
+  var sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0));
   const membersCache = channel.guild.members.cache;
 
   for (var i = 0; i < config.leaderboardSize; i++) {
-    console.log(sorted[i]);
-    if (membersCache.get(sorted[i]) !== undefined) {
+    console.log(sorted[i].id);
+    if (membersCache.get(sorted[i].id) !== undefined) {
     var user = membersCache.get(sorted[i].id).user;
     embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
   }
@@ -66,6 +66,6 @@ exports.sendCategoryLb = (style, embed, channel, data) => {
 };
 
 exports.help = {
-  description: "Leaderboard command, leaving the 1st option blank will dis play the all time leaderboard",
+  description: "Leaderboard command, leaving the 1st option blank will display the all time leaderboard",
   usage: `${config.prefix}lb {daily | weekly | monthly}`
 };
