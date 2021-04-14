@@ -1,6 +1,6 @@
 // BEFORE LAUNCH
-const storedVars = require('./DO-NOT-PUSH.json');
-//const storedVars = process.env;
+//const storedVars = require('./DO-NOT-PUSH.json');
+const storedVars = process.env;
 const Discord = require('discord.js');
 const { Client, Intents} = require('discord.js');
 const client = new Discord.Client({
@@ -116,15 +116,16 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 // GUILDMEMBER UPDATE
 client.on('presenceUpdate', (oldPresence, newPresence) => {
   // STREAMING ROLL
-  if (!newPresence.activities) return;
-  newPresence.activities.forEach(activity => {
-      if (activity.type == "STREAMING") {
-          console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
-          newPresence.member.roles.add(newPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
-          .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
-          .catch(console.error);
-      };
-  });
+  if (newPresence.activities !== undefined) {
+    newPresence.activities.forEach(activity => {
+        if (activity.type == "STREAMING") {
+            console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
+            newPresence.member.roles.add(newPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
+            .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
+            .catch(console.error);
+        };
+    });
+  } else if (oldPresence.activities !== undefined) {
   oldPresence.activities.forEach(activity => {
       if (activity.type == "STREAMING") {
           console.log(`${oldPresence.user.tag} is no longer streaming.`);
@@ -132,12 +133,6 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
           .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
           .catch(console.error);
       };
-  });
+    });
+  }
 });
-
-
-// ERROR
-client.on('error', console.error);
-
-// LOGIN
-client.login(storedVars.TOKEN);
