@@ -25,7 +25,7 @@ exports.text = (client, message, database) => {
 
       var genXp = generateXp(15, 25);
 
-        var oldTime = rows[0].timestamp;
+        var oldTime = rows[0].lastMessage;
         var diff = (newTime - oldTime);
 
         // If cooldown over

@@ -18,7 +18,7 @@ exports.run = (client, message, args, con) => {
     var embed = new Discord.MessageEmbed({
       title: time,
       color: "#3370FC",
-      timestamp: Date.now(),
+      lastMessage: Date.now(),
       fields: [
         {
           name: "Yes",

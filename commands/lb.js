@@ -10,7 +10,7 @@ exports.run = (client, message, args, con) => {
 
     const embed = new Discord.MessageEmbed({
       color: color,
-      timestamp: Date.now(),
+      lastMessage: Date.now(),
       footer: {
         icon_url: client.user.avatarURL(),
         text: "© 2021 Newo"
