@@ -122,8 +122,6 @@ exports.getLevel = (xp) => {
 
 exports.new = (member, database) => {
 
-
-
    database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${member.id}'`, (err, userArr) => {
 
     if(userArr.length < 1)  {
@@ -137,14 +135,15 @@ exports.new = (member, database) => {
           daily: 0,
           weekly: 0,
           monthly: 0,
-          timeStamp: newTime
+          timeStamp: newTime,
+          voiceStart: new Date().getTime() / 60000,
         };
 
-        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp) VALUES (${newData.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp})`;
+        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp, voiceStart) VALUES (${newData.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp}, ${newData.voiceStart})`;
 
         database.query(sql, () => {
           if(err) throw err;
-          console.log(`SQL: Inserted a new row for ${member.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
+          console.log(`SQL: Inserted a new row for ${member.user.tag} in ${table} with the following parameters: ${JSON.stringify(newData)}`);
         });
     }
 });
