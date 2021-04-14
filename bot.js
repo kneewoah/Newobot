@@ -56,7 +56,7 @@ setInterval(() => {
 // ON MESSAGE
 client.on('message', async message => {
 
-  if(message.author.bot) return;
+  if(message.author.bot || message.system) return;
 
   if(!message.guild) return require(`./modules/logDM.js`).run(client, message);
 
