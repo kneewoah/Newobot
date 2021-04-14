@@ -47,7 +47,7 @@ exports.run = (client, message, args, con) => {
 
 exports.sendCategoryLb = (style, embed, channel, data) => {
   var category = style.toLowerCase();
-  const sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0));
+  var sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0)).toArray();
   const membersCache = channel.guild.members.cache;
 
   for (var i = 0; i < config.leaderboardSize; i++) {
