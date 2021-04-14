@@ -36,7 +36,7 @@ exports.run = (client, message, args, con) => {
     const data = {
       title: `XP for ${target.username}`,
       color: color,
-      lastMessage: Date.now(),
+      timestamp: Date.now(),
       fields: [
         {
           name: "XP",

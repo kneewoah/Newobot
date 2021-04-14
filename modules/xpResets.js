@@ -26,7 +26,7 @@ exports.weekly = (client, database) => {
 
   const embed = new Discord.MessageEmbed({
     color: `0x2F69EC`,
-    lastMessage: Date.now(),
+    timestamp: Date.now(),
     footer: {
       icon_url: client.user.avatarURL(),
       text: "© 2021 Newo"
