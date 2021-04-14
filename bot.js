@@ -136,3 +136,10 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
     });
   }
 });
+
+
+// ERROR
+client.on('error', console.error);
+
+// LOGIN
+client.login(storedVars.TOKEN);
