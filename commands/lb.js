@@ -23,12 +23,15 @@ exports.run = (client, message, args, con) => {
 
     } else {
       const sorted = data.sort((a, b) => (a.xp > b.xp ? -1 : 1));
-
-      for (var i = 0; i < sorted.length; i++) {
-        var user = message.guild.members.cache.get(sorted[i].id).user
-        var xp = sorted[i].xp;
-        var level = require(`../modules/handleXP.js`).getLevel(xp).level;
-        embed.addField(`${i+1}. ${user.username}`, `**XP:** ${xp}\n**Level:** ${level}`, true);
+      
+      const membersCache = message.guild.members.cache;
+      for (var i = 0; i< config.leaderboardSize && i < sorted.length; i++) {
+        if (membersCache.get(sorted[i].id) !== undefined) {
+           var user = membersCache.get(sorted[i].id).user
+           var xp = sorted[i].xp;
+           var level = require(`../modules/handleXP.js`).getLevel(xp).level;
+           embed.addField(`${i+1}. ${user.username}`, `**XP:** ${xp}\n**Level:** ${level}`, true);
+        }
       }
 
       embed.setTitle(`Pillows XP Leaderboard`);
@@ -44,11 +47,15 @@ exports.run = (client, message, args, con) => {
 
 exports.sendCategoryLb = (style, embed, channel, data) => {
   var category = style.toLowerCase();
-  const sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0));
-  for (var i = 0; i < sorted.length; i++) {
-    var user = channel.guild.members.cache.get(sorted[i].id).user;
+  var sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0));
+  const membersCache = channel.guild.members.cache;
+
+  for (var i = 0; i < sorted.length && i < config.leaderboardSize; i++) {
+    if (membersCache.get(sorted[i].id) !== undefined) {
+    var user = membersCache.get(sorted[i].id).user;
     embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
   }
+}
 
   channel.send(embed)
   .then(message => console.log(`Sent a ${category} leaderboard embed`))
@@ -58,6 +65,6 @@ exports.sendCategoryLb = (style, embed, channel, data) => {
 };
 
 exports.help = {
-  description: "Leaderboard command, leaving the 1st option blank will dis play the all time leaderboard",
+  description: "Leaderboard command, leaving the 1st option blank will display the all time leaderboard",
   usage: `${config.prefix}lb {daily | weekly | monthly}`
 };
