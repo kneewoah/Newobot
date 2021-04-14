@@ -51,9 +51,7 @@ exports.sendCategoryLb = (style, embed, channel, data) => {
   const membersCache = channel.guild.members.cache;
 
   for (var i = 0; i < config.leaderboardSize; i++) {
-    console.log(membersCache);
-    console.log("sorted[i]");
-    console.log(sorted[i]);
+    console.log(sorted);
     if (membersCache.get(sorted[i]) !== undefined) {
     var user = membersCache.get(sorted[i].id).user;
     embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
