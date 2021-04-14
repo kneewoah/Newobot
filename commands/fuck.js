@@ -13,5 +13,5 @@ exports.run = async (client, message, args) => {
 
 exports.help = {
   description: "makes you fuck your true love",
-  usage: "!fuck"
+  usage: `${config.prefix}fuck`
 };

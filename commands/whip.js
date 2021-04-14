@@ -20,5 +20,5 @@ exports.run = async (client, message, args) => {
 
 exports.help = {
   description: "whip someone",
-  usage: "!whip"
+  usage: `${config.prefix}whip`
 };

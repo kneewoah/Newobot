@@ -15,9 +15,9 @@ function generateXp(min, max) {
 
 exports.text = (client, message, database) => {
     // exit if not pillows
-    if (message.guild.id != config.pillowsID) return;
+    if (message.guild.id != config.guilds[0].id) return;
 
-    const table = `xp_${config.pillowsID}`;
+    const table = `xp_${config.guilds[0].id}`;
     const newTime = new Date().getTime();
 
     database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
@@ -29,7 +29,7 @@ exports.text = (client, message, database) => {
         var diff = (newTime - oldTime);
 
         // If cooldown over
-        if (diff >= config.xpCoolDownMs) {
+        if (diff >= config.guilds[0].xpCoolDownMs) {
           // update params
           var newData = {
             xp: rows[0].xp + genXp,
@@ -59,12 +59,12 @@ exports.text = (client, message, database) => {
 
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
-  if (((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || (newVoiceState.deaf && newVoiceState.channel == oldVoiceState.channel) || (oldVoiceState.channel !== newVoiceState.channel && !oldVoiceState.deaf && oldVoiceState.channel !== null)) && !((oldVoiceState.channel == null && oldVoiceState.channel.id === config.pillowsAFK) || oldVoiceState.guild.id !== config.pillowsID || (oldVoiceState.channel === null && newVoiceState.channel.id === config.pillowsAFK) || (oldVoiceState.channel.id === config.pillowsAFK && newVoiceState.channel.id !== config.pillowsAFK && !oldVoiceState.deaf))) { // END XP COUNT
+  if (((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || (newVoiceState.deaf && newVoiceState.channel == oldVoiceState.channel) || (oldVoiceState.channel !== newVoiceState.channel && !oldVoiceState.deaf && oldVoiceState.channel !== null)) && !((oldVoiceState.channel == null && oldVoiceState.channel.id === config.guilds[0].voiceAFK) || oldVoiceState.guild.id !== config.guilds[0].id || (oldVoiceState.channel === null && newVoiceState.channel.id === config.pillowsAFK) || (oldVoiceState.channel.id === config.pillowsAFK && newVoiceState.channel.id !== config.guilds[0].voiceAFK && !oldVoiceState.deaf))) { // END XP COUNT
 
-    if(!newVoiceState.deaf && !oldVoiceState.deaf && oldVoiceState.channel !== null && newVoiceState.channel !== null && oldVoiceState.channel !== newVoiceState.channel && newVoiceState.channel.id !== config.pillowsAFK) return console.log(`${oldVoiceState.member.user.tag} is safely moving channels`);
+    if(!newVoiceState.deaf && !oldVoiceState.deaf && oldVoiceState.channel !== null && newVoiceState.channel !== null && oldVoiceState.channel !== newVoiceState.channel && newVoiceState.channel.id !== config.guilds[0].voiceAFK) return console.log(`${oldVoiceState.member.user.tag} is safely moving channels`);
 
     console.log(`UPDATING voice channel XP for ${oldVoiceState.member.user.tag}`);
-    database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
+    database.query(`SELECT * FROM xp_${config.guilds[0].id} WHERE id = '${newVoiceState.member.id}'`, (err, data) => {
         const time = Math.floor(new Date().getTime() / 60000);
         const diff = time - data[0].voiceStart;
 
@@ -82,27 +82,27 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
         const newLvl = require(`./handleXP.js`).getLevel(newData.xp).level;
         if (newLvl > require(`./handleXP.js`).getLevel(data[0].xp).level) {
-          sendLevelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.pillowsGeneralID), newLvl);
+          sendLevelUpMsg(newVoiceState.member.user, newVoiceState.guild.channels.cache.get(config.guilds[0].generalID), newLvl);
         }
 
         console.log(`${oldVoiceState.member.user.tag} earned ${newXp} xp over ${diff} minutes`);
-        var sql = `UPDATE xp_${config.pillowsID} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly} WHERE id = '${newVoiceState.member.id}'`;
+        var sql = `UPDATE xp_${config.guilds[0].id} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly} WHERE id = '${newVoiceState.member.id}'`;
 
         database.query(sql, () => {
           if(err) throw err;
-          console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify(newData)}`);
+          console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.guilds[0].id} with the following parameters: ${JSON.stringify(newData)}`);
         });
     });
   } else if ((!newVoiceState.deaf && newVoiceState.channel !== null) && (oldVoiceState.deaf || oldVoiceState.channel !== newVoiceState.channel)) { // BEGIN XP COUNT
-    if (newVoiceState.guild.id !== config.pillowsID) return;
-    if (newVoiceState.guild.id === config.pillowsAFK) return;
+    if (newVoiceState.guild.id !== config.guilds[0].id) return;
+    if (newVoiceState.guild.id === config.guilds[0].voiceAFK) return;
 
     console.log(`Logging start time for voice channel XP for ${oldVoiceState.member.user.tag}`);
 
     const time = Math.floor(new Date().getTime() / 60000);
-    database.query(`UPDATE xp_${config.pillowsID} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
+    database.query(`UPDATE xp_${config.guilds[0].id} SET voiceStart = '${time}' WHERE id = '${newVoiceState.member.id}'`, (err) => {
       if(err) throw(err);
-      console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.pillowsID} with the following parameters: ${JSON.stringify({time: time})}`);
+      console.log(`SQL: Updated XP for ${newVoiceState.member.user.tag} in xp_${config.guilds[0].id} with the following parameters: ${JSON.stringify({time: time})}`);
     });
   }
 };
@@ -122,12 +122,12 @@ exports.getLevel = (xp) => {
 
 exports.new = (member, database) => {
 
-   database.query(`SELECT * FROM xp_${config.pillowsID} WHERE id = '${member.id}'`, (err, userArr) => {
+   database.query(`SELECT * FROM xp_${config.guilds[0].id} WHERE id = '${member.id}'`, (err, userArr) => {
 
     if(userArr.length < 1)  {
 
         const newTime = new Date().getTime();
-        const table = `xp_${config.pillowsID}`;
+        const table = `xp_${config.guilds[0].id}`;
 
         var newData = {
           id: member.id,

@@ -39,7 +39,7 @@ exports.run = (client, message, args, con) => {
 
     embed.setThumbnail(config.mlgpillowsicon);
 
-    message.guild.channels.cache.get(config.scrimChannel).send(embed).then(m => {
+    message.guild.channels.cache.get(config.guilds[0].scrimChannel).send(embed).then(m => {
       m.react("✅")
         .then((reaction) => console.log(`Reacted with ${reaction.emoji.name} to message ${message.id}`))
         .catch(console.error);

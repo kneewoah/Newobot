@@ -4,7 +4,7 @@ const fs = require("fs");
 
 exports.add = (client, message, user, reaction, emoji, database) => {
 
-  if((message.author === client.user) && (message.channel.id === config.scrimChannel))  {
+  if((message.author === client.user) && (message.channel.id === config.guilds[0].scrimChannel))  {
     if(emoji.name == '✅') {
         console.log(`Processing ${user.username}'s ${reaction.emoji.name} reaction to scrim message ${message.id}`);
         var embed = message.embeds[0];
@@ -22,7 +22,7 @@ exports.add = (client, message, user, reaction, emoji, database) => {
           console.log(`Added ${user.username} as a yes for scrim message ${message.id}`)
           yes[0]++;
           console.log(`Increased 'yesses' to ${yes[0]} for scrim message ${message.id}`)
-          message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " can play.")
+          message.guild.channels.cache.get(config.guilds[0].generalID).send(user.toString() + " can play.")
             .then(message => console.log(`Sent message: ${message.content}`))
             .catch(console.error);
         } if (noIndex > -1) {
@@ -56,13 +56,11 @@ exports.add = (client, message, user, reaction, emoji, database) => {
 
       if (noIndex == -1) {
         no.push(user.toString());
-        console.log(`Added ${user.username} as a no for scrim message ${message.id}`)
+        console.log(`Added ${user.username} as a no for scrim message ${message.id}`);
         no[0]++;
-        console.log(`Increased 'noes' to ${no[0]} for scrim message ${message.id}`)
-        // message.guild.channels.cache.get(config.pillowsGeneralID).send(user.toString() + " cannot scrim.")
-        //   .then(message => console.log(`Sent message: ${message.content}`))
-        //   .catch(console.error);
-        message.guild.channels.cache.get(config.pillowsGeneralID).send("Please let us know why you cannot play, " + user.toString())
+        console.log(`Increased 'noes' to ${no[0]} for scrim message ${message.id}`);
+
+        message.guild.channels.cache.get(config.guilds[0].generalID).send("Please let us know why you cannot play, " + user.toString())
           .then(message => console.log(`Sent message: ${message.content}`))
           .catch(console.error);
       } if (yesIndex > -1) {

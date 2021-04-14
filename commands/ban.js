@@ -26,7 +26,7 @@ exports.run = async (client, message, args) => {
     .catch(console.error);
 
   let reason = args.slice(0).join(' ');
-  if(!reason) reason = config.defaultbanreason;
+  if(!reason) reason = config.guilds[0].defaultbanreason;
 
   await member.ban(reason)
     .then(() => {

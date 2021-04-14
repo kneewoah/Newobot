@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
 
   let reason;
    if(!args[1]) {
-     reason = config.defaultKickReason;
+     reason = config.guilds[0].defaultKickReason;
    } else {
      reason = args.splice(0, 1).join(" ");
    };

@@ -4,7 +4,7 @@ const fs = require("fs");
 
 exports.daily = (client, database) => {
   console.log(`Resetting DAILY XP totals...`)
-  database.query(`UPDATE xp_${config.pillowsID} SET daily = 0 WHERE 1`, (err) => {
+  database.query(`UPDATE xp_${config.guilds[0].id} SET daily = 0 WHERE 1`, (err) => {
     if(err) throw err;
     console.log(`SQL: Reset DAILY XP totals.`);
   });
@@ -19,7 +19,7 @@ exports.weekly = (client, database) => {
   date.setTime(date.getTime() - 24*60*60*1000);
   date2.setTime(date.getTime() - 6*24*60*60*1000);
 
-  var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+  var months = config.months;
 
   const endDate = months[date.getMonth()] + " " + date.getDate();
   const startDate = months[date2.getMonth()] + " " + date2.getDate();
@@ -34,14 +34,14 @@ exports.weekly = (client, database) => {
     title: `Final Weekly XP Totals for the week of ${startDate} - ${endDate}`
   });
 
-  const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
+  const channel = client.guilds.cache.get(config.guilds[0].id).channels.cache.get(config.pillowsGeneralID);
 
-  database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, data) => {
+  database.query(`SELECT * FROM xp_${config.guilds[0].id} WHERE 1`, (err, data) => {
     if(err) throw err;
     require(`../commands/lb.js`).sendCategoryLb("weekly", embed, channel, data);
   });
 
-  database.query(`UPDATE xp_${config.pillowsID} SET weekly = 0 WHERE 1`, (err) => {
+  database.query(`UPDATE xp_${config.guilds[0].id} SET weekly = 0 WHERE 1`, (err) => {
     if(err) throw err;
   });
 
@@ -53,7 +53,7 @@ exports.monthly = (client, database) => {
 
   const date = new Date();
   date.setTime(date.getTime() - 24*60*60*1000);
-  var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+  var months = config.months;
   const month = months[date.getMonth()];
 
   const embed = new Discord.MessageEmbed({
@@ -66,9 +66,9 @@ exports.monthly = (client, database) => {
     title: `Final Monthly XP Totals for the month of ${month}`
   });
 
-  const channel = client.guilds.cache.get(config.pillowsID).channels.cache.get(config.pillowsGeneralID);
+  const channel = client.guilds.cache.get(config.guilds[0].id).channels.cache.get(config.guilds[0].generalID);
 
-  database.query(`SELECT * FROM xp_${config.pillowsID} WHERE 1`, (err, data) => {
+  database.query(`SELECT * FROM xp_${config.guilds[0].id} WHERE 1`, (err, data) => {
     if(err) throw err;
     const winner = require(`../commands/lb.js`).sendCategoryLb("monthly", embed, channel, data);
     channel.send(`Congratulations, ${channel.guild.members.cache.get(winner.id).user.toString()}, you topped the leaderboard this month with ${winner.monthly} xp!`)
@@ -76,7 +76,7 @@ exports.monthly = (client, database) => {
       .catch(console.error);
   });
 
-  database.query(`UPDATE xp_${config.pillowsID} SET monthly = 0 WHERE 1`, (err) => {
+  database.query(`UPDATE xp_${config.guilds[0].id} SET monthly = 0 WHERE 1`, (err) => {
     if(err) throw err;
   });
 

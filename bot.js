@@ -1,4 +1,6 @@
 // BEFORE LAUNCH
+//const storedVars = require('./DO-NOT-PUSH.json');
+const storedVars = process.env;
 const Discord = require('discord.js');
 const { Client, Intents} = require('discord.js');
 const client = new Discord.Client({
@@ -8,50 +10,48 @@ const client = new Discord.Client({
 const config = require('./config.json');
 const fs = require('fs');
 const mysql = require('mysql');
+var pillowsServer;
+var database;
 
 // ON READY
 client.on('ready', () => {
   console.log("Newo Bot is Online");
   console.log(`Owner ID: ${config.ownerID}`);
 
+  // CONNECT TO DATABASE
+  database = mysql.createConnection({
+    host: storedVars.DATABASE_HOST,
+    user: storedVars.DATABASE_USER,
+    password: storedVars.DATABASE_PASSWORD,
+    database: storedVars.DATABASE
+  });
+
+  database.connect(err => {
+    if(err) throw err;
+    console.log("Connected to database");
+  });
+
   client.user.setActivity(`bot is restarting`, {type: 'PLAYING'})
   .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
   .catch(console.error);
 
   // CACHE MESSAGES
-  const pillowsServer = client.guilds.cache.get(config.pillowsID)
+  pillowsServer = client.guilds.cache.get(config.guilds[0].id);
 
   // Scrim Messages
-  pillowsServer.channels.cache.get(config.scrimChannel).messages.fetch({limit: 10})
+  pillowsServer.channels.cache.get(config.guilds[0].scrimChannel).messages.fetch({limit: 10})
   .then(messages => console.log(`Cached ${messages.size} messages in the scrim channel`))
   .catch(console.error);
 
-  // Pillows Mmbers
+  // Pillows Members
   pillowsServer.members.fetch({limit: pillowsServer.memberCount})
   .then(members => console.log(`Cached ${members.size} members in the Pillows Discord`))
   .catch(console.error);
 
+  // TIMERS
+  require(`./modules/timers.js`).run(client, client.guilds.cache.get(config.guilds[0].id), database);
+
 });
-
-// CONNECT TO DATABASE
-const database = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE
-});
-
-database.connect(err => {
-  if(err) throw err;
-  console.log("Connected to database");
-});
-
-// RECONNECT EVERY 5 MINUTES
-setInterval(() => {
-    database.query('SELECT 1');
-    console.log(`Refreshing database connection`)
-}, 300000);
-
 
 // ON MESSAGE
 client.on('message', async message => {
@@ -77,7 +77,7 @@ client.on('guildMemberAdd', member => {
   const color = require(`./modules/roleColor.js`);
   const randColor = `0x${Math.floor(Math.random()*16777215).toString(16)}`
   color.run(client, database, member, randColor);
-  member.guild.channels.cache.get(config.pillowsGeneralID).send(`Welcome ${member}! Type \`!color #HEXCODEHERE\` to chose your role color! You can choose a color here: <https://tr.im/hexwheel>.`)
+  member.guild.channels.cache.get(config.guilds[0].pillowsGeneralID).send(`Welcome ${member}! Type \`!color #HEXCODEHERE\` to chose your role color! You can choose a color here: <https://tr.im/hexwheel>.`)
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
 
@@ -121,65 +121,20 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
   newActivities = newMember.presence.activities;
   for (var i = 0; i < oldActivities.length; i++) {
       if (newActivities[i].type === "STREAMING" && oldActivities[i].type !== "STREAMING") {
-        newMember.roles.add(newMember.guild.roles.cache.get(config.streamingRoleID), "Now Streaming")
+        newMember.roles.add(newMember.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
         .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
         .catch(console.error);
       } else if (oldActivities[i].type === "STREAMING" && newActivities[i].type !== "STREAMING") {
-        newMember.roles.remove(newMember.guild.roles.cache.get(config.streamingRoleID), "Now Streaming")
+        newMember.roles.remove(newMember.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
         .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
         .catch(console.error);
       }
   }
 });
 
-// TIMERS
-setInterval(() => {
-
-  console.log(`Checking Date...`);
-  var date = new Date()
-  date.setTime(date.getTime() + config.timeOffset*3600000); // apply offset;
-  var hour = date.getHours();
-  var dayOfWeek = date.getDay();
-  var dayOfMonth = date.getDate();
-
-  console.log(`Hour: ${hour}, Day of the Week: ${dayOfWeek}, Day of the Month: ${dayOfMonth}`);
-
-  if(dayOfMonth == 1 && hour == 0) require(`./modules/xpResets.js`).monthly(client, database);
-  if(dayOfWeek == 0 && hour == 0) require(`./modules/xpResets.js`).weekly(client, database);
-  if(hour == 0) require(`./modules/xpResets.js`).daily(client, database);
-
-}, 60*60000); // (1 hour)
-
-var minutesSinceCrash = 0;
-setInterval(() => {
-  minutesSinceCrash++;
-  client.user.setActivity(`${minutesSinceCrash} minutes without a crash/restart!`, {type: 'PLAYING'})
-  .then(presence => console.log(`Activity set to ${presence.activities[0].name}`))
-  .catch(console.error);
-
-}, 60000); // (1 minute)
-
-setInterval(() => {
-  console.log(`Verifying all color roles are properly applied...`);
-  const mems = client.guilds.cache.get(config.pillowsID).members.cache.filter(guildMember => !guildMember.user.bot);
-  const color = require(`./modules/roleColor.js`);
-
-  mems.forEach(member => {
-    color.run(client, database, member, undefined, "Newo Bot Timer");
-  });
-
-  setTimeout(function() {
-    require(`./modules/roleColor.js`).verify(client.guilds.cache.get(config.pillowsID), "Newo Bot Timer");
-  }, 1000);
-
-  console.log(`All color roles now applied correctly.`);
-}, 6*60*60000); // (6 hours)
-
-
-
 
 // ERROR
 client.on('error', console.error);
 
 // LOGIN
-client.login(process.env.TOKEN);
+client.login(storedVars.TOKEN);

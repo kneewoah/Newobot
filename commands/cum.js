@@ -9,9 +9,9 @@ exports.run = async (client, message, args) => {
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
 
-};
+}
 
 exports.help = {
   description: "makes you cum",
-  usage: "!cum"
+  usage: `${config.prefix}cum`
 };
