@@ -36,7 +36,7 @@ exports.text = (client, message, database) => {
             daily: rows[0].daily + genXp,
             weekly: rows[0].weekly + genXp,
             monthly: rows[0].monthly + genXp,
-            timeStamp: newTime
+            lastMessage: newTime
           };
 
           // check if level update
@@ -45,7 +45,7 @@ exports.text = (client, message, database) => {
             sendLevelUpMsg(message.author, message.channel, newLvl);
           }
 
-          var sql = `UPDATE ${table} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly}, timeStamp = ${newData.timeStamp} WHERE id = '${message.author.id}'`;
+          var sql = `UPDATE ${table} SET xp = ${newData.xp}, daily = ${newData.daily}, weekly = ${newData.weekly}, monthly = ${newData.monthly}, lastMessage = ${newData.lastMessage} WHERE id = '${message.author.id}'`;
 
           database.query(sql, (err) => {
             if(err) throw err;
@@ -135,11 +135,11 @@ exports.new = (member, database) => {
           daily: 0,
           weekly: 0,
           monthly: 0,
-          timeStamp: newTime,
+          lastMessage: newTime,
           voiceStart: new Date().getTime() / 60000,
         };
 
-        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, timeStamp, voiceStart) VALUES (${newData.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.timeStamp}, ${newData.voiceStart})`;
+        const sql = `INSERT INTO ${table} (id, xp, daily, weekly, monthly, lastMessage, voiceStart) VALUES (${newData.id}, ${newData.xp}, ${newData.daily}, ${newData.weekly}, ${newData.monthly}, ${newData.lastMessage}, ${newData.voiceStart})`;
 
         database.query(sql, () => {
           if(err) throw err;
