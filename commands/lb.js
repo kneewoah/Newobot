@@ -25,7 +25,7 @@ exports.run = (client, message, args, con) => {
       const sorted = data.sort((a, b) => (a.xp > b.xp ? -1 : 1));
       
       const membersCache = message.guild.members.cache;
-      for (var i = 0; i < sorted.length; i++) {
+      for (var i = 0; i < config.leaderboardSize; i++) {
         if (membersCache.get(sorted[i].id) !== undefined) {
            var user = membersCache.get(sorted[i].id).user
            var xp = sorted[i].xp;
@@ -50,7 +50,7 @@ exports.sendCategoryLb = (style, embed, channel, data) => {
   const sorted = data.sort((a, b) => (a[category] > b[category] ? -1 : 1)).filter(obj => (obj[category] !== 0));
   const membersCache = channel.guild.members.cache;
 
-  for (var i = 0; i < sorted.length; i++) {
+  for (var i = 0; i < config.leaderboardSize; i++) {
     if (membersCache.get(sorted[i].id) !== undefined) {
     var user = membersCache.get(sorted[i].id).user;
     embed.addField(`${i+1}. ${user.username}`, `**XP:** ${sorted[i][category]}`, false);
