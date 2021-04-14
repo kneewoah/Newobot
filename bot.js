@@ -1,11 +1,11 @@
 // BEFORE LAUNCH
-//const storedVars = require('./DO-NOT-PUSH.json');
-const storedVars = process.env;
+const storedVars = require('./DO-NOT-PUSH.json');
+//const storedVars = process.env;
 const Discord = require('discord.js');
 const { Client, Intents} = require('discord.js');
 const client = new Discord.Client({
   disableMentions: 'everyone',
-  partials: ['GUILD_MEMBERS']
+  partials: ['GUILD_PRESENCES', 'GUILD_MEMBERS']
 });
 const config = require('./config.json');
 const fs = require('fs');
@@ -44,7 +44,7 @@ client.on('ready', () => {
   .catch(console.error);
 
   // Pillows Members
-  pillowsServer.members.fetch({limit: pillowsServer.memberCount})
+  pillowsServer.members.fetch({withPresences: true, limit: pillowsServer.memberCount})
   .then(members => console.log(`Cached ${members.size} members in the Pillows Discord`))
   .catch(console.error);
 
@@ -115,25 +115,24 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 
 // GUILDMEMBER UPDATE
 client.on('presenceUpdate', (oldPresence, newPresence) => {
-
   // STREAMING ROLL
-  if (!newPresence.activities) return false;
-    newPresence.activities.forEach(activity => {
-        if (activity.type == "STREAMING") {
-            console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
-            newMember.roles.add(newMember.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
-            .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
-            .catch(console.error);
-        };
-    });
-    oldPresence.activities.forEach(activity => {
-        if (activity.type == "STREAMING") {
-            console.log(`${newPresence.user.tag} is no longer streaming.`);
-            newMember.roles.remove(newMember.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
-            .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
-            .catch(console.error);
-        };
-    });
+  if (!newPresence.activities) return;
+  newPresence.activities.forEach(activity => {
+      if (activity.type == "STREAMING") {
+          console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
+          newPresence.member.roles.add(newPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
+          .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
+          .catch(console.error);
+      };
+  });
+  oldPresence.activities.forEach(activity => {
+      if (activity.type == "STREAMING") {
+          console.log(`${oldPresence.user.tag} is no longer streaming.`);
+          oldPresence.member.roles.remove(oldPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
+          .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
+          .catch(console.error);
+      };
+  });
 });
 
 
