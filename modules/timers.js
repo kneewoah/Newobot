@@ -26,7 +26,7 @@ exports.run = (client, guild, database) => {
     if(hour == 0) {
       // NEW DAY
       xpResets.daily(client, database);
-    } else if (hour == 8) {
+    } else if (hour == 7) {
       // MORNING
       require(`./goodmorning.js`).run(client, guild, config.days[dayOfWeek]);
     } if(hour == 0) {
