@@ -7,7 +7,7 @@ exports.run = (client, message, args, database) => {
     console.log(`Evaluating ${input}...`);
     x = eval(input);
     console.log(`${input} evaluates to ${x}`);
-    message.channel.send(input + ` = ` + x)
+    message.channel.send(`${input} = **${x}**`)
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
   } catch (e) {
