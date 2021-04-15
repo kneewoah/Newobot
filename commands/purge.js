@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
   }
 
   const fetched = await message.channel.messages.fetch({limit: deleteCount});
-  console.log(`Fetched ${fetched.size} messages in ${message.channel.name}`)
+  console.log(`Fetched ${fetched.size} messages in ${message.channel.name}`);
   message.channel.bulkDelete(fetched)
     .then(msgs => console.log(`Deleted ${msgs.size} messages in ${message.channel.name}`))
     .catch(error => {
