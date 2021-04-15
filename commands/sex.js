@@ -3,14 +3,15 @@ const config = require("../config.json");
 exports.run = (client, message, args) => {
 
   const members = message.guild.members.cache.filter(guildMember => !guildMember.user.bot);
-  const p2 = members.random().user.username;
+  const other = members.random().user
+  const p2 = other.username
   const p1 = message.author.username;
   const time = Math.floor(Math.random()*30);
   const num = Math.ceil(Math.random()*100);
   var name = (p1.substring(0, Math.floor(Math.random()*(p1.length-1))+1) + p2.substring(Math.floor(Math.random()*(p1.length-1))));
   name = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
 
-  var str = `${p1} was getting pretty horny with ${p2}, so they decided to make a baby. ${p1} lasted for ${time} long minutes!!`;
+  var str = `${message.author} was getting pretty horny with ${other}, so they decided to make a baby. ${p1} lasted for ${time} long minutes!!`;
 
   if (num < 3) {
     str += ` Unfortunately, ${p2} had a miscarriage in the first trimester`;
