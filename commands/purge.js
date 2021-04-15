@@ -5,22 +5,24 @@ exports.run = async (client, message, args) => {
     .then(message => console.log(`Sent message: ${message.content}`))
     .catch(console.error);
 
-  const deleteCount = parseInt(args[0], 10) + 1;
+  const deleteCount = parseInt(args[0], 10);
 
-  if(!deleteCount || deleteCount < 3 || deleteCount > 100) {
-  return message.reply("Please provide a number between 2 and 99 for the number of messages to delete")
+  if(!deleteCount || deleteCount < 2 || deleteCount > 100) {
+  return message.reply("Please provide a number between 2 and 100 for the number of messages to delete")
     .then(() => console.log(`Sent a reply to ${message.author.tag}: 'Please provide a number between 2 and 100 for the number of messages to delete'`))
     .catch(console.error);
   }
+  const messageCopy = message;
+  message.delete();
 
-  const fetched = await message.channel.messages.fetch({limit: deleteCount});
-  console.log(`Fetched ${fetched.size} messages in ${message.channel.name}`)
-  message.channel.bulkDelete(fetched)
-    .then(msgs => console.log(`Deleted ${msgs.size} messages in ${message.channel.name}`))
+  const fetched = await messageCopy.channel.messages.fetch({limit: deleteCount});
+  console.log(`Fetched ${fetched.size} messages in ${messageCopy.channel.name}`)
+  messageCopy.channel.bulkDelete(fetched)
+    .then(msgs => console.log(`Deleted ${msgs.size} messages in ${messageCopy.channel.name}`))
     .catch(error => {
       console.log(`Couldn't delete ${fetched.size} messages because of: ${error}`);
-      message.reply(`Couldn't delete ${fetched.size} messages because of: ${error}`)
-        .then(() => console.log(`Sent a reply to ${message.author.tag}: 'Couldn't delete ${fetched.size} messages because of: ${error}'`))
+      messageCopy.reply(`Couldn't delete ${fetched.size} messages because of: ${error}`)
+        .then(() => console.log(`Sent a reply to ${messageCopy.author.tag}: 'Couldn't delete ${fetched.size} messages because of: ${error}'`))
         .catch(console.error);
   });
 };
