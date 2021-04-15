@@ -28,7 +28,7 @@ exports.run = (client, message, args) => {
     }if (num % 30 == 0) {
       str += ` Sadly, ${name} was born with severe autism.`;
     } if (num % 20 == 0) {
-      str += ` And due to complications with heart surgery, ${name} died at age 4 `;
+      str += ` And due to complications with heart surgery, ${name} died at age 4.`;
     }
 
   } else {
