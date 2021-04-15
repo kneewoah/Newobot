@@ -7,8 +7,8 @@ exports.run = async (client, message, args) => {
 
   const deleteCount = parseInt(args[0], 10) + 1;
 
-  if(!deleteCount || deleteCount < 3 || deleteCount > 101) {
-  return message.reply("Please provide a number between 2 and 100 for the number of messages to delete")
+  if(!deleteCount || deleteCount < 3 || deleteCount > 100) {
+  return message.reply("Please provide a number between 2 and 99 for the number of messages to delete")
     .then(() => console.log(`Sent a reply to ${message.author.tag}: 'Please provide a number between 2 and 100 for the number of messages to delete'`))
     .catch(console.error);
   }
