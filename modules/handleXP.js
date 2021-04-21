@@ -24,7 +24,7 @@ exports.text = (client, message, database) => {
       if(err) throw err;
       if (rows[0] == undefined || rows[0] == null) {
 
-return require("./handleXP").new(member.author, database);
+return require("./handleXP").new(message.author, database);
 
 }
 
