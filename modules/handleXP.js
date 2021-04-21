@@ -22,6 +22,11 @@ exports.text = (client, message, database) => {
 
     database.query(`SELECT * FROM ${table} WHERE id = '${message.author.id}'`, (err, rows) => {
       if(err) throw err;
+      if (rows[0] == undefined || rows[0] == null) {
+
+return require("./handleXP").new(member.author, database);
+
+}
 
       var genXp = generateXp(15, 25);
 
