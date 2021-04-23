@@ -116,7 +116,7 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 // GUILDMEMBER UPDATE
 client.on('presenceUpdate', (oldPresence, newPresence) => {
   // STREAMING ROLL
-  if (newPresence.activities !== undefined) {
+  if (newPresence && newPresence.activities !== undefined) {
     newPresence.activities.forEach(activity => {
         if (activity.state == "STREAMING") {
             console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
@@ -125,10 +125,9 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
             .catch(console.error);
         };
     });
-  } if (oldPresence.activities !== undefined) {
+  } if (oldPresence && oldPresence.activities !== undefined) {
     oldPresence.activities.forEach(activity => {
       if (activity.state == "STREAMING") {
-          console.log("custom status!!!");
           console.log(`${oldPresence.user.tag} is no longer streaming.`);
           oldPresence.member.roles.remove(oldPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
           .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
