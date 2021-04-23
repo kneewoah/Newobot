@@ -116,23 +116,25 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 // GUILDMEMBER UPDATE
 client.on('presenceUpdate', (oldPresence, newPresence) => {
   // STREAMING ROLL
-  if (newPresence && newPresence.activities !== undefined) {
-    newPresence.activities.forEach(activity => {
-        if (activity.state == "STREAMING") {
-            console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
-            newPresence.member.roles.add(newPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
-            .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
-            .catch(console.error);
-        };
-    });
-  } if (oldPresence && oldPresence.activities !== undefined) {
+  if (oldPresence && oldPresence.activities !== undefined) {
     oldPresence.activities.forEach(activity => {
-      if (activity.state == "STREAMING") {
+      if (activity.type == "STREAMING") {
           console.log(`${oldPresence.user.tag} is no longer streaming.`);
           oldPresence.member.roles.remove(oldPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
           .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
           .catch(console.error);
       };
+    });
+  }
+  
+  if (newPresence && newPresence.activities !== undefined) {
+    newPresence.activities.forEach(activity => {
+        if (activity.type == "STREAMING") {
+            console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
+            newPresence.member.roles.add(newPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
+            .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
+            .catch(console.error);
+        };
     });
   }
 });
