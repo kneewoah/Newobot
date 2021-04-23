@@ -116,7 +116,8 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 // GUILDMEMBER UPDATE
 client.on('presenceUpdate', (oldPresence, newPresence) => {
   // STREAMING ROLL
-  console.log('test');
+  console.log(newPresence.activities);
+  console.log(oldPresence.activities);
   // if (newPresence.activities !== undefined) {
   //   newPresence.activities.forEach(activity => {
   //       if (activity.type == "STREAMING") {
