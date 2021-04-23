@@ -22,7 +22,16 @@ exports.run = (client, message, args) => {
           var cmdFile2 = require(`./${cmdNameLower}.js`)
           var cmdDesc = cmdFile2.help.description;
           var cmdUsage = cmdFile2.help.usage;
-          helpMessage = `\`Newo Bot Commands\`\n__Command__: **${cmdNameLower}**\n__Description__: ${cmdDesc}\n__Usage__: ${cmdUsage}`;
+          message.author.send(`\`Newo Bot Commands\`\n__Command__: **${cmdNameLower}**\n__Description__: ${cmdDesc}\n__Usage__: ${cmdUsage}`)
+            .then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
+            .catch(err => {
+              if (!sentblocked) {
+                sentblocked = true;
+                message.reply("sorry, I can't help because you blocked me.")
+                .then(() => console.log(`Sent a reply to ${message.author.tag}`))
+                .catch(console.error);
+              }
+            });
 
         } catch (e) {
           message.channel.send(`\'${cmdNameLower}\' is not a valid command`)
@@ -36,25 +45,31 @@ exports.run = (client, message, args) => {
       } else {
         let cmdArray = files.filter(f => f.split(".").pop() === "js").sort().map(function(cmd) {return cmd.slice(0, cmd.length - 3)}).map(x => [x]);
 
-        var embed = new Discord.MessageEmbed({title: `Newo Bot Commands`, color: `#FFFFFF`});
-        console.log(`Help Embed created`)
+        var embeds = [];
 
-        cmdArray.forEach(element => embed.addField(`**${element[0]}**`, `${require(`./${element[0]}.js`).help.description}\n${require(`./${element[0]}.js`).help.usage}`))
-        
-        helpMessage = embed;
+        for (var i = 0; i < Math.round(cmdArray.length / 25) + 1; i++) {
+          embeds.push(new Discord.MessageEmbed({title: `Newo Bot Commands - Page ${i+1}/${Math.round(cmdArray.length / 25) + 1}`, color: `#FFFFFF`}));
+          for (var j = 25*i; (j < 25*(i+1)) && (j < cmdArray.length); j++) {
+            embeds[i].addField(`**${cmdArray[j][0]}**`, `${require(`./${cmdArray[j][0]}.js`).help.description}\n${require(`./${cmdArray[j][0]}.js`).help.usage}`);
+          }
+        }
+        console.log(`Help embeds created`);
       }
 
-       // send dm
-        try {
-            message.author.send(helpMessage)
-            .then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
-          } catch (err) {
-            console.log(`Failed to send a help dm to ${message.author.tag}`);
+      var sentblocked = false;
+      embeds.forEach(embed => message.author.send(embed).then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
+        .catch(err => {
+          if (!sentblocked) {
+            sentblocked = true;
             message.reply("sorry, I can't help because you blocked me.")
             .then(() => console.log(`Sent a reply to ${message.author.tag}`))
             .catch(console.error);
           }
-    });
+
+        })
+      );
+
+  });
 
 };
 
