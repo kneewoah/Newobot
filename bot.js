@@ -126,14 +126,17 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
         };
     });
   } else if (oldPresence.activities !== undefined) {
-  oldPresence.activities.forEach(activity => {
-      if (activity.type == "STREAMING") {
+    oldPresence.activities.forEach(activity => {
+      if (activity.type == "CUSTOM_STATUS") {
+          console.log("custom status!!!");
           console.log(`${oldPresence.user.tag} is no longer streaming.`);
           oldPresence.member.roles.remove(oldPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
           .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
           .catch(console.error);
       };
     });
+  } else {
+    console.log('nothing');
   }
 });
 
