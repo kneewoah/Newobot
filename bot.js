@@ -116,30 +116,25 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 // GUILDMEMBER UPDATE
 client.on('presenceUpdate', (oldPresence, newPresence) => {
   // STREAMING ROLL
-  console.log(newPresence.activities);
-  console.log(oldPresence.activities);
-  // if (newPresence.activities !== undefined) {
-  //   newPresence.activities.forEach(activity => {
-  //       if (activity.type == "STREAMING") {
-  //           console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
-  //           newPresence.member.roles.add(newPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
-  //           .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
-  //           .catch(console.error);
-  //       };
-  //   });
-  // } else if (oldPresence.activities !== undefined) {
-  //   oldPresence.activities.forEach(activity => {
-  //     if (activity.type == "CUSTOM_STATUS") {
-  //         console.log("custom status!!!");
-  //         console.log(`${oldPresence.user.tag} is no longer streaming.`);
-  //         oldPresence.member.roles.remove(oldPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
-  //         .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
-  //         .catch(console.error);
-  //     };
-  //   });
-  // } else {
-  //   console.log('nothing');
-  // }
+  if (newPresence.activities !== undefined) {
+    newPresence.activities.forEach(activity => {
+        if (activity.state == "STREAMING") {
+            console.log(`${newPresence.user.tag} is streaming at ${activity.url}.`);
+            newPresence.member.roles.add(newPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
+            .then(u => console.log(`Added role 'STREAMING' to ${u.user.tag}.`))
+            .catch(console.error);
+        };
+    });
+  } if (oldPresence.activities !== undefined) {
+    oldPresence.activities.forEach(activity => {
+      if (activity.state == "STREAMING") {
+          console.log("custom status!!!");
+          console.log(`${oldPresence.user.tag} is no longer streaming.`);
+          oldPresence.member.roles.remove(oldPresence.guild.roles.cache.get(config.guilds[0].streamingRoleID), "Now Streaming")
+          .then(u => console.log(`Removed roll 'STREAMING' from ${u.user.tag}.`))
+          .catch(console.error);
+      };
+    });
 });
 
 
