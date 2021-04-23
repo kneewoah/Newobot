@@ -54,20 +54,21 @@ exports.run = (client, message, args) => {
           }
         }
         console.log(`Help embeds created`);
+
+        var sentblocked = false;
+        embeds.forEach(embed => message.author.send(embed).then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
+          .catch(err => {
+            if (!sentblocked) {
+              sentblocked = true;
+              message.reply("sorry, I can't help because you blocked me.")
+              .then(() => console.log(`Sent a reply to ${message.author.tag}`))
+              .catch(console.error);
+            }
+
+          })
+        );
       }
 
-      var sentblocked = false;
-      embeds.forEach(embed => message.author.send(embed).then(msg => console.log(`Private Messaged ${message.author.tag}: ${msg.content}`))
-        .catch(err => {
-          if (!sentblocked) {
-            sentblocked = true;
-            message.reply("sorry, I can't help because you blocked me.")
-            .then(() => console.log(`Sent a reply to ${message.author.tag}`))
-            .catch(console.error);
-          }
-
-        })
-      );
 
   });
 
