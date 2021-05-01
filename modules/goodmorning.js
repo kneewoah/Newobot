@@ -7,7 +7,7 @@ exports.run = (client, guild, day) => {
   console.log(`Sending a good morning message to ${guildData.name}...`);
 
   const generalChannel = client.channels.cache.get(guildData.generalID);
-  const message = config.goodMorningMessages[Math.floor(Math.random()*config.goodMorningMessages.length)] + day;
+  const message = config.goodMorningMessages[Math.floor(Math.random()*config.goodMorningMessages.length)];
 
   generalChannel.send(message)
     .then(message => console.log(`Sent message: ${message.content}`))
