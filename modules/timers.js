@@ -46,7 +46,7 @@ exports.run = (client, guild, database) => {
 
 
   }, 60
-  //*60000
+  *60000
 ); // (1 hour)
 
   // Crash Timer
