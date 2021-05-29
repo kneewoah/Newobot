@@ -34,8 +34,7 @@ exports.weekly = (client, database) => {
     title: `Final Weekly XP Totals for the week of ${startDate} - ${endDate}`
   });
 
-  const channel = client.guilds.cache.get(config.guilds[0].id).channels.cache.get(config.pillowsGeneralID);
-  console.log(channel);
+  const channel = client.guilds.cache.get(config.guilds[0].id).channels.cache.get(config.guilds[0].generalID);
 
   database.query(`SELECT * FROM xp_${config.guilds[0].id} WHERE 1`, (err, data) => {
     if(err) throw err;
