@@ -34,7 +34,7 @@ exports.run = (client, guild, database) => {
       xpResets.daily(client, database);
     }
 
-    if(dayOfWeek == 6 && hour == 12) {
+    if(dayOfWeek == 0 && hour == 0) {
       // NEW WEEK
       xpResets.weekly(client, database);
     }
@@ -45,9 +45,7 @@ exports.run = (client, guild, database) => {
     }
 
 
-  }, 60
-  *60000
-); // (1 hour)
+  }, 60*60000); // (1 hour)
 
   // Crash Timer
   var minutesSinceCrash = 0;
