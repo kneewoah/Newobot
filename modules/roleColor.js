@@ -40,6 +40,7 @@ exports.run = (client, database, member, color, reason) => {
 
 exports.delete = (client, member, guild) => {
   var roleToDelete = guild.roles.cache.find(role => role.name === member.id);
+  if (roleToDelete == undefined) return;
   roleToDelete.delete('User left the server')
   .then(deleted => console.log(`Deleted role ${deleted.name}`))
   .catch(console.error);
