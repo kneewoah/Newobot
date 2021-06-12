@@ -101,6 +101,8 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
   } else if ((!newVoiceState.deaf && newVoiceState.channel !== null) && (oldVoiceState.deaf || oldVoiceState.channel !== newVoiceState.channel)) { // BEGIN XP COUNT
     if (newVoiceState.guild.id !== config.guilds[0].id) return;
     if (newVoiceState.guild.id === config.guilds[0].voiceAFK) return;
+    console.log(newVoiceState.guild.id);
+    console.log(config.guilds[0].voiceAFK);
 
     console.log(`Logging start time for voice channel XP for ${oldVoiceState.member.user.tag}`);
 
