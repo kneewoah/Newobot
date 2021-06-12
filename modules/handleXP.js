@@ -64,7 +64,7 @@ return require("./handleXP").new(message.author, database);
 
 exports.voice = (client, oldVoiceState, newVoiceState, database) => {
 
-  if (((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || (newVoiceState.deaf && newVoiceState.channel == oldVoiceState.channel) || (oldVoiceState.channel !== newVoiceState.channel && !oldVoiceState.deaf && oldVoiceState.channel !== null)) && !((oldVoiceState.channel == null && oldVoiceState.channel.id === config.guilds[0].voiceAFK) || oldVoiceState.guild.id !== config.guilds[0].id || (oldVoiceState.channel === null && newVoiceState.channel.id === config.pillowsAFK) || (oldVoiceState.channel.id === config.guilds[0].voiceAFK && newVoiceState.channel.id !== config.guilds[0].voiceAFK && !oldVoiceState.deaf))) { // END XP COUNT
+  if (((newVoiceState.channel == null && !oldVoiceState.deaf && oldVoiceState.channel !== null) || (newVoiceState.deaf && newVoiceState.channel == oldVoiceState.channel) || (oldVoiceState.channel !== newVoiceState.channel && !oldVoiceState.deaf && oldVoiceState.channel !== null)) && !((oldVoiceState.channel == null && oldVoiceState.channel.id === config.guilds[0].voiceAFK) || oldVoiceState.guild.id !== config.guilds[0].id || (oldVoiceState.channel === null && newVoiceState.channel.id === config.pillowsAFK) || (oldVoiceState.channel.id === config.guilds[0].voiceAFK && (newVoiceState.channel.id && newVoiceState.channel.id !== config.guilds[0].voiceAFK) && !oldVoiceState.deaf))) { // END XP COUNT
 
     if(!newVoiceState.deaf && !oldVoiceState.deaf && oldVoiceState.channel !== null && newVoiceState.channel !== null && oldVoiceState.channel !== newVoiceState.channel && newVoiceState.channel.id !== config.guilds[0].voiceAFK) return console.log(`${oldVoiceState.member.user.tag} is safely moving channels`);
 
@@ -100,9 +100,7 @@ exports.voice = (client, oldVoiceState, newVoiceState, database) => {
     });
   } else if ((!newVoiceState.deaf && newVoiceState.channel !== null) && (oldVoiceState.deaf || oldVoiceState.channel !== newVoiceState.channel)) { // BEGIN XP COUNT
     if (newVoiceState.guild.id !== config.guilds[0].id) return;
-    if (newVoiceState.guild.id === config.guilds[0].voiceAFK) return;
-    console.log(newVoiceState.guild.id);
-    console.log(config.guilds[0].voiceAFK);
+    if (newVoiceState.channel.id === config.guilds[0].voiceAFK) return;
 
     console.log(`Logging start time for voice channel XP for ${oldVoiceState.member.user.tag}`);
 
